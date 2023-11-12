@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/buttonsky"
+    >
+    
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageview"
+        android:background="@drawable/baseline_account_circle_24"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageview"
+        android:text="사인페 스터디 모집합니다."
+        android:layout_marginStart="10dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/wirter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/title"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/imageview"
+        android:text="작성자" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/wirter"
+        android:layout_alignBottom="@+id/wirter"
+        android:text="dlcksgh8511" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="모집기간"
+        android:layout_alignStart="@id/title"
+        android:layout_toEndOf="@+id/imageview"
+        android:layout_below="@+id/wirter"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date"
+        android:layout_toEndOf="@+id/date"
+        android:text="2023/11/1~2023/12/25"
+        />
+
+    <TextView
+        android:id="@+id/people"
+        android:text="인원:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date"
+        android:layout_toEndOf="@+id/day"
+        android:layout_marginStart="15dp"
+
+        />
+
+    <TextView
+        android:id="@+id/num1"
+        android:text="6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date"
+        android:layout_toEndOf="@+id/people"
+        android:layout_marginStart="5dp"
+
+        />
+    <TextView
+        android:id="@+id/setallnum"
+        android:text="/6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/date"
+        android:layout_toEndOf="@+id/num1"
+        android:layout_marginStart="5dp"
+        />
+
+
+</RelativeLayout>

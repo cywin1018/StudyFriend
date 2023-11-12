@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/studybttn"
+        android:title="study"
+        android:icon="@drawable/register_icon"
+        />
+    <item
+        android:id="@+id/chatbttn"
+        android:title="chat"
+        android:icon="@drawable/message_icon"
+        />
+<!--    <item-->
+<!--        android:id="@+id/questionbttn"-->
+<!--        android:title="question"-->
+<!--        android:icon="@drawable/question_icon"-->
+<!--        />-->
+    <item
+        android:id="@+id/accountbttn"
+        android:title="account"
+        android:icon="@drawable/profile_icon"
+        />
+</menu>
