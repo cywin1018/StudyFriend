@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/buttonsky"
         android:queryHint="찾으시는 스터디를 검색하세요!"
+        android:layout_margin="15dp"
         />
 
     <FrameLayout
@@ -26,7 +27,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+
+            />
     </FrameLayout>
 
     <LinearLayout

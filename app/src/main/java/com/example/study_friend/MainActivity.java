@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-
+        
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         List<Item> items = new ArrayList<Item>();

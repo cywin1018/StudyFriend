@@ -12,9 +12,9 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+       android:layout_margin="15dp"
         android:background="@drawable/buttonsky"
-        android:queryHint="찾으시는 스터디를 검색하세요!"
-        />
+        android:queryHint="찾으시는 스터디를 검색하세요!" />
 
     <FrameLayout
         android:id="@+id/frame_recycle"
