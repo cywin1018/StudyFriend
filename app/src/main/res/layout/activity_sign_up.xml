@@ -204,7 +204,7 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/buttonblackline"
                     android:ems="10"
-                    android:hint="학교"
+                    android:hint="학기"
                     android:gravity="center"
                     android:inputType="text"
                     android:text=""
