@@ -51,6 +51,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "951059133058-c2hu0fsspdovdbc54mhr727fv8oak8rl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.study_friend",
+            "certificate_hash": "479dee04ad7262edf7376ba0f980e04a7fd30e21"
+          }
+        },
+        {
           "client_id": "951059133058-jkratve8v3d3k6pv9roo182akm13qi9t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
