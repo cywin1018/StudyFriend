@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recycle_test"
         tools:targetApi="31">
-        <activity
-            android:name=".chatting"
-            android:exported="false" />
+         <activity
+                android:name=".chatting"
+                android:exported="false"
+                android:windowSoftInputMode="adjustResize"
+                android:configChanges="screenSize|screenLayout"
+             />
+
         <activity
             android:name=".PasswordReset"
             android:exported="false" />
@@ -27,12 +31,7 @@
         <activity
             android:name=".StudyWrite"
             android:exported="false" />
-        <activity
-            android:name=".ScreenSlidePageFragment"
-            android:exported="false" />
-        <activity
-            android:name=".ScreenSlidePagerActivity"
-            android:exported="false" />
+
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
