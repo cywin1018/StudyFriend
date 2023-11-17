@@ -1,11 +1,11 @@
 package com.example.study_friend;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study_friend.databinding.ActivityPasswordResetBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,12 +26,12 @@ public class PasswordReset extends AppCompatActivity {
 
 
         binding.backLogin.setOnClickListener(v -> {
-            intent = new Intent(this, LogIn.class);
+            intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
         binding.loginBtn.setOnClickListener(v -> {
             sendPasswordReset();
-            intent = new Intent(this,LogIn.class);
+            intent = new Intent(this,MainActivity.class);
             startActivity(intent);
         });
     }

@@ -1,12 +1,12 @@
 package com.example.study_friend;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study_friend.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -78,7 +78,7 @@ public class SignUp extends AppCompatActivity {
                 });
     }
     public void updateUI(FirebaseUser user){
-        intent = new Intent(this, LogIn.class);
+        intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

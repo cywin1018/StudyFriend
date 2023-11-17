@@ -2,6 +2,7 @@ package com.example.study_friend;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
@@ -25,7 +26,7 @@ public class chatting extends AppCompatActivity {
 
     ActivityChattingBinding binding;
 
-    //채팅방 시작하자마자 아이테 ㅁ하나 붙잡을 테니 전역변수로
+    //채팅방 시작하자마자 아이템 하나 붙잡을 테니 전역변수로
     FirebaseFirestore firestore;
     CollectionReference chatRef;
 
@@ -46,11 +47,11 @@ public class chatting extends AppCompatActivity {
         //제목줄에 채팅방 이름 표시
         getSupportActionBar().setTitle(chatName);
         getSupportActionBar().setSubtitle("상대방 이름");
-
+        Log.d("채팅방이름",chatName);
         //아답터 연결
         messageAdapter = new adapter(this,messageItems);
         binding.recycler.setAdapter(messageAdapter);
-
+        Log.d("채팅방이름","adapter연결");
 
         //파리어베이스 파이어 스토어 관리객체 및 (채팅방 이름)참조 객체 소환
         //채팅기록 남기기 위한 DB 생성
