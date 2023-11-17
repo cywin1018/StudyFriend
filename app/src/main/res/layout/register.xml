@@ -12,49 +12,41 @@
         android:weightSum="1"
         android:gravity="center"
         >
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonsky"
-        android:layout_weight="1"
-
-        >
-        <TextView
-            android:id="@+id/icon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/edit_icon" />
-
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/icon"
-            android:text="스터디 모집 작성하기"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            />
-    </LinearLayout>
+            android:background="@drawable/buttonsky"
+            android:layout_weight="1"
+
+            >
+            <TextView
+                android:id="@+id/icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/edit_icon" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/buttonblue"
-            android:text="작성하기"
-            android:textColor="#ffff"
-            android:textStyle="bold"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/icon"
+                android:text="스터디 모집 작성하기"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonblackline"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         >
         <TextView
             android:id="@+id/atr1"
@@ -72,7 +64,16 @@
             android:text="모집 추천 학부와 학생을 정할 수 있어요!"
             android:textColor="#80020202"
             />
-
+        <EditText
+            android:id="@+id/edit_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/atr1"
+            android:layout_alignStart="@+id/atr1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            />
 
     </RelativeLayout>
 
@@ -83,58 +84,113 @@
         android:layout_height="wrap_content"
         android:background="@drawable/buttonblackline"
         >
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="20dp"
-            android:weightSum="1"
-            >
-            <TextView
-            android:id="@+id/filed"
+
+        <TextView
+            android:id="@+id/field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="분야"
-
+            android:layout_marginStart="20dp"
             />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="지역/장소"
-                />
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="지역/장소" />
+
+        <EditText
+            android:id="@+id/edit_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/field"
+            android:layout_alignStart="@+id/field"
+            android:hint="분야를 입력해주세요"
+            android:textSize="15dp"
+            android:layout_alignLeft="@+id/edit_place"
+            />
+
+        <EditText
+            android:id="@+id/edit_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/place"
+            android:layout_alignStart="@+id/place"
+            android:hint="스터리를 진행할 장소를 정해주세요"
+            android:textSize="15dp"
+            />
+
 
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonblackline"
         >
         <TextView
+            android:id="@+id/text_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="모집인원"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             />
+        <EditText
+            android:id="@+id/edit_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_num"
+            android:layout_alignStart="@+id/text_num"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            />
 
     </RelativeLayout>
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/buttonblackline"
+
         >
 
+        <EditText
+            android:id="@+id/edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/buttonblackline"
+            android:hint="제목"
+            android:paddingLeft="20dp"
+            />
 
+        <EditText
+            android:id="@+id/edit_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_title"
+            android:layout_above="@+id/reg_bttn"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/buttonblackline"
+            android:gravity="top"
+            android:hint="내용을 입력하세요"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reg_bttn"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/buttonblue"
+            android:text="등록하기"
+            android:textColor="#ffff"
+            android:textStyle="bold"
+            android:layout_margin="3dp"
+            />
     </RelativeLayout>
-
 
 </LinearLayout>
