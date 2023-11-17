@@ -67,9 +67,11 @@
             android:text="보내기"
             android:layout_marginLeft="8dp"
             android:layout_gravity="center"
-            android:backgroundTint="@drawable/msg_send"
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+
+            />
     </LinearLayout>
 
 </RelativeLayout>
