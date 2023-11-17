@@ -42,6 +42,7 @@
         >
 
         <ImageView
+            android:id="@+id/profileImg"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/profile_icon"
@@ -55,17 +56,20 @@
             android:padding="10dp"
             >
             <TextView
+                android:id="@+id/profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="컴학 찬호님"
                 android:textStyle="bold"
                 />
             <TextView
+                android:id="@+id/profileInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="숭실대학교 컴퓨터학부 20학번"
                 />
             <TextView
+                android:id="@+id/profileSemester"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                android:layout_gravity="center"
@@ -84,6 +88,7 @@
                    android:layout_marginLeft="10dp"
                    />
                 <TextView
+                    android:id="@+id/starNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="60개"
@@ -96,6 +101,7 @@
                     android:padding="10dp"
                     />
                 <TextView
+                    android:id="@+id/groupNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -141,6 +147,7 @@
                    android:text="스터디 횟수"
                    />
                <TextView
+                   android:id="@+id/studyNumber"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="20회"
@@ -158,6 +165,7 @@
                     android:text="함께한 학우"
                     />
                 <TextView
+                    android:id="@+id/studyMemberNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200+"
@@ -175,6 +183,7 @@
                     android:text="포인트"
                     />
                 <TextView
+                    android:id="@+id/studyPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5000점"
@@ -196,11 +205,13 @@
             >
 
             <ImageView
+
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/edit_icon"
                 />
             <TextView
+                android:id="@+id/moZip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="내가 모집한 스터디 보기"
@@ -228,6 +239,7 @@
                 android:src="@drawable/question_icon"
                 />
             <TextView
+                android:id="@+id/participateZip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="내가 참여한 스터디 보기"
