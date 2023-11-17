@@ -50,7 +50,7 @@ public class LogIn extends Activity {
         binding.loginBtn.setOnClickListener(v -> {
             Log.d(TAG, "LogInBtn Clicked");
             signIn(binding.editID.getText().toString(),binding.editPassword.getText().toString());
-            intent = new Intent(this, HomeActivity.class);
+            intent = new Intent(this,HomeActivity.class);
             startActivity(intent);
         });
 
