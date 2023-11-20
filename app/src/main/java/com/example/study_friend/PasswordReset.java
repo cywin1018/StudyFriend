@@ -15,14 +15,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordReset extends AppCompatActivity {
     private ActivityPasswordResetBinding binding;
     Intent intent;
-    FirebaseAuth auth = FirebaseAuth.getInstance();
     private final static String TAG ="PasswordReset";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPasswordResetBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        String email = binding.editID.getText().toString().trim();
 
 
         binding.backLogin.setOnClickListener(v -> {

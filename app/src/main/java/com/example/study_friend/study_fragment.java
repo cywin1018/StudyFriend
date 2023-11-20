@@ -1,6 +1,5 @@
 package com.example.study_friend;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,8 +17,6 @@ import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 
 public class study_fragment extends Fragment {
     FragmentStudyFragmentBinding binding;
-
-    Intent intent;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

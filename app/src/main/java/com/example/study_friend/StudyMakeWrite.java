@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.study_friend.databinding.FragmentStudyMakeWriteBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -57,6 +60,17 @@ public class StudyMakeWrite extends Fragment {
         post.put("제목",title);
         post.put("내용",content);
 
-        db.collection("스터디 게시글").document().set(post);
+        db.collection("스터디 게시글").document().set(post).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isComplete()){
+                    intent = new Intent(getContext(), HomeActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Log.d("posting","posting error");
+                }
+            }
+        });
     }
 }
