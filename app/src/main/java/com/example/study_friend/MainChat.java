@@ -51,11 +51,11 @@ public class MainChat extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("profile",MODE_PRIVATE);
         G.nicname = pref.getString("nicName",null);
-        G.profileUrl = pref.getString("profileUrl",null);
+//        G.profileUrl = pref.getString("profileUrl",null);
 
         if(G.nicname != null){
             binding.et.setText(G.nicname);
-            Glide.with(this).load(G.profileUrl).into(binding.civ);
+//            Glide.with(this).load(G.profileUrl).into(binding.civ);
 
             isFirst = false;
         }
@@ -118,7 +118,7 @@ public class MainChat extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         //Uri 안에 업로드 된 파일의 다운로드[URL] 옴
-                        G.profileUrl = uri.toString();
+//                        G.profileUrl = uri.toString();
 
                         Toast.makeText(MainChat.this, "이미지 주소값 저장 완료", Toast.LENGTH_SHORT).show();
 
@@ -130,7 +130,7 @@ public class MainChat extends AppCompatActivity {
 
                         //닉네임을 도큐먼트로 정하고 필드 값으로 이미지 경로 url 저장
                         Map<String, Object> profile = new HashMap<>();
-                        profile.put("profileUrl", G.profileUrl);
+//                        profile.put("profileUrl", G.profileUrl);
 
                         profileRef.document(G.nicname).set(profile);
 
@@ -140,7 +140,7 @@ public class MainChat extends AppCompatActivity {
 
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("nicName",G.nicname);
-                        editor.putString("profileUrl",G.profileUrl);
+//                        editor.putString("profileUrl",G.profileUrl);
 
                         editor.commit(); //내부적으로 트랜젝션 상태라 commit() 안해주면 안됨
 

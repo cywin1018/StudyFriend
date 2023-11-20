@@ -66,7 +66,7 @@ public class adapter extends RecyclerView.Adapter<adapter.VH> {
         holder.tvName.setText(item.name);
         holder.tvMsg.setText(item.message);
         holder.tvTime.setText(item.time);
-        Glide.with(context).load(item.profileUrl).into(holder.civ);
+//        Glide.with(context).load(item.profileUrl).into(holder.civ);
     }
 
     @Override

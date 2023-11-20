@@ -40,6 +40,12 @@ public class chat_fragment extends Fragment {
                 mfriendItems.add(new FriendItem(R.drawable.register_icon, i + "번째 사람", i + "번째 상태메시지"));
         }
         mRecyclerAdapter.setFriendList(mfriendItems);
+        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return view;
     }
 }
