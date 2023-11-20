@@ -9,10 +9,12 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/buttonsky"
-        android:queryHint="찾으시는 스터디를 검색하세요!"
-        android:layout_margin="15dp"
-        />
+        android:queryHint="찾으시는 스터디를 검색하세요!" />
 
     <FrameLayout
         android:id="@+id/frame_recycle"
@@ -41,16 +43,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         >
+
         <android.widget.Button
             android:id="@+id/wirterbttn"
-            android:layout_width="match_parent"
+            android:layout_width="34dp"
             android:layout_height="match_parent"
-            android:background="@drawable/register_icon"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
             android:layout_margin="5dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/register_icon"
             android:gravity="center_vertical"
-            />
+            android:scaleType="fitCenter" />
     </LinearLayout>
 
 </RelativeLayout>
