@@ -1,7 +1,12 @@
 package com.example.study_friend;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 
@@ -47,6 +53,33 @@ public class study_fragment extends Fragment {
             Itemlist.add(new Item("chanho"+i,"study 모집합니다"+i,"2023-11-1"+i,""+i));
         }
         RecyclerAdapter.setItems(Itemlist);
+
+        ActivityResultLauncher<Intent> resultLanch = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Intent intent = result.getData();
+                        ArrayList<String> list =intent.getStringArrayListExtra("data");
+                        //필요한데이터 작성자, 제목, 시간(, 사람수, 이미지
+                        // <작성페이지:regactivity 데이터 인덱스> 0: 학부 1:분야 2:장소 3:사람수 4:제목 5:내용
+
+                        //서버에서 가져와야하는것 작성자
+                        //날짜는 현재 생성일
+                        Item item = new Item("서버에서불러온 작성자",list.get(4),"2023-11-25",list.get(3));
+                        RecyclerAdapter.addItems(item);
+                    }
+                }
+        );
+
+
+        Button button = v.findViewById(R.id.wirterbttn);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), study_register.class);
+//            intent.putExtra("data",1);
+            resultLanch.launch(intent);
+        });
+
 
         return v;
     }

@@ -21,7 +21,11 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
 //        notifyDataSetChanged();
     }
 
-    // Create new views (invoked by the layout manager)
+    public void addItems(Item item){
+        items.add(item);
+//        notifyDataSetChanged() 필요한지 검토중...
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public studyrecyclerview_adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
