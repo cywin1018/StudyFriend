@@ -19,7 +19,7 @@
             android:name=".MainChat"
             android:exported="true" />
         <activity
-            android:name=".chatting"
+            android:name=".chat.chatting"
             android:configChanges="screenSize|screenLayout"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />

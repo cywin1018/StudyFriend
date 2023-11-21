@@ -1,4 +1,4 @@
-package com.example.study_friend;
+package com.example.study_friend.chat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.study_friend.MessageItem;
+import com.example.study_friend.R;
 
 import java.util.ArrayList;
 

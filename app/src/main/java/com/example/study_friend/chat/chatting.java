@@ -1,4 +1,4 @@
-package com.example.study_friend;
+package com.example.study_friend.chat;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study_friend.MessageItem;
 import com.example.study_friend.databinding.ActivityChattingBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
