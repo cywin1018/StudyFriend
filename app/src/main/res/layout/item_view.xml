@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:background="@drawable/buttonsky"
     >
-    
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -14,7 +14,7 @@
         />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -27,8 +27,8 @@
         android:id="@+id/wirter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/title"
-        android:layout_below="@+id/title"
+        android:layout_alignStart="@+id/title1"
+        android:layout_below="@+id/title1"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/imageview"
         android:text="작성자" />
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="모집기간"
-        android:layout_alignStart="@id/title"
+        android:layout_alignStart="@id/title1"
         android:layout_toEndOf="@+id/imageview"
         android:layout_below="@+id/wirter"
         android:layout_marginTop="10dp"
@@ -75,7 +75,7 @@
         />
 
     <TextView
-        android:id="@+id/num1"
+        android:id="@+id/select_num"
         android:text="6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,12 +85,12 @@
 
         />
     <TextView
-        android:id="@+id/setallnum"
+        android:id="@+id/setnum"
         android:text="/6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/date"
-        android:layout_toEndOf="@+id/num1"
+        android:layout_toEndOf="@+id/select_num"
         android:layout_marginStart="5dp"
         />
 

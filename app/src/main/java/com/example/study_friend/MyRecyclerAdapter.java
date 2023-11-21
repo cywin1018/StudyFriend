@@ -1,5 +1,6 @@
 package com.example.study_friend;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull MyRecyclerAdapter.ViewHolder holder, int position) {
+
         holder.onBind(mFriendList.get(position));
     }
 
     public void setFriendList(ArrayList<FriendItem> list){
         this.mFriendList = list;
+
         notifyDataSetChanged();
     }
 
@@ -51,6 +54,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         }
 
         void onBind(FriendItem item){
+            Log.d("MYMY2", "onBind: " + item.getResourceId());
             profile.setImageResource(item.getResourceId());
             name.setText(item.getName());
             message.setText(item.getDate());

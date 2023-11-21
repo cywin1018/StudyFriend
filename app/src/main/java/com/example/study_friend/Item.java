@@ -6,7 +6,12 @@ public class Item {
     String day;
     String num;
     int image;
-
+    public Item(String name, String title, String day, String num) {
+        this.name = name;
+        this.title = title;
+        this.day = day;
+        this.num = num;
+    }
     public Item(String name, String title, String day, String num, int image) {
         this.name = name;
         this.title = title;

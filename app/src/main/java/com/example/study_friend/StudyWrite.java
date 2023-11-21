@@ -16,4 +16,5 @@ public class StudyWrite extends AppCompatActivity {
         binding = ActivityStudyWriteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
     }}

@@ -27,7 +27,7 @@
         android:layout_marginBottom="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/study_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 

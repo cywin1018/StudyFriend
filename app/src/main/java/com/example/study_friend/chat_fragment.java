@@ -32,6 +32,7 @@ public class chat_fragment extends Fragment {
         /* adapt data */
         mfriendItems = new ArrayList<>();
 
+
         // 추후 정보를 받아 와서 채팅방 필요한 명수 만큼 만들 예정
         for (int i = 1; i <= 4; i++) {
             if (i % 2 == 0)

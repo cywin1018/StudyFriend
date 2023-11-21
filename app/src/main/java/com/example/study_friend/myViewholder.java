@@ -17,9 +17,9 @@ public class myViewholder extends RecyclerView.ViewHolder {
     public myViewholder(@NonNull View itemView) {
         super(itemView);
         imageView = itemView.findViewById(R.id.imageview);
-        title = itemView.findViewById(R.id.title);
+        title = itemView.findViewById(R.id.title1);
         name = itemView.findViewById(R.id.name);
         day = itemView.findViewById(R.id.day);
-        num = itemView.findViewById(R.id.num1);
+        num = itemView.findViewById(R.id.select_num);
     }
 }
