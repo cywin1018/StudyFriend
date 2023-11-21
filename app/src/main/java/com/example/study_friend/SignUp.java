@@ -48,7 +48,7 @@ public class SignUp extends AppCompatActivity {
             Log.d(TAG,nickname);
             if(nickname != null){
                 CollectionReference userRef = db.collection("FirebaseID.user");
-                Query query = userRef.whereEqualTo("FirebaseID.nickname",nickname)
+                Query query = userRef.whereEqualTo("FirebaseID.nickname",nickname);
                 Log.d(TAG,"여기까지는 성공");
                 Task<QuerySnapshot>task = query.get();
                 QueryDocumentSnapshot document;
