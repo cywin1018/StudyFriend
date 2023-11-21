@@ -27,7 +27,7 @@ public class PasswordReset extends AppCompatActivity {
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
-        binding.loginBtn.setOnClickListener(v -> {
+        binding.sendResetBtn.setOnClickListener(v -> {
             sendPasswordReset();
             intent = new Intent(this,MainActivity.class);
             startActivity(intent);
@@ -42,6 +42,7 @@ public class PasswordReset extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            /*메일이 보내짐을 알리기만 하자*/
                             Log.d(TAG,"Email sent");
                         }else{
                             Log.d(TAG,"Email unsent");

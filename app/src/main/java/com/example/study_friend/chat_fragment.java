@@ -39,12 +39,6 @@ public class chat_fragment extends Fragment {
 
 
         mRecyclerAdapter.setFriendList(mfriendItems);
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         return view;
     }
 }

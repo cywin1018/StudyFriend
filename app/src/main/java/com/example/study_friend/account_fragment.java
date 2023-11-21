@@ -43,9 +43,10 @@ public class account_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.logoutBtn.setOnClickListener(v->{
             FirebaseAuth.getInstance().signOut();
-            intent = new Intent(getContext(), LogIn.class);
+            intent = new Intent(getContext(), MainActivity.class);
             startActivity(intent);
         });
+        /*oncreateview로 이동이 될 것인가?*/
         DocumentReference docRef = db.collection("FirebaseID.user").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

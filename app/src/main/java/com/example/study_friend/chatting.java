@@ -34,7 +34,7 @@ public class chatting extends AppCompatActivity {
     FirebaseUser mUser;
     CollectionReference chatRef;
 
-    //채팅방 이름
+    //채팅방 이름 sample
     String chatName ="myChat";
 
     //리사이클러뷰에 넣어줄 아이템

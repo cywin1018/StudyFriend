@@ -86,16 +86,16 @@ public class study_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.wirterbttn.setOnClickListener(v ->{
-            replaceFragment(new StudyMakeWrite());
-        });
+//        binding.wirterbttn.setOnClickListener(v ->{
+//            replaceFragment(new StudyMakeWrite());
+//        });
 
     }
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.changeFrame,fragment);
-        fragmentTransaction.commit();
-        fragmentTransaction.addToBackStack(null);
-    }
+//    private void replaceFragment(Fragment fragment){
+//        FragmentManager fragmentManager = getParentFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.changeFrame,fragment);
+//        fragmentTransaction.commit();
+//        fragmentTransaction.addToBackStack(null);
+//    }
 }

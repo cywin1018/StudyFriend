@@ -25,9 +25,6 @@ public class HomeActivity extends AppCompatActivity {
             if(item.getItemId() == R.id.studybttn){
                 replaceFragment(new study_fragment());
             }
-//            else if(item.getItemId() == R.id.questionbttn){
-//                replaceFragment(new question_fragment());
-//            }
             else if(item.getItemId() == R.id.accountbttn){
                 replaceFragment(new account_fragment());
             }
