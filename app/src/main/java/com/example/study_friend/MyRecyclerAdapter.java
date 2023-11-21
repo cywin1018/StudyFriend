@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<FriendItem> mFriendList = new ArrayList<>();
+    public ArrayList<FriendItem> mFriendList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -44,6 +44,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         ImageView profile;
         TextView name;
         TextView message;
+        TextView title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,13 +52,17 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             profile = (ImageView) itemView.findViewById(R.id.profile);
             name = (TextView) itemView.findViewById(R.id.name);
             message = (TextView) itemView.findViewById(R.id.message);
+            title   =(TextView) itemView.findViewById(R.id.studyTitle);
+            Log.d("MYMY2", "ViewHolder: " + title);
         }
 
         void onBind(FriendItem item){
-            Log.d("MYMY2", "onBind: " + item.getResourceId());
+//            Log.d("MYMY2", "onBind: " + item.getResourceId());
             profile.setImageResource(item.getResourceId());
             name.setText(item.getName());
             message.setText(item.getDate());
+            title.setText(item.getTitle());
+            Log.d("MYMY2", "onBind: " + item);
         }
     }
 }

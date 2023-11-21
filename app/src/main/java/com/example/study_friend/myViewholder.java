@@ -1,5 +1,6 @@
 package com.example.study_friend;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,10 +17,11 @@ public class myViewholder extends RecyclerView.ViewHolder {
 
     public myViewholder(@NonNull View itemView) {
         super(itemView);
-        imageView = itemView.findViewById(R.id.imageview);
-        title = itemView.findViewById(R.id.title1);
-        name = itemView.findViewById(R.id.name);
-        day = itemView.findViewById(R.id.day);
-        num = itemView.findViewById(R.id.select_num);
+        Log.d("MYMY", "myViewholder: "+itemView);
+//        imageView = itemView.findViewById(R.id.imageview);
+//        title = itemView.findViewById(R.id.title1);
+//        name = itemView.findViewById(R.id.name);
+//        day = itemView.findViewById(R.id.day);
+//        num = itemView.findViewById(R.id.select_num);
     }
 }

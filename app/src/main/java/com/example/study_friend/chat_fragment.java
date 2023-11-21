@@ -34,12 +34,10 @@ public class chat_fragment extends Fragment {
 
 
         // 추후 정보를 받아 와서 채팅방 필요한 명수 만큼 만들 예정
-        for (int i = 1; i <= 4; i++) {
-            if (i % 2 == 0)
-                mfriendItems.add(new FriendItem(R.drawable.profile_icon, i + "번째 사람", i + "번째 상태메시지"));
-            else
-                mfriendItems.add(new FriendItem(R.drawable.register_icon, i + "번째 사람", i + "번째 상태메시지"));
-        }
+        mfriendItems.add(new FriendItem(R.drawable.profile_icon, "gibomi", "2023-11-12","선형대수학 공부하실 분"));
+        mfriendItems.add(new FriendItem(R.drawable.a, "chinno", "2023-11-15","오토마타 공부하자"));
+
+
         mRecyclerAdapter.setFriendList(mfriendItems);
         mRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
