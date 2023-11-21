@@ -1,4 +1,4 @@
-package com.example.study_friend;
+package com.example.study_friend.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.study_friend.Item;
+import com.example.study_friend.R;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
+import com.example.study_friend.study_register;
+import com.example.study_friend.studyrecyclerview_adapter;
 
 import java.util.ArrayList;
 

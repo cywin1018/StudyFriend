@@ -8,6 +8,9 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.study_friend.databinding.ActivityHomeBinding;
+import com.example.study_friend.fragment.account_fragment;
+import com.example.study_friend.fragment.chat_fragment;
+import com.example.study_friend.fragment.study_fragment;
 
 
 public class HomeActivity extends AppCompatActivity {

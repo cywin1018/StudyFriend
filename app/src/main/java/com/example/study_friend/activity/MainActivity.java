@@ -1,4 +1,4 @@
-package com.example.study_friend;
+package com.example.study_friend.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.study_friend.HomeActivity;
+import com.example.study_friend.R;
 import com.example.study_friend.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;

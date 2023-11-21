@@ -1,4 +1,4 @@
-package com.example.study_friend;
+package com.example.study_friend.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.study_friend.activity.MainActivity;
 import com.example.study_friend.databinding.FragmentAccountFragmentBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,7 +22,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
-import java.util.Objects;
 
 
 public class account_fragment extends Fragment {
