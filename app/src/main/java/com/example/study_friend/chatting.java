@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study_friend.databinding.ActivityChattingBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +30,8 @@ public class chatting extends AppCompatActivity {
 
     //채팅방 시작하자마자 아이템 하나 붙잡을 테니 전역변수로
     FirebaseFirestore firestore;
+
+    FirebaseUser mUser;
     CollectionReference chatRef;
 
     //채팅방 이름
@@ -40,7 +44,13 @@ public class chatting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        G.nicname = "gibomi";
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = mUser.getUid();
+        firestore = FirebaseFirestore.getInstance();
+        firestore.collection("FirebaseID.user").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+            G.nicname = documentSnapshot.get("FirebaseID.nickname").toString();
+            Log.d("chatting.java",G.nicname);
+        });
 
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
