@@ -54,6 +54,18 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             message = (TextView) itemView.findViewById(R.id.message);
             title   =(TextView) itemView.findViewById(R.id.studyTitle);
             Log.d("MYMY2", "ViewHolder: " + title);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getBindingAdapterPosition(); //아이템 위치를 알아냄
+                    Log.d("MYMY2", "where are u? : " + pos);
+                    if(pos != RecyclerView.NO_POSITION){
+                        FriendItem friendItem = mFriendList.get(pos);
+                        Log.d("MYMY2", "onClick: " + friendItem.name);
+                        // 이후에 닉네임, 방장에 맞는걸 store에서 받아와서 intent하면 될듯
+                    }
+                }
+            });
         }
 
         void onBind(FriendItem item){
