@@ -122,6 +122,18 @@
             android:textSize="16dp"
             android:textStyle="bold"
             />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/SuperBtn"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/buttonblue"
+            android:text="슈퍼로그인"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            />
     </LinearLayout>
 
 </ScrollView>

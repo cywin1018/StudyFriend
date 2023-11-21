@@ -46,6 +46,12 @@ public class MainActivity extends Activity {
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
         mAuth = FirebaseAuth.getInstance();
 
+        binding.SuperBtn.setOnClickListener(v-> {
+            Log.d(TAG, "SuperBtn Clicked");
+            intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        });
+
         binding.loginBtn.setOnClickListener(v -> {
             Log.d(TAG, "LogInBtn Clicked");
             signIn(binding.editID.getText().toString(),binding.editPassword.getText().toString());
