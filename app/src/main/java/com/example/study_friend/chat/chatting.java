@@ -36,7 +36,8 @@ public class chatting extends AppCompatActivity {
     CollectionReference chatRef;
 
     //채팅방 이름 sample
-    String chatName ="myChat";
+    String chatName="myChat";
+
 
     //리사이클러뷰에 넣어줄 아이템
     ArrayList<MessageItem> messageItems = new ArrayList<>();
@@ -45,14 +46,15 @@ public class chatting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = mUser.getUid();
-        firestore = FirebaseFirestore.getInstance();
-        firestore.collection("FirebaseID.user").document(uid).get().addOnSuccessListener(documentSnapshot -> {
-            G.nicname = documentSnapshot.get("FirebaseID.nickname").toString();
-            Log.d("chatting.java",G.nicname);
-        });
-
+//        Log.d("chatting.java`s nickname : ",chatName);
+//        mUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = mUser.getUid();
+//        firestore = FirebaseFirestore.getInstance();
+//        firestore.collection("FirebaseID.user").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+//            G.nicname = documentSnapshot.get("FirebaseID.nickname").toString();
+//            Log.d("chatting.java",G.nicname);
+//        });
+        G.nicname = "yongwon";
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

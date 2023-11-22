@@ -1,6 +1,9 @@
 package com.example.study_friend.fragment;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,12 +56,16 @@ public class chat_fragment extends Fragment {
                     String date = task.getResult().getDocuments().get(i).get("date").toString();
                     String title = task.getResult().getDocuments().get(i).get("title").toString();
 
-
                     mfriendItems.add(new FriendItem(R.drawable.profile_icon, nickname, date, title));
                     mRecyclerAdapter.setFriendList(mfriendItems);
                 }
             }
         });
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }
