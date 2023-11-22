@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import android.view.ViewGroup;
 import com.example.study_friend.FriendItem;
 import com.example.study_friend.MyRecyclerAdapter;
 import com.example.study_friend.R;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -20,6 +24,9 @@ public class chat_fragment extends Fragment {
     View view;
 
     ArrayList<FriendItem> mfriendItems;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference nicknameRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,16 +40,25 @@ public class chat_fragment extends Fragment {
         mRecyclerAdapter = new MyRecyclerAdapter();
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
-        /* adapt data */
         mfriendItems = new ArrayList<>();
 
+        /* 닉네임이랑  채팅방 정보 가져와서 채팅방 만들어주기 */
+        nicknameRef = db.collection("TestCollection");
+        nicknameRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (int i = 0; i < task.getResult().size(); i++) {
+                    Log.d("yongwon", String.valueOf(task.getResult().size()));
+                    String nickname = task.getResult().getDocuments().get(i).get("nickname").toString();
+                    Log.d("yongwon", nickname);
+                    String date = task.getResult().getDocuments().get(i).get("date").toString();
+                    String title = task.getResult().getDocuments().get(i).get("title").toString();
 
-        // 추후 정보를 받아 와서 채팅방 필요한 명수 만큼 만들 예정
-        mfriendItems.add(new FriendItem(R.drawable.profile_icon, "gibomi", "2023-11-12","선형대수학 공부하실 분"));
-        mfriendItems.add(new FriendItem(R.drawable.a, "chinno", "2023-11-15","오토마타 공부하자"));
 
-
-        mRecyclerAdapter.setFriendList(mfriendItems);
+                    mfriendItems.add(new FriendItem(R.drawable.profile_icon, nickname, date, title));
+                    mRecyclerAdapter.setFriendList(mfriendItems);
+                }
+            }
+        });
         return view;
     }
 }
