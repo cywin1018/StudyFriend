@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SearchView;
 
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
@@ -104,29 +104,27 @@ public class study_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         /*스터디 검색 기능 일단 작동 안함*/
-//        SearchView searchView = v.findViewById(R.id.search_bar);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                db = FirebaseFirestore.getInstance();
-//                ArrayList<Item> filteredItems = new ArrayList<Item>();
-//                for(int i = 0; i<items.size(); i++){
-//                    Item item = items.get(i);
-//                    if(item.getTitle().toLowerCase().contains(newText.toLowerCase())){
-//                        filteredItems.add(item);
-//                        studyRecyclerAdapter.setItemsList(filteredItems);
-//                    }
-//                }
-//
-//
-//                return false;
-//            }
-//        });
+        SearchView searchView = v.findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) { //검색 버튼 눌렀을 때
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) { //검색어 입력할 때마다
+                db = FirebaseFirestore.getInstance();
+                ArrayList<Item> filteredItems = new ArrayList<>();
+                for(int i = 0; i<items.size(); i++){
+                    Item item = items.get(i);
+                    if(item.getTitle().toLowerCase().contains(newText.toLowerCase())){
+                        filteredItems.add(item);
+                        studyRecyclerAdapter.setItemsList(filteredItems);
+                    }
+                }
+                return false;
+
+                 }
+        });
     }
 }
