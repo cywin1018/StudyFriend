@@ -5,20 +5,25 @@ public class Item {
     String title;
     String day;
     String num;
+
     int image;
+
+    public Item(){
+
+    }
     public Item(String name, String title, String day, String num) {
         this.name = name;
         this.title = title;
         this.day = day;
         this.num = num;
     }
-    public Item(String name, String title, String day, String num, int image) {
-        this.name = name;
-        this.title = title;
-        this.day = day;
-        this.num = num;
-        this.image = image;
-    }
+//    public Item(String name, String title, String day, String num, int image) {
+//        this.name = name;
+//        this.title = title;
+//        this.day = day;
+//        this.num = num;
+//        this.image = image;
+//    }
 
     public String getName() {
         return name;

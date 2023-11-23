@@ -15,73 +15,86 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class study_fragment extends Fragment {
-    FragmentStudyFragmentBinding binding;
+    final static String TAG = "RERE";
+    FirebaseFirestore db;
+    CollectionReference postRf;
+    RecyclerView recyclerView;
+    studyrecyclerview_adapter studyRecyclerAdapter;
 
-    androidx.recyclerview.widget.RecyclerView RecyclerView;
-    studyrecyclerview_adapter RecyclerAdapter;
-
-    ArrayList<Item> Itemlist;
+    ArrayList<Item> items = new ArrayList<>();
 
     private View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentStudyFragmentBinding.inflate(inflater);
 
         v = inflater.inflate(R.layout.fragment_study_fragment,container,false);
+        Log.d(TAG,"뷰 생성");
 
-        RecyclerView = v.findViewById(R.id.study_recyclerview);
+        recyclerView = v.findViewById(R.id.study_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        RecyclerView.setLayoutManager(layoutManager);
-        RecyclerAdapter = new studyrecyclerview_adapter();
-        RecyclerView.setAdapter(RecyclerAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+        studyRecyclerAdapter = new studyrecyclerview_adapter(items);
+        recyclerView.setAdapter(studyRecyclerAdapter);
 
-        Itemlist = new ArrayList<>();
-        //sever에 데이터를 어레이 형식으로 불러와야한다.
-        for (int i = 1; i <= 4; i++) {
-            Itemlist.add(new Item("chanho"+i,"study 모집합니다"+i,"2023-11-1"+i,""+i));
-        }
-        RecyclerAdapter.setItems(Itemlist);
+        Log.d(TAG,"adapter연결");
 
-        ActivityResultLauncher<Intent> resultLanch = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        Intent intent = result.getData();
-                        ArrayList<String> list =intent.getStringArrayListExtra("data");
-                        //필요한데이터 작성자, 제목, 시간(, 사람수, 이미지
-                        // <작성페이지:regactivity 데이터 인덱스> 0: 학부 1:분야 2:장소 3:사람수 4:제목 5:내용
+        db = FirebaseFirestore.getInstance();
+        postRf = db.collection("게시글");
+        items = new ArrayList<Item>();
+        postRf.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                List<DocumentChange> documentChanges = value.getDocumentChanges();
 
-                        //서버에서 가져와야하는것 작성자
-                        //날짜는 현재 생성일
-                        Item item = new Item("서버에서불러온 작성자",list.get(4),"2023-11-25",list.get(3));
-                        RecyclerAdapter.addItems(item);
-                    }
+                for(DocumentChange documentChange : documentChanges){
+                    DocumentSnapshot documentSnapshot = documentChange.getDocument();
+
+                    Map<String,Object> postDocument = documentSnapshot.getData();
+                    String nickname = postDocument.get("내용").toString();
+                    String date = postDocument.get("장소").toString();
+                    String title = postDocument.get("제목").toString();
+                    String num = postDocument.get("모집인원").toString();
+                    items.add(new Item(nickname,title,date,num));
+                    studyRecyclerAdapter.setItemsList(items);
+                    studyRecyclerAdapter.notifyItemInserted(items.size()-1);
                 }
-        );
+            }
+        });
 
 
-        Button button = v.findViewById(R.id.wirterbttn);
+        Button button = v.findViewById(R.id.writerBtn);
+
         button.setOnClickListener(view -> {
+            Log.d("TAG","Click y nono?");
             Intent intent = new Intent(getActivity(), study_register.class);
-//            intent.putExtra("data",1);
-            resultLanch.launch(intent);
+            startActivity(intent);
         });
 
 
@@ -90,16 +103,30 @@ public class study_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        binding.wirterbttn.setOnClickListener(v ->{
-//            replaceFragment(new StudyMakeWrite());
+        /*스터디 검색 기능 일단 작동 안함*/
+//        SearchView searchView = v.findViewById(R.id.search_bar);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                db = FirebaseFirestore.getInstance();
+//                ArrayList<Item> filteredItems = new ArrayList<Item>();
+//                for(int i = 0; i<items.size(); i++){
+//                    Item item = items.get(i);
+//                    if(item.getTitle().toLowerCase().contains(newText.toLowerCase())){
+//                        filteredItems.add(item);
+//                        studyRecyclerAdapter.setItemsList(filteredItems);
+//                    }
+//                }
+//
+//
+//                return false;
+//            }
 //        });
 
     }
-//    private void replaceFragment(Fragment fragment){
-//        FragmentManager fragmentManager = getParentFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.changeFrame,fragment);
-//        fragmentTransaction.commit();
-//        fragmentTransaction.addToBackStack(null);
-//    }
 }

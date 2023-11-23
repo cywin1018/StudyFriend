@@ -72,25 +72,27 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                     if(pos != RecyclerView.NO_POSITION){
                         FriendItem friendItem = mFriendList.get(pos);
                         Log.d("yongwon", "onClick: " + friendItem.name);
+                        intent = new Intent(view.getContext(), chatting.class);
+                        view.getContext().startActivity(intent);
                         // 이후에 닉네임, 방장에 맞는걸 store에서 받아와서 intent하면 될듯
-                        nicknameRef = db.collection("TestCollection");
-                        nicknameRef.get().addOnCompleteListener(task->{
-                            if(task.isSuccessful()){
-                                for(int i=0; i<task.getResult().size(); i++){
-
-                                    String nickname = task.getResult().getDocuments().get(i).get("nickname").toString();
-                                    Log.d("MYYY : ", nickname);
-
-                                    if(friendItem.name.equals(nickname)){
-                                        intent = new Intent(view.getContext(), chatting.class);
-
-//                                        intent.putExtra("nickname", nickname);
-                                        view.getContext().startActivity(intent);
-                                    }
-                                }
-
-                            }
-                        });
+//                        nicknameRef = db.collection("TestCollection");
+//                        nicknameRef.get().addOnCompleteListener(task->{
+//                            if(task.isSuccessful()){
+//                                for(int i=0; i<task.getResult().size(); i++){
+//
+//                                    String nickname = task.getResult().getDocuments().get(i).get("nickname").toString();
+//                                    Log.d("MYYY : ", nickname);
+//
+//                                    if(friendItem.name.equals(nickname)){
+//                                        intent = new Intent(view.getContext(), chatting.class);
+//
+////                                        intent.putExtra("nickname", nickname);
+//                                        view.getContext().startActivity(intent);
+//                                    }
+//                                }
+//
+//                            }
+//                        });
                     }
                 }
             });

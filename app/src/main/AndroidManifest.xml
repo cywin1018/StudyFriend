@@ -14,13 +14,11 @@
         tools:targetApi="31">
         <activity
             android:name=".StudyContent"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".study_register"
             android:exported="false" />
-        <activity
-            android:name=".MainChat"
-            android:exported="true" />
+
         <activity
             android:name=".chat.chatting"
             android:configChanges="screenSize|screenLayout"
@@ -31,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.SignUp"
-            android:exported="false" />
-        <activity
-            android:name=".StudyWrite"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"

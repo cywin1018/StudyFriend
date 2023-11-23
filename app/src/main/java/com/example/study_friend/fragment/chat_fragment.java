@@ -16,10 +16,20 @@ import android.view.ViewGroup;
 import com.example.study_friend.FriendItem;
 import com.example.study_friend.MyRecyclerAdapter;
 import com.example.study_friend.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class chat_fragment extends Fragment {
     RecyclerView mRecyclerView;
@@ -43,24 +53,54 @@ public class chat_fragment extends Fragment {
         mRecyclerAdapter = new MyRecyclerAdapter();
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
-        mfriendItems = new ArrayList<>();
+        mfriendItems = new ArrayList<FriendItem>();
 
         /* 닉네임이랑  채팅방 정보 가져와서 채팅방 만들어주기 */
-        nicknameRef = db.collection("TestCollection");
-        nicknameRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                for (int i = 0; i < task.getResult().size(); i++) {
-                    Log.d("yongwon", String.valueOf(task.getResult().size()));
-                    String nickname = task.getResult().getDocuments().get(i).get("nickname").toString();
-                    Log.d("yongwon", nickname);
-                    String date = task.getResult().getDocuments().get(i).get("date").toString();
-                    String title = task.getResult().getDocuments().get(i).get("title").toString();
+//        nicknameRef = db.collection("TestCollection");
+//        nicknameRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                List<DocumentChange>documentChanges = value.getDocumentChanges();
+//
+//                for(DocumentChange documentChange : documentChanges){
+//                    DocumentSnapshot documentSnapshot = documentChange.getDocument();
+//
+//                    Map<String,Object>chatRoom = documentSnapshot.getData();
+//                    String nickname = chatRoom.get("nickname").toString();
+//                    String date = chatRoom.get("date").toString();
+//                    String title = chatRoom.get("title").toString();
+//
+//                    mfriendItems.add(new FriendItem(R.drawable.profile_icon,nickname,date,title));
+//                    mRecyclerAdapter.setFriendList(mfriendItems);
+//                    mRecyclerAdapter.notifyItemInserted(mfriendItems.size()-1);
+//                }
+//            }
+//        });
+        /*자자 이걸 이제 내가 참여했던 채팅방을 가져오려면 어떻게 해야 할까?
+         * 그것은 말이지 나도 잘은 모르겠지만 일단 각 유저의 정보에 따른 채팅방을 만들면 되는거 아니겠어??
+         * 그렇다는건 유저 정보에 맞는 친구들을 띄워주면 되는거잖아? */
+        String temp = "Fen0A9rXYdW7BbE8uySQzKFsg1M2";
+        db.collection("TestCollection")
+                .whereEqualTo("student",temp)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            Log.d("RERE","이건 되는거냐?");
+                            for(QueryDocumentSnapshot chatRoom : task.getResult()){
+                                Map<String,Object> chatRoomData = chatRoom.getData();
+                                String nickname = chatRoomData.get("nickname").toString();
+                                String date = chatRoomData.get("date").toString();
+                                String title = chatRoomData.get("title").toString();
+                                Log.d("RERE",nickname+" "+date + " " + title);
 
-                    mfriendItems.add(new FriendItem(R.drawable.profile_icon, nickname, date, title));
-                    mRecyclerAdapter.setFriendList(mfriendItems);
-                }
-            }
-        });
+                                mfriendItems.add(new FriendItem(R.drawable.profile_icon,nickname,date,title));
+                                mRecyclerAdapter.setFriendList(mfriendItems);
+                            }
+                        }
+                    }
+                });
         return view;
     }
 
