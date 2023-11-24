@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
@@ -68,6 +69,7 @@ public class study_fragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         postRf = db.collection("게시글");
         items = new ArrayList<Item>();
+
         postRf.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
