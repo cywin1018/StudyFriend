@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 app/src/main/java/com/example/study_friend/local.properties
+local.properties
