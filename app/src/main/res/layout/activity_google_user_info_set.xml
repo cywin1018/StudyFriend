@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.GoogleUserInfoSet">
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/back"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--         />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/signup"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginBottom="20dp"-->
+    <!--            android:layout_weight="2"-->
+    <!--            android:text="회원 가입"-->
+    <!--            android:textColor="@color/purple_200"-->
+    <!--            android:textSize="25dp" />-->
+    <!--    </LinearLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"
+                android:text="회원가입"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="45dp"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/Email"
+                android:background="@drawable/button_small_circle"
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="이메일"
+
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="310dp"
+                android:layout_height="55dp"
+                android:layout_marginBottom="5dp"
+                android:hint="이메일을 입력하세요"
+                android:gravity="center"
+                android:background="@drawable/buttonblackline"
+                android:textSize="20dp"
+                android:inputType="textEmailAddress"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/Password"
+                android:layout_width="60sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_small_circle"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:text="비밀번호"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                />
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="310dp"
+                android:layout_height="55dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/buttonblackline"
+                android:ems="10"
+                android:hint="비밀번호를 입력하세요."
+                android:gravity="center"
+                android:inputType="numberPassword"
+                />
+            <EditText
+                android:id="@+id/editPasswordConfirm"
+                android:layout_width="310dp"
+                android:layout_height="55dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/buttonblackline"
+                android:ems="10"
+                android:hint="비밀번호를 확인하세요."
+                android:gravity="center"
+                android:inputType="numberPassword"
+                />
+            <TextView
+                android:id="@+id/nickname"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_small_circle"
+                android:gravity="center"
+
+                android:text="닉네임"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <EditText
+                    android:id="@+id/editNickname"
+                    android:layout_width="230dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/buttonblackline"
+                    android:ems="10"
+                    android:hint="닉네임을 입력하세요."
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/confirm"
+                    android:layout_width="70dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:ems="10"
+                    android:text="중복확인"
+                    android:textSize="12dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/buttonblue"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="정보"
+                android:background="@drawable/button_small_circle"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/univ"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/buttonblackline"
+                    android:ems="10"
+                    android:hint="학교"
+                    android:inputType="text"
+                    android:gravity="center"
+                    android:text=""
+                    />
+                <EditText
+                    android:id="@+id/major"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/buttonblackline"
+                    android:ems="10"
+                    android:hint="학부"
+                    android:inputType="text"
+                    android:gravity="center"
+                    android:text=""
+                    />
+                <EditText
+                    android:id="@+id/semester"
+                    android:layout_width="100dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/buttonblackline"
+                    android:ems="10"
+                    android:hint="학기"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:text=""
+                    />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitBtn"
+                android:layout_width="310dp"
+                android:layout_height="55dp"
+                android:background="@drawable/buttonblue"
+                android:text="제출하기"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
