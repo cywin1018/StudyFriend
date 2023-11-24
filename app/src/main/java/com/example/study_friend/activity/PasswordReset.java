@@ -11,6 +11,9 @@ import com.example.study_friend.databinding.ActivityPasswordResetBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+/*
+* 이건 그냥 끝남
+*/
 
 public class PasswordReset extends AppCompatActivity {
     private ActivityPasswordResetBinding binding;

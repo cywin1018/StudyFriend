@@ -20,6 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+/*
+* 없애도 되는 파일로 알고 있음
+*/
 
 
 public class StudyMakeWrite extends Fragment {

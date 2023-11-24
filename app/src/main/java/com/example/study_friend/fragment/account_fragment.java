@@ -22,7 +22,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
-
+/*
+* 1. 내가 만든 스터디 내가 참여한 스터디 연결
+* 2. 개추 시스템
+* 3. 포인트 시스템
+*/
 
 public class account_fragment extends Fragment {
     FragmentAccountFragmentBinding binding;

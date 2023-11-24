@@ -103,7 +103,9 @@ public class study_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*스터디 검색 기능 일단 작동 안함*/
+        /*스터디 검색 기능 개선할 점
+        * 1. 아무것도 같은게 없으면 안뜨게 해야함
+        * 2. title검색하는데 tttttttt쳐도 검색되니까 이거는 수정 해야함*/
         SearchView searchView = v.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -117,7 +119,7 @@ public class study_fragment extends Fragment {
                 ArrayList<Item> filteredItems = new ArrayList<>();
                 for(int i = 0; i<items.size(); i++){
                     Item item = items.get(i);
-                    if(item.getTitle().toLowerCase().contains(newText.toLowerCase())){
+                    if(item.getTitle().contains(newText)){
                         filteredItems.add(item);
                         studyRecyclerAdapter.setItemsList(filteredItems);
                     }

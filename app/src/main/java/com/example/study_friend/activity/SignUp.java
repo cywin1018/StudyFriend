@@ -23,6 +23,9 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/*
+* 이메일 유효성(용짱이 한다고 했음)(근데 굳이 안되면 가라치면 되니까 후순위로)
+*/
 
 public class SignUp extends AppCompatActivity {
 

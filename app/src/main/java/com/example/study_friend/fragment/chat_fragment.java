@@ -30,6 +30,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+/*
+* 일단 아직 안한거!!
+* 1. 클릭하면 채팅방으로 넘어가지는데 아직 다른 채팅방으로 넘기는건 아님
+* 2. 뷰에서 조금 개선할거 있는데 굳이 지금 할 필요는 없음
+*/
 
 public class chat_fragment extends Fragment {
     RecyclerView mRecyclerView;

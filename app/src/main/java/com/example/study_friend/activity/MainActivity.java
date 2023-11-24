@@ -24,6 +24,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+/*
+* 일단 대부분 다 되는데 이메일 비밀번호 틀렸을 때 어떤식으로 나타낼 지 생각해보면 될 듯
+*/
 
 public class MainActivity extends Activity {
     private static final String TAG = "Login Activity";
