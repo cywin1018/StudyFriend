@@ -18,12 +18,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 /*
 * 일단 대부분 다 되는데 이메일 비밀번호 틀렸을 때 어떤식으로 나타낼 지 생각해보면 될 듯
 */
@@ -31,6 +37,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends Activity {
     private static final String TAG = "Login Activity";
     private FirebaseAuth mAuth;
+
+    private FirebaseFirestore db;
     private static final int RC_SIGN_IN= 9001;
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -42,6 +50,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = FirebaseFirestore.getInstance();
         textView = (TextView) binding.googleLoginBtn.getChildAt(0);
         textView.setText(getString(R.string.googleLogInBtn));
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -135,7 +144,24 @@ public class MainActivity extends Activity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            Log.d(TAG,user.getUid() + " " + user.getEmail() + " " + user.getDisplayName());
+                            db.collection("users")
+                                            .whereEqualTo("documentID",user.getUid())
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    Log.d(TAG,"여기");
+                                                    QuerySnapshot documents = task.getResult();
+                                                    if(documents.isEmpty()){
+                                                        Log.d(TAG,"이거?");
+                                                        intent = new Intent(getApplicationContext(), GoogleUserInfoSet.class);
+                                                        startActivity(intent);
+                                                    }else{
+                                                        updateUI(user);
+                                                    }
+                                                }
+                                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

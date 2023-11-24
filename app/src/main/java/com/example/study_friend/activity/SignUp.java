@@ -3,6 +3,7 @@ package com.example.study_friend.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,9 +25,6 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-/*
-* 이메일 유효성(용짱이 한다고 했음)(근데 굳이 안되면 가라치면 되니까 후순위로)
-*/
 
 public class SignUp extends AppCompatActivity {
 
@@ -44,31 +43,22 @@ public class SignUp extends AppCompatActivity {
             String nickname = binding.editNickname.getText().toString().trim();
             Log.d(TAG,nickname);
             if(nickname != null){
-//                CollectionReference userRef = db.collection("FirebaseID.user");
-//                Query query = userRef.whereEqualTo("FirebaseID.nickname",nickname);
-//                Log.d(TAG,"여기까지는 성공");
-//                Task<QuerySnapshot>task = query.get();
-//                QueryDocumentSnapshot document;
                 db.collection("users")
-                        .whereEqualTo("nickname","gibomi")
+                        .whereEqualTo("nickname",nickname)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
-                                    Log.d(TAG,"불러는 들어왔다");//진짜 불러는 들어왔다.
                                     QuerySnapshot snapshots = task.getResult();
-                                    Log.d("snapshots",snapshots.toString());
                                     List<DocumentChange> documentChanges = snapshots.getDocumentChanges();
-                                    Log.d("snapshots",documentChanges.toString());
-                                    for(DocumentChange documentChange : documentChanges){
-                                        Log.d(TAG,"인간적으로 이건 해라");
+                                    if(documentChanges.isEmpty()){
+                                        Toast.makeText(SignUp.this,"가능한 닉네임입니다",Toast.LENGTH_SHORT).show();
                                     }
-                                    for(QueryDocumentSnapshot document : task.getResult()){
-                                        Log.d(TAG,document.getId() + "=>" + document.getData());
+                                    else{
+                                        Toast.makeText(SignUp.this,"이미 존재하는 닉네임입니다",Toast.LENGTH_SHORT).show();
+                                        binding.editNickname.setText("");
                                     }
-                                }else{
-                                    Log.d(TAG,"Error",task.getException());
                                 }
                             }
                         });
@@ -100,7 +90,7 @@ public class SignUp extends AppCompatActivity {
                             userMap.put("univ",univ);
                             userMap.put("major",major);
                             userMap.put("semester",semester);
-                            db.collection("user").document(user.getUid()).set(userMap, SetOptions.merge());
+                            db.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(getLayoutInflater().getContext());
                             builder.setTitle("회원가입 성공");
