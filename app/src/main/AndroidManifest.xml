@@ -13,10 +13,13 @@
         android:theme="@style/Theme.Recycle_test"
         tools:targetApi="31">
         <activity
+            android:name=".StudyTutor"
+            android:exported="true" />
+        <activity
             android:name=".activity.GoogleUserInfoSet"
             android:exported="false" />
         <activity
-            android:name=".CustomDialog"
+            android:name=".activity.CustomDialog"
             android:exported="false" />
         <activity
             android:name=".StudyContent"
