@@ -1,6 +1,7 @@
 package com.example.study_friend;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecyclerview_adapter.ViewHolder> {
 
     public ArrayList<Item> items;
+    Intent intent;
 
     public studyrecyclerview_adapter(ArrayList<Item> items){
         this.items = items;
@@ -62,7 +64,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
 //        return 2;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView title1, name, day, selectNum;
 
         public ViewHolder(@NonNull View itemView) {
@@ -71,6 +73,23 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
             name =(TextView)itemView.findViewById(R.id.name);
             day = (TextView)itemView.findViewById(R.id.day);
             selectNum = (TextView)itemView.findViewById(R.id.select_num);
+
+            //          chat의 리사이클러뷰 클릭함수 적극 반영
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getBindingAdapterPosition(); //아이템 위치를 알아냄
+                    if(pos != RecyclerView.NO_POSITION){
+                        Item studyitem = items.get(pos);
+
+                        intent = new Intent(view.getContext(), StudyContent.class);
+//                        intent.putExtra("name",studyitem.name);
+                        intent.putExtra("title",studyitem.title);
+                        view.getContext().startActivity(intent);
+
+                    }
+                }
+            });
         }
 
 //        void onBind(Item item){

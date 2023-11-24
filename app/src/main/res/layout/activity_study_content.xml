@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".StudyContent">
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonsky"
@@ -37,7 +37,7 @@
                 />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
@@ -60,21 +60,21 @@
                     android:id="@+id/profileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="컴학 찬호님"
+                    android:text="Nickname 불러오기"
                     android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/profileInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="숭실대학교 컴퓨터학부 20학번"
+                    android:text="정보 불러오(숭실대학교 컴퓨터학부 20학번)"
                     />
                 <TextView
                     android:id="@+id/profileSemester"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="2학년 2학기"
+                    android:text="학기 : 2학년 2학기"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
                         android:id="@+id/starNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="60개"
+                        android:text="(개수)60개"
                         />
                     <ImageView
                         android:layout_width="wrap_content"
@@ -106,13 +106,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="100+"
+                        android:text="(명수)100+"
                         />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
@@ -133,10 +133,21 @@
                 android:layout_gravity="center"
                 >
                 <TextView
+                    android:id="@+id/study_major"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="컴퓨터학부"
+                    android:text="(학부) 컴퓨터학부"
                     />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    />
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="전체 학부"-->
+                <!--                    />-->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -145,33 +156,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="전체 학부"
+                    android:text="(학년) 2학년"
                     />
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2학년"
-                    />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="전체학부"
-                    />
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="전체학부"-->
+                <!--                    />-->
 
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
@@ -229,9 +230,10 @@
                 android:layout_gravity="center"
                 >
                 <TextView
+                    android:id="@+id/study_textbook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오토마타"
+                    android:text="(분야)오토마타"
                     />
                 <View
                     android:layout_width="0dp"
@@ -239,9 +241,10 @@
                     android:layout_weight="1"
                     />
                 <TextView
+                    android:id="@+id/study_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3층 중간 스터디룸"
+                    android:text="(장소)3층 중간 스터디룸"
                     />
                 <View
                     android:layout_width="0dp"
@@ -249,49 +252,53 @@
                     android:layout_weight="1"
                     />
                 <TextView
+                    android:id="@+id/study_possiblenum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5명"
+                    android:text="(명수)5명"
                     />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:orientation="vertical"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:padding="10dp"
             android:background="@drawable/mystudy"
-            >
+            android:orientation="vertical"
+            android:padding="10dp">
+
             <TextView
-                android:layout_marginTop="10dp"
+                android:id="@+id/content_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:textStyle="bold"
+                android:layout_marginTop="10dp"
                 android:paddingLeft="5dp"
-                android:text="오토마타 스터디 급구"
-                />
+                android:text="(제목)오토마타 스터디 급구"
+                android:textSize="16dp"
+                android:textStyle="bold" />
             <!--구분선-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="10dp"
-                android:background="#aaa"/>
+                android:background="#aaa" />
+
             <TextView
+                android:id="@+id/study_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:textSize="12dp"
-                android:text="나현숙 교수님 오토마타 8주차 과정 스터디 할 사람 구합니다! 실력 좋은 학우 구했습니다. 많은신청 바랍니다."
-                />
+                android:text="(내용)나현숙 교수님 오토마타 8주차 과정 스터디 할 사람 구합니다! 실력 좋은 학우 구했습니다. 많은신청 바랍니다."
+                android:textSize="12dp" />
 
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_gravity="center"
             android:id="@+id/studyRegBtn"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="3dp"
@@ -301,6 +308,8 @@
             android:background="@drawable/buttonblue"
             android:text="신청하기"
             android:textColor="#ffff"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+
+            />
     </LinearLayout>
 </ScrollView>
