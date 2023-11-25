@@ -18,7 +18,7 @@ import java.util.Map;
 public class study_register extends AppCompatActivity {
     ActivityStudyRegisterBinding binding;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    //    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     Intent intent;
     private ArrayList<Item> items=null;
     @Override
@@ -61,6 +61,7 @@ public class study_register extends AppCompatActivity {
         post.put("모집인원",num);
         post.put("제목",title);
         post.put("내용",content);
+        post.put("tutorUid",currentUser.getUid());
 
         db.collection("게시글").document(title).set(post);
     }

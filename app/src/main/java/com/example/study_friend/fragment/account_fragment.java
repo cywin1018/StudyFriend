@@ -51,7 +51,7 @@ public class account_fragment extends Fragment {
             startActivity(intent);
         });
         /*oncreateview로 이동이 될 것인가?*/
-        DocumentReference docRef = db.collection("FirebaseID.user").document(uid);
+        DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -59,10 +59,10 @@ public class account_fragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
                         Map<String, Object> users = document.getData();
-                        String nickname = (String)users.get("FirebaseID.nickname");
-                        String univ =(String)users.get("FirebaseID.univ");
-                        String semester = (String)users.get("FirebaseID.semester");
-                        String major =(String)users.get("FirebaseID.major");
+                        String nickname = (String)users.get("nickname");
+                        String univ =(String)users.get("univ");
+                        String semester = (String)users.get("semester");
+                        String major =(String)users.get("major");
                         binding.profileName.setText(nickname +"님");
                         binding.profileSemester.setText(semester +"학기");
                         binding.profileInfo.setText(univ + " " + major);
