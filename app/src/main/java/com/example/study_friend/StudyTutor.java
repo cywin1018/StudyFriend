@@ -38,9 +38,10 @@ public class StudyTutor extends AppCompatActivity {
     ArrayList<Item> items = new ArrayList<>();
     Item itemData;
     /* Firestore */
-//    FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    CollectionReference docRef = db.collection("게시글");
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference docRef = db.collection("게시글");
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
     String nickname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,34 @@ public class StudyTutor extends AppCompatActivity {
             intent = new Intent(StudyTutor.this, account_fragment.class);
             startActivity(intent);
         });
+        // 현재 사용자의 정보를 가져오는 부분
+        String uid = user.getUid();
 
+        db.collection("게시글")
+                .whereEqualTo("tutorUid",uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            recyclerView = findViewById(R.id.tutor_recyclerview_list);
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                            recyclerView.setLayoutManager(layoutManager);
+                            for(QueryDocumentSnapshot posts : task.getResult()){
+                                Map<String,Object> post = posts.getData();
+                                String nickname = post.get("내용").toString();
+                                String date = post.get("장소").toString();
+                                String title = post.get("제목").toString();
+                                String people = post.get("모집인원").toString();
+                                itemData = new Item("닉네임",title , date, people);
+                                items.add(itemData);
 
+                                studyRecyclerAdapter = new studyrecyclerview_adapter(items);
+                                recyclerView.setAdapter(studyRecyclerAdapter);
+                            }
+                        }
+                    }
+                });
 
 
         /* 리사이클러뷰로 리스트 추가하는 부분 */
