@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class study_register extends AppCompatActivity {
@@ -32,17 +33,18 @@ public class study_register extends AppCompatActivity {
             final String people = binding.editPeople.getText().toString().trim();
             final String field = binding.editField.getText().toString().trim();
             final String place = binding.editPlace.getText().toString().trim();
-            final String num = binding.editNum.getText().toString().trim();
+            final int num = Integer.parseInt(binding.editNum.getText().toString().trim());
             final String title = binding.editTitle.getText().toString().trim();
             final String content = binding.editContent.getText().toString().trim();
-            ArrayList<String> data=new ArrayList<>();
+            List<String> participants = new ArrayList<>();
+            ArrayList<Object> data=new ArrayList<>();
             data.add(people);
             data.add(field);
             data.add(place);
             data.add(num);
             data.add(title);
             data.add(content);
-            posting(people,field,place,num,title,content);
+            posting(people,field,place,num,title,content,participants);
 
             // 0: 학부 1:분야 2:장소 3:사람수 4:제목 5:내용
             Intent intent = getIntent();
@@ -53,8 +55,9 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,String num,String title,String content){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants){
         Map<String,Object> post = new HashMap<>();
+        int k = 0;
         post.put("모집대상",people);
         post.put("분야",field);
         post.put("장소",place);
@@ -62,6 +65,8 @@ public class study_register extends AppCompatActivity {
         post.put("제목",title);
         post.put("내용",content);
         post.put("tutorUid",currentUser.getUid());
+        post.put("신청인원",k);
+        post.put("신청자Uid",participants);
 
         db.collection("게시글").document(title).set(post);
     }

@@ -1,8 +1,10 @@
 package com.example.study_friend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,14 +12,26 @@ import android.util.Log;
 import com.example.study_friend.R;
 import com.example.study_friend.databinding.ActivityStudyContentBinding;
 import com.example.study_friend.fragment.study_fragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StudyContent extends AppCompatActivity {
 
     ActivityStudyContentBinding binding;
     FirebaseFirestore db;
     CollectionReference nicknameRef;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +87,37 @@ public class StudyContent extends AppCompatActivity {
             String num = "5명";
             menu.setTitle("작성 목록");
             menu.setMessage("모집대상 " + people + "\n" + "학년 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
-            menu.setPositiveButton("Ok",null);
+            menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    db.collection("게시글").document(intent1.getStringExtra("title")).get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        Log.d("RERE","1번");
+                                        DocumentSnapshot documentSnapshot = task.getResult();
+                                        Map<String,Object> info = documentSnapshot.getData();
+                                        Log.d("RERE",info.get("신청인원").toString());
+                                        int applicants = Integer.parseInt(info.get("신청인원").toString());
+                                        Log.d("RERE","요기");
+                                        Log.d("RERE",info.get("신청자Uid").toString());
+                                        List<String> appliers = (ArrayList<String>)info.get("신청자Uid");
+                                        Log.d("RERE",Integer.toString(applicants));
+                                        appliers.add(applicants,user.getUid());
+                                        Log.d("RERE","2번");
+                                        applicants++;
+                                        Map<String,Object> newInfo = new HashMap<>();
+                                        newInfo.put("신청인원",applicants);
+                                        newInfo.put("신청자Uid",appliers);
+                                        db.collection("게시글").document(intent1.getStringExtra("title"))
+                                                .set(newInfo, SetOptions.merge());
+
+                                    }
+                                }
+                            });
+                }
+            });
             menu.setNegativeButton("Cancel",null);
             menu.create();
             menu.show();
