@@ -21,9 +21,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
+import com.example.study_friend.StudyTutor;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
@@ -87,7 +89,13 @@ public class study_fragment extends Fragment {
                 }
             }
         });
-
+        // 튜터로 이동하는 코드
+        TextView tutorBtn = v.findViewById(R.id.tutorBtnLayout);
+//        tutorBtn.setOnClickListener(view -> {
+//            Log.d("TAG","tutorBtn clicked?");
+////            Intent intent = new Intent(getActivity(), StudyTutor.class);
+////            startActivity(intent);
+//        });
 
         Button button = v.findViewById(R.id.writerBtn);
 

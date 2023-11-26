@@ -69,8 +69,11 @@ public class MainActivity extends Activity {
         binding.loginBtn.setOnClickListener(v -> {
             Log.d(TAG, "LogInBtn Clicked");
             signIn(binding.editID.getText().toString(),binding.editPassword.getText().toString());
+            Log.d(TAG, "signInWithEmail:success??");
             intent = new Intent(this, HomeActivity.class);
+            Log.d(TAG, "HomeActivity로 이동");
             startActivity(intent);
+            Log.d(TAG, "startActivity(intent) 실행");
         });
 
         binding.SignUpBtn.setOnClickListener(v -> {
@@ -108,6 +111,7 @@ public class MainActivity extends Activity {
                             Log.d(TAG,"signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Log.d(TAG,"updateUI 실행");
                         }
                         else{
                             Log.w(TAG,"signUpWithEmail:Failure");

@@ -13,6 +13,9 @@ import android.util.Log;
 
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
 import com.example.study_friend.fragment.account_fragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -24,9 +27,12 @@ public class StudyTutor extends AppCompatActivity {
     RecyclerView recyclerView;
     studyrecyclerview_adapter studyRecyclerAdapter;
     ArrayList<Item> items = new ArrayList<>();
-
     Item itemData;
+    /* Firestore */
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference docRef = db.collection("게시글");
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,10 @@ public class StudyTutor extends AppCompatActivity {
             intent = new Intent(StudyTutor.this, account_fragment.class);
             startActivity(intent);
         });
+        // 현재 사용자의 정보를 가져오는 부분
+//        String nickname = mAuth.getCurrentUser().getDisplayName();
+//        Log.d("yongwon", "현재 사용자의 닉네임 : " + nickname);
+
         /* 리사이클러뷰로 리스트 추가하는 부분 */
         // 리사이클러뷰 초기화 및 설정
         recyclerView = findViewById(R.id.tutor_recyclerview_list);
@@ -51,5 +61,7 @@ public class StudyTutor extends AppCompatActivity {
         // 어댑터 설정
         studyRecyclerAdapter = new studyrecyclerview_adapter(items);
         recyclerView.setAdapter(studyRecyclerAdapter);
+
+
     }
 }
