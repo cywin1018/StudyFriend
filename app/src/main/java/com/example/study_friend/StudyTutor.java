@@ -38,42 +38,45 @@ public class StudyTutor extends AppCompatActivity {
     ArrayList<Item> items = new ArrayList<>();
     Item itemData;
     /* Firestore */
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    CollectionReference docRef = db.collection("게시글");
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String uid = user.getUid();
-    String nickname;
+    FirebaseUser user;
+    String uid;
+    FirebaseFirestore db;
+    CollectionReference docRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStudyTutorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        db = FirebaseFirestore.getInstance();
+        docRef = db.collection("게시글");
         // 뒤로가기 버튼, 아마 로그인 안 해서 튕기는듯
-        binding.backBtn.setOnClickListener(v -> {
-            intent = new Intent(StudyTutor.this, account_fragment.class);
-            startActivity(intent);
-        });
+//        binding.backBtn.setOnClickListener(v -> {
+//            intent = new Intent(StudyTutor.this, account_fragment.class);
+//            startActivity(intent);
+//        });
         // 현재 사용자의 정보를 가져오는 부분
-        String uid = user.getUid();
+
 
         db.collection("게시글")
-                .whereEqualTo("tutorUid",uid)
+                .whereEqualTo("tutorUid", uid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             recyclerView = findViewById(R.id.tutor_recyclerview_list);
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                             recyclerView.setLayoutManager(layoutManager);
-                            for(QueryDocumentSnapshot posts : task.getResult()){
-                                Map<String,Object> post = posts.getData();
+                            for (QueryDocumentSnapshot posts : task.getResult()) {
+                                Map<String, Object> post = posts.getData();
                                 String nickname = post.get("내용").toString();
                                 String date = post.get("장소").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
-                                itemData = new Item("닉네임",title , date, people);
+                                itemData = new Item("닉네임", title, date, people);
                                 items.add(itemData);
 
                                 studyRecyclerAdapter = new studyrecyclerview_adapter(items);

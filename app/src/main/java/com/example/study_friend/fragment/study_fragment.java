@@ -51,8 +51,6 @@ public class study_fragment extends Fragment {
     CollectionReference postRf;
     RecyclerView recyclerView;
     studyrecyclerview_adapter studyRecyclerAdapter;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String uid = user.getUid();
     ArrayList<Item> items = new ArrayList<>();
 
     public View v;

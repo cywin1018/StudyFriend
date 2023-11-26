@@ -28,16 +28,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 /*
-* 1. 내가 만든 스터디 내가 참여한 스터디 연결
-* 2. 개추 시스템
-* 3. 포인트 시스템
-*/
+ * 1. 내가 만든 스터디 내가 참여한 스터디 연결
+ * 2. 개추 시스템
+ * 3. 포인트 시스템
+ */
 
 public class account_fragment extends Fragment {
     FragmentAccountFragmentBinding binding;
     Intent intent;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String uid = user.getUid();
+    FirebaseUser user;
+    String uid;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +58,8 @@ public class account_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
         binding.logoutBtn.setOnClickListener(v->{
             FirebaseAuth.getInstance().signOut();
             intent = new Intent(getContext(), MainActivity.class);
