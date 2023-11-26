@@ -30,6 +30,7 @@ import com.example.study_friend.StudyTutor;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -88,9 +89,16 @@ public class study_fragment extends Fragment {
                     String date = postDocument.get("장소").toString();
                     String title = postDocument.get("제목").toString();
                     String num = postDocument.get("모집인원").toString();
-                    items.add(new Item(nickname, title, date, num));
-                    studyRecyclerAdapter.setItemsList(items);
-                    studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
+                    long timeNow = Timestamp.now().getSeconds();
+                    Timestamp time = (Timestamp) postDocument.get("time");
+                    if(time !=null) {
+                        long timeThen = time.getSeconds();
+                        if (timeNow < timeThen + 3000) {
+                            items.add(new Item(nickname, title, date, num));
+                            studyRecyclerAdapter.setItemsList(items);
+                            studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
+                        }
+                    }
                 }
             }
         });

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.study_friend.databinding.ActivityStudyRegisterBinding;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,6 +37,7 @@ public class study_register extends AppCompatActivity {
             final int num = Integer.parseInt(binding.editNum.getText().toString().trim());
             final String title = binding.editTitle.getText().toString().trim();
             final String content = binding.editContent.getText().toString().trim();
+            Timestamp timestamp = Timestamp.now();
             List<String> participants = new ArrayList<>();
             ArrayList<Object> data=new ArrayList<>();
             data.add(people);
@@ -44,7 +46,7 @@ public class study_register extends AppCompatActivity {
             data.add(num);
             data.add(title);
             data.add(content);
-            posting(people,field,place,num,title,content,participants);
+            posting(people,field,place,num,title,content,participants,timestamp);
 
             // 0: 학부 1:분야 2:장소 3:사람수 4:제목 5:내용
             Intent intent = getIntent();
@@ -55,7 +57,7 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time){
         Map<String,Object> post = new HashMap<>();
         int k = 0;
         post.put("모집대상",people);
@@ -67,6 +69,7 @@ public class study_register extends AppCompatActivity {
         post.put("tutorUid",currentUser.getUid());
         post.put("신청인원",k);
         post.put("신청자Uid",participants);
+        post.put("time",time);
 
         db.collection("게시글").document(title).set(post);
     }
