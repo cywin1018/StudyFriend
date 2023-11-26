@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.study_friend.R;
+import com.example.study_friend.StudyTutee;
 import com.example.study_friend.StudyTutor;
 import com.example.study_friend.activity.MainActivity;
 import com.example.study_friend.databinding.FragmentAccountFragmentBinding;
@@ -46,10 +47,15 @@ public class account_fragment extends Fragment {
         binding = FragmentAccountFragmentBinding.inflate(inflater);
 
         TextView tutorBtn = binding.getRoot().findViewById(R.id.tutorBtn);
-
+        TextView tuteeBtn = binding.getRoot().findViewById(R.id.tuteeBtn);
         tutorBtn.setOnClickListener(view -> {
             Toast.makeText(getActivity(), "튜터로 이동합니다.", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), StudyTutor.class);
+            startActivity(intent);
+        });
+        tuteeBtn.setOnClickListener(view -> {
+            Toast.makeText(getActivity(), "튜티로 이동합니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), StudyTutee.class);
             startActivity(intent);
         });
         return binding.getRoot();
