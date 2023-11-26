@@ -3,6 +3,9 @@ package com.example.study_friend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +17,7 @@ import android.util.Log;
 
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
 import com.example.study_friend.fragment.account_fragment;
+import com.example.study_friend.fragment.study_fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,10 +57,11 @@ public class StudyTutor extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         docRef = db.collection("게시글");
         // 뒤로가기 버튼, 아마 로그인 안 해서 튕기는듯
-//        binding.backBtn.setOnClickListener(v -> {
-//            intent = new Intent(StudyTutor.this, account_fragment.class);
-//            startActivity(intent);
-//        });
+
+        binding.backBtn.setOnClickListener(v -> {
+            intent = new Intent(StudyTutor.this, HomeActivity.class);
+            startActivity(intent);
+        });
         // 현재 사용자의 정보를 가져오는 부분
 
 
@@ -103,4 +108,5 @@ public class StudyTutor extends AppCompatActivity {
 
 
     }
+
 }
