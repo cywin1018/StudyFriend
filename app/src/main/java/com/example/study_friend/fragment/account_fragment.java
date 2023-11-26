@@ -7,10 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.study_friend.R;
+import com.example.study_friend.StudyTutor;
 import com.example.study_friend.activity.MainActivity;
 import com.example.study_friend.databinding.FragmentAccountFragmentBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,6 +44,14 @@ public class account_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAccountFragmentBinding.inflate(inflater);
+
+        TextView tutorBtn = binding.getRoot().findViewById(R.id.tutorBtn);
+
+        tutorBtn.setOnClickListener(view -> {
+            Toast.makeText(getActivity(), "튜터로 이동합니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), StudyTutor.class);
+            startActivity(intent);
+        });
         return binding.getRoot();
     }
 

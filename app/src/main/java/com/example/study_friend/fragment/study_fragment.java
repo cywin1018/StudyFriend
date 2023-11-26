@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
@@ -29,6 +30,8 @@ import com.example.study_friend.StudyTutor;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -48,12 +51,13 @@ public class study_fragment extends Fragment {
     CollectionReference postRf;
     RecyclerView recyclerView;
     studyrecyclerview_adapter studyRecyclerAdapter;
-
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
     ArrayList<Item> items = new ArrayList<>();
 
     public View v;
 
-    public View tutorView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,15 +96,7 @@ public class study_fragment extends Fragment {
                 }
             }
         });
-        // 튜터로 이동하는 코드
-        tutorView = inflater.inflate(R.layout.fragment_account_fragment, container, false);
-        TextView tutorBtn = tutorView.findViewById(R.id.tutorBtn);
 
-        tutorBtn.setOnClickListener(view -> {
-            Log.d("yongwon", "Button clicked!");
-            Intent intent = new Intent(getActivity(), StudyTutor.class);
-            startActivity(intent);
-        });
 
 
         Button button = v.findViewById(R.id.writerBtn);
