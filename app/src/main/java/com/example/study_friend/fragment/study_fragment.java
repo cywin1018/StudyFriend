@@ -51,13 +51,16 @@ public class study_fragment extends Fragment {
 
     ArrayList<Item> items = new ArrayList<>();
 
-    private View v;
+    public View v;
+
+    public View tutorView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_study_fragment,container,false);
-        Log.d(TAG,"뷰 생성");
+        v = inflater.inflate(R.layout.fragment_study_fragment, container, false);
+        Log.d(TAG, "뷰 생성");
 
         recyclerView = v.findViewById(R.id.study_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -65,7 +68,7 @@ public class study_fragment extends Fragment {
         studyRecyclerAdapter = new studyrecyclerview_adapter(items);
         recyclerView.setAdapter(studyRecyclerAdapter);
 
-        Log.d(TAG,"adapter연결");
+        Log.d(TAG, "adapter연결");
 
         db = FirebaseFirestore.getInstance();
         postRf = db.collection("게시글");
@@ -75,32 +78,35 @@ public class study_fragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 List<DocumentChange> documentChanges = value.getDocumentChanges();
 
-                for(DocumentChange documentChange : documentChanges){
+                for (DocumentChange documentChange : documentChanges) {
                     DocumentSnapshot documentSnapshot = documentChange.getDocument();
 
-                    Map<String,Object> postDocument = documentSnapshot.getData();
+                    Map<String, Object> postDocument = documentSnapshot.getData();
                     String nickname = postDocument.get("내용").toString();
                     String date = postDocument.get("장소").toString();
                     String title = postDocument.get("제목").toString();
                     String num = postDocument.get("모집인원").toString();
-                    items.add(new Item(nickname,title,date,num));
+                    items.add(new Item(nickname, title, date, num));
                     studyRecyclerAdapter.setItemsList(items);
-                    studyRecyclerAdapter.notifyItemInserted(items.size()-1);
+                    studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
                 }
             }
         });
         // 튜터로 이동하는 코드
-        TextView tutorBtn = v.findViewById(R.id.tutorBtnLayout);
-//        tutorBtn.setOnClickListener(view -> {
-//            Log.d("TAG","tutorBtn clicked?");
-////            Intent intent = new Intent(getActivity(), StudyTutor.class);
-////            startActivity(intent);
-//        });
+        tutorView = inflater.inflate(R.layout.fragment_account_fragment, container, false);
+        TextView tutorBtn = tutorView.findViewById(R.id.tutorBtn);
+
+        tutorBtn.setOnClickListener(view -> {
+            Log.d("yongwon", "Button clicked!");
+            Intent intent = new Intent(getActivity(), StudyTutor.class);
+            startActivity(intent);
+        });
+
 
         Button button = v.findViewById(R.id.writerBtn);
 
         button.setOnClickListener(view -> {
-            Log.d("TAG","Click y nono?");
+            Log.d("TAG", "Click y nono?");
             Intent intent = new Intent(getActivity(), study_register.class);
             startActivity(intent);
         });
@@ -108,12 +114,13 @@ public class study_fragment extends Fragment {
 
         return v;
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         /*스터디 검색 기능 개선할 점
-        * 1. 아무것도 같은게 없으면 안뜨게 해야함
-        * 2. title검색하는데 tttttttt쳐도 검색되니까 이거는 수정 해야함*/
+         * 1. 아무것도 같은게 없으면 안뜨게 해야함
+         * 2. title검색하는데 tttttttt쳐도 검색되니까 이거는 수정 해야함*/
         SearchView searchView = v.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -125,16 +132,16 @@ public class study_fragment extends Fragment {
             public boolean onQueryTextChange(String newText) { //검색어 입력할 때마다
                 db = FirebaseFirestore.getInstance();
                 ArrayList<Item> filteredItems = new ArrayList<>();
-                for(int i = 0; i<items.size(); i++){
+                for (int i = 0; i < items.size(); i++) {
                     Item item = items.get(i);
-                    if(item.getTitle().contains(newText)){
+                    if (item.getTitle().contains(newText)) {
                         filteredItems.add(item);
                         studyRecyclerAdapter.setItemsList(filteredItems);
                     }
                 }
                 return false;
 
-                 }
+            }
         });
     }
 }

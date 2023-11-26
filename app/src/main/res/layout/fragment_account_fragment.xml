@@ -197,7 +197,7 @@
             android:layout_gravity="center"
             />
         <LinearLayout
-            android:id="@+id/tutorBtnLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -212,7 +212,7 @@
                 android:src="@drawable/edit_icon"
                 />
             <TextView
-
+                android:id="@+id/tutorBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="내가 모집한 스터디 보기"
