@@ -93,7 +93,7 @@ public class study_fragment extends Fragment {
                     Timestamp time = (Timestamp) postDocument.get("time");
                     if(time !=null) {
                         long timeThen = time.getSeconds();
-                        if (timeNow < timeThen + 3000) {
+                        if (timeNow < timeThen + 60*30) {
                             items.add(new Item(nickname, title, date, num));
                             studyRecyclerAdapter.setItemsList(items);
                             studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
