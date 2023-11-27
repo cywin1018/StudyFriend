@@ -3,6 +3,7 @@ package com.example.study_friend.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,8 +33,7 @@ public class PasswordReset extends AppCompatActivity {
         });
         binding.sendResetBtn.setOnClickListener(v -> {
             sendPasswordReset();
-            intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+            Toast.makeText(this,"비밀번호 재설정 메일을 보냈습니다",Toast.LENGTH_SHORT).show();
         });
     }
     public void sendPasswordReset(){

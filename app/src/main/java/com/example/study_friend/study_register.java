@@ -1,15 +1,20 @@
 package com.example.study_friend;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.study_friend.databinding.ActivityStudyRegisterBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -18,11 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 public class study_register extends AppCompatActivity {
+    final static String TAG = "RERE";
     ActivityStudyRegisterBinding binding;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    Intent intent;
-    private ArrayList<Item> items=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,25 +44,28 @@ public class study_register extends AppCompatActivity {
             Timestamp timestamp = Timestamp.now();
             List<String> participants = new ArrayList<>();
             participants.add(currentUser.getUid());
-            ArrayList<Object> data=new ArrayList<>();
-            data.add(people);
-            data.add(field);
-            data.add(place);
-            data.add(num);
-            data.add(title);
-            data.add(content);
-            posting(people,field,place,num,title,content,participants,timestamp);
+            db.collection("users").document(currentUser.getUid()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            String nickname = documentSnapshot.get("nickname").toString();
+                            Log.d(TAG,documentSnapshot.get("nickname").toString());
+                            posting(people,field,place,num,title,content,participants,timestamp,nickname);
+                        }
+                    });
+
 
             // 0: 학부 1:분야 2:장소 3:사람수 4:제목 5:내용
             Intent intent = getIntent();
-            intent.putExtra("data", data);
+//            intent.putExtra("data", data);
             setResult(Activity.RESULT_OK,intent);
             finish();
         });
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname){
         Map<String,Object> post = new HashMap<>();
         int k = 1;
         post.put("모집대상",people);
@@ -71,6 +78,7 @@ public class study_register extends AppCompatActivity {
         post.put("신청인원",k);
         post.put("신청자Uid",participants);
         post.put("time",time);
+        post.put("nickname",nickname);
 
         db.collection("게시글").document(title).set(post);
     }
