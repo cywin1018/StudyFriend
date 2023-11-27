@@ -36,12 +36,18 @@ public class chatting extends AppCompatActivity {
     CollectionReference chatRef;
 
     //채팅방 이름 sample
-    String chatName="myChat";
+    public static String chatName;
 
 
     //리사이클러뷰에 넣어줄 아이템
     ArrayList<MessageItem> messageItems = new ArrayList<>();
     adapter messageAdapter;
+
+    public chatting(){};
+
+    public chatting(String chatName){
+        this.chatName = chatName;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

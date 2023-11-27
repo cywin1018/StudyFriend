@@ -85,18 +85,21 @@ public class study_fragment extends Fragment {
                     DocumentSnapshot documentSnapshot = documentChange.getDocument();
 
                     Map<String, Object> postDocument = documentSnapshot.getData();
-                    String nickname = postDocument.get("내용").toString();
-                    String date = postDocument.get("장소").toString();
-                    String title = postDocument.get("제목").toString();
-                    String num = postDocument.get("모집인원").toString();
-                    long timeNow = Timestamp.now().getSeconds();
-                    Timestamp time = (Timestamp) postDocument.get("time");
-                    if(time !=null) {
-                        long timeThen = time.getSeconds();
-                        if (timeNow < timeThen + 60*30) {
-                            items.add(new Item(nickname, title, date, num));
-                            studyRecyclerAdapter.setItemsList(items);
-                            studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
+                    if(postDocument != null) {
+                        String nickname = postDocument.get("nickname").toString();
+                        Timestamp time1 =(Timestamp)postDocument.get("time");
+                        String date = time1.toDate().toString();
+                        String title = postDocument.get("제목").toString();
+                        String num = postDocument.get("모집인원").toString();
+                        long timeNow = Timestamp.now().getSeconds();
+                        Timestamp time = (Timestamp) postDocument.get("time");
+                        if (time != null) {
+                            long timeThen = time.getSeconds();
+                            if (timeNow < timeThen + 60 * 30) {
+                                items.add(new Item(nickname, title, date, num));
+                                studyRecyclerAdapter.setItemsList(items);
+                                studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
+                            }
                         }
                     }
                 }
