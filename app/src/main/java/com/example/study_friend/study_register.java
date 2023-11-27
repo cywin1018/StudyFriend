@@ -39,6 +39,7 @@ public class study_register extends AppCompatActivity {
             final String content = binding.editContent.getText().toString().trim();
             Timestamp timestamp = Timestamp.now();
             List<String> participants = new ArrayList<>();
+            participants.add(currentUser.getUid());
             ArrayList<Object> data=new ArrayList<>();
             data.add(people);
             data.add(field);
@@ -59,7 +60,7 @@ public class study_register extends AppCompatActivity {
 
     public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time){
         Map<String,Object> post = new HashMap<>();
-        int k = 0;
+        int k = 1;
         post.put("모집대상",people);
         post.put("분야",field);
         post.put("장소",place);

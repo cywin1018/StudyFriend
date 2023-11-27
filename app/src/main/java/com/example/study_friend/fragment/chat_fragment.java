@@ -18,6 +18,8 @@ import com.example.study_friend.MyRecyclerAdapter;
 import com.example.study_friend.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -44,6 +46,7 @@ public class chat_fragment extends Fragment {
     ArrayList<FriendItem> mfriendItems;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user;
     CollectionReference nicknameRef;
 
     @Override
@@ -51,6 +54,7 @@ public class chat_fragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_chat_fragment, container, false);
         mRecyclerView = view.findViewById(R.id.recyclerView);
+        Log.d("RERE","프레그먼트는 넘어옴");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -59,6 +63,8 @@ public class chat_fragment extends Fragment {
         mRecyclerView.setAdapter(mRecyclerAdapter);
 
         mfriendItems = new ArrayList<FriendItem>();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("RERE","계정정보는 받아옴");
 
         /* 닉네임이랑  채팅방 정보 가져와서 채팅방 만들어주기 */
 //        nicknameRef = db.collection("TestCollection");
@@ -84,9 +90,9 @@ public class chat_fragment extends Fragment {
         /*자자 이걸 이제 내가 참여했던 채팅방을 가져오려면 어떻게 해야 할까?
          * 그것은 말이지 나도 잘은 모르겠지만 일단 각 유저의 정보에 따른 채팅방을 만들면 되는거 아니겠어??
          * 그렇다는건 유저 정보에 맞는 친구들을 띄워주면 되는거잖아? */
-        String temp = "Fen0A9rXYdW7BbE8uySQzKFsg1M2";
-        db.collection("TestCollection")
-                .whereEqualTo("student",temp)
+        String uid = user.getUid();
+        db.collection("게시글")
+                .whereArrayContains("신청자Uid",uid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -95,9 +101,9 @@ public class chat_fragment extends Fragment {
                             Log.d("RERE","이건 되는거냐?");
                             for(QueryDocumentSnapshot chatRoom : task.getResult()){
                                 Map<String,Object> chatRoomData = chatRoom.getData();
-                                String nickname = chatRoomData.get("nickname").toString();
-                                String date = chatRoomData.get("date").toString();
-                                String title = chatRoomData.get("title").toString();
+                                String nickname = chatRoomData.get("모집대상").toString();
+                                String date = chatRoomData.get("분야").toString();
+                                String title = chatRoomData.get("제목").toString();
                                 Log.d("RERE",nickname+" "+date + " " + title);
 
                                 mfriendItems.add(new FriendItem(R.drawable.profile_icon,nickname,date,title));
