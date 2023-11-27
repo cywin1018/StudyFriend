@@ -26,7 +26,7 @@ public class StudyTutee extends AppCompatActivity {
     ActivityStudyTuteeBinding binding;
     Intent intent;
     RecyclerView recyclerView;
-    studyrecyclerview_adapter studyRecyclerAdapter;
+    TuteeAdapter tuteeAdapter;
     ArrayList<Item> items = new ArrayList<>();
     Item itemData;
     /* Firestore */
@@ -41,7 +41,7 @@ public class StudyTutee extends AppCompatActivity {
         binding = ActivityStudyTuteeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         user = FirebaseAuth.getInstance().getCurrentUser();
-        uid = "fZ92A3CVJCgRXbO6dkuFfCck8oz2";
+        uid = user.getUid();
         db = FirebaseFirestore.getInstance();
         docRef = db.collection("게시글");
 
@@ -56,7 +56,7 @@ public class StudyTutee extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            recyclerView = findViewById(R.id.tutor_recyclerview_list);
+                            recyclerView = findViewById(R.id.tutee_recyclerview_list);
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                             recyclerView.setLayoutManager(layoutManager);
                             for (QueryDocumentSnapshot posts : task.getResult()) {
@@ -68,8 +68,8 @@ public class StudyTutee extends AppCompatActivity {
                                 itemData = new Item("닉네임", title, date, people);
                                 items.add(itemData);
 
-                                studyRecyclerAdapter = new studyrecyclerview_adapter(items);
-                                recyclerView.setAdapter(studyRecyclerAdapter);
+                                tuteeAdapter = new TuteeAdapter(items);
+                                recyclerView.setAdapter(tuteeAdapter);
                             }
                         }
                     }

@@ -32,7 +32,7 @@ public class StudyTutor extends AppCompatActivity {
     ActivityStudyTutorBinding binding;
     Intent intent;
     RecyclerView recyclerView;
-    studyrecyclerview_adapter studyRecyclerAdapter;
+    TutorAdapter tutorAdapter;
     ArrayList<Item> items = new ArrayList<>();
     Item itemData;
     /* Firestore */
@@ -78,28 +78,12 @@ public class StudyTutor extends AppCompatActivity {
                                 itemData = new Item("닉네임", title, date, people);
                                 items.add(itemData);
 
-                                studyRecyclerAdapter = new studyrecyclerview_adapter(items);
-                                recyclerView.setAdapter(studyRecyclerAdapter);
+                                tutorAdapter = new TutorAdapter(items);
+                                recyclerView.setAdapter(tutorAdapter);
                             }
                         }
                     }
                 });
-
-
-        /* 리사이클러뷰로 리스트 추가하는 부분 */
-        // 리사이클러뷰 초기화 및 설정
-//        recyclerView = findViewById(R.id.tutor_recyclerview_list);
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
-
-        // 아이템 추가
-//        itemData = new Item("자바", "자바는 객체지향 프로그래밍 언어이다. 자바는 웹, 모바일, 빅데이터, AI 등 다양한 분야에서 활용되고 있다.", "자바","gg");
-//        items.add(itemData);
-
-        // 어댑터 설정
-//        studyRecyclerAdapter = new studyrecyclerview_adapter(items);
-//        recyclerView.setAdapter(studyRecyclerAdapter);
-
 
     }
 
