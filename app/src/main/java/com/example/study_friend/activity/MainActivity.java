@@ -35,20 +35,21 @@ import java.util.List;
 */
 
 public class MainActivity extends Activity {
-    private static final String TAG = "Login Activity";
+    private static final String TAG = "RERE";
     private FirebaseAuth mAuth;
 
     private FirebaseFirestore db;
     private static final int RC_SIGN_IN= 9001;
 
     private GoogleSignInClient mGoogleSignInClient;
+    ActivityMainBinding binding;
 
     TextView textView;
     Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         db = FirebaseFirestore.getInstance();
         textView = (TextView) binding.googleLoginBtn.getChildAt(0);
@@ -69,11 +70,6 @@ public class MainActivity extends Activity {
         binding.loginBtn.setOnClickListener(v -> {
             Log.d(TAG, "LogInBtn Clicked");
             signIn(binding.editID.getText().toString(),binding.editPassword.getText().toString());
-            Log.d(TAG, "signInWithEmail:success??");
-            intent = new Intent(this, HomeActivity.class);
-            Log.d(TAG, "HomeActivity로 이동");
-            startActivity(intent);
-            Log.d(TAG, "startActivity(intent) 실행");
         });
 
         binding.SignUpBtn.setOnClickListener(v -> {
@@ -93,15 +89,6 @@ public class MainActivity extends Activity {
         });
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-//            reload();
-//        }
-//    }
-
     private void signIn(String email,String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -115,8 +102,9 @@ public class MainActivity extends Activity {
                         }
                         else{
                             Log.w(TAG,"signUpWithEmail:Failure");
-                            Toast.makeText(MainActivity.this,"Authentication Failed.",Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            Toast.makeText(MainActivity.this,"아이디 또는 비밀번호가 다릅니다",Toast.LENGTH_SHORT).show();
+                            binding.editID.setText("");
+                            binding.editPassword.setText("");
                         }
                     }
                 });
