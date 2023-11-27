@@ -84,9 +84,11 @@ public class account_fragment extends Fragment {
                         String univ =(String)users.get("univ");
                         String semester = (String)users.get("semester");
                         String major =(String)users.get("major");
+                        String recommended = users.get("recommended").toString();
                         binding.profileName.setText(nickname +"님");
                         binding.profileSemester.setText(semester +"학기");
                         binding.profileInfo.setText(univ + " " + major);
+                        binding.starNumber.setText(recommended+" 개");
                     }
                 }
             }

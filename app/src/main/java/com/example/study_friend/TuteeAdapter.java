@@ -14,13 +14,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> {
 
     public ArrayList<Item> items;
     AlertDialog.Builder builder;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public TuteeAdapter (ArrayList<Item> items){
         this.items = items;
@@ -70,23 +81,45 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
                 @Override
                 public void onClick(View view) {
                     Log.d("RERE", "onClicked?");
-                    builder = new AlertDialog.Builder(view.getContext());
-                    builder.setTitle("스터디 추천하기");
-                    builder.setMessage("스터디를 추천하시겠습니까?");
+                    int pos = getBindingAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        Item item = items.get(pos);
+                        builder = new AlertDialog.Builder(view.getContext());
+                        builder.setTitle("스터디 추천하기");
+                        builder.setMessage("스터디를 추천하시겠습니까?");
+                        Log.d("RERE",item.name);
 
-                    builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.show();
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                db.collection("users")
+                                        .whereEqualTo("nickname", item.name)
+                                                .get()
+                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                 QuerySnapshot documents = task.getResult();
+                                                                 for(QueryDocumentSnapshot documentSnapshot : documents){
+                                                                     Map<String,Object> document =documentSnapshot.getData();
+                                                                     String uid = document.get("documentID").toString();
+                                                                     int recommended = Integer.parseInt(document.get("recommended").toString());
+                                                                     recommended++;
+                                                                     DocumentReference docRef = db.collection("users").document(uid);
+                                                                     docRef.update("recommended",recommended);
+                                                                 }
+                                                            }
+                                                        });
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.show();
+                    }
                 }
             });
         }

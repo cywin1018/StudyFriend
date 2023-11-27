@@ -61,11 +61,11 @@ public class StudyTutee extends AppCompatActivity {
                             recyclerView.setLayoutManager(layoutManager);
                             for (QueryDocumentSnapshot posts : task.getResult()) {
                                 Map<String, Object> post = posts.getData();
-                                String nickname = post.get("내용").toString();
+                                String nickname = post.get("nickname").toString();
                                 String date = post.get("장소").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
-                                itemData = new Item("닉네임", title, date, people);
+                                itemData = new Item(nickname, title, date, people);
                                 items.add(itemData);
 
                                 tuteeAdapter = new TuteeAdapter(items);
