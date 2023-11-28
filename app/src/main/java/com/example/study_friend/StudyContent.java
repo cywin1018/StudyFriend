@@ -30,9 +30,11 @@ public class StudyContent extends AppCompatActivity {
 
     ActivityStudyContentBinding binding;
     FirebaseFirestore db;
-    CollectionReference nicknameRef;
+    CollectionReference contentRef;
+    CollectionReference UserRef;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    String profilename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +48,12 @@ public class StudyContent extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 //      <게시글 파베에 기반해서 >
-        nicknameRef = db.collection("게시글");
-        nicknameRef.get().addOnCompleteListener(task -> {
+        contentRef = db.collection("게시글");
+        contentRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (int i = 0; i < task.getResult().size(); i++) {
                     String data = task.getResult().getDocuments().get(i).toString();
-                    Log.d("MYMY", "database -> data: "+data);
+                    Log.d("MYMY", "게시글: database -> data: "+data);
                     String title = task.getResult().getDocuments().get(i).get("제목").toString();
                     if (sel_title.equals(title)) {
 //                      <파이어베이스 연동> -> 작성시 현재 로그인 회원 정보도 "게시글"에 저장하도록 수정하자.
@@ -60,16 +62,45 @@ public class StudyContent extends AppCompatActivity {
                         String  num = task.getResult().getDocuments().get(i).get("모집인원").toString();
                         String  textbook = task.getResult().getDocuments().get(i).get("분야").toString();
                         String  place = task.getResult().getDocuments().get(i).get("장소").toString();
+                        profilename = task.getResult().getDocuments().get(i).get("nickname").toString();
                         binding.contentTitle.setText(title);
                         binding.studyContent.setText(content);
                         binding.studyMajor.setText(major);
                         binding.studyPossiblenum.setText(num+"명");
                         binding.studyTextbook.setText(textbook);
                         binding.studyPlace.setText(place);
+                        binding.profileName.setText(profilename);
 
                     }
                 }
 
+            }
+        });
+
+        UserRef = db.collection("users");
+        UserRef.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for(int i=0; i< task.getResult().size(); i++){
+                    String data = task.getResult().getDocuments().get(i).toString();
+                    Log.d("MYMY", "Users database -> data: "+data);
+                    String regnickname = task.getResult().getDocuments().get(i).get("nickname").toString();
+                    if(profilename.equals(regnickname)){
+                        Log.d("MYMY", "users have the nickname");
+                        String univ = task.getResult().getDocuments().get(i).get("univ").toString();
+                        String semester = task.getResult().getDocuments().get(i).get("semester").toString();
+                        String recommended = task.getResult().getDocuments().get(i).get("recommended").toString();
+                        String major = task.getResult().getDocuments().get(i).get("major").toString();
+
+                        Log.d("MYMY", "데이터베이스 결과: " + univ + semester + recommended + major);
+
+                        String profile = "학교: "+univ+"전공: "+major;
+                        semester = "학기: "+semester;
+                        recommended=recommended+"개";
+                        binding.profileInfo.setText(profile);
+                        binding.profileSemester.setText(semester);
+                        binding.starNumber.setText(recommended);
+                    }
+                }
             }
         });
 
