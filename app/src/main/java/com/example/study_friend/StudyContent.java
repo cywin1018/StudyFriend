@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.study_friend.R;
 import com.example.study_friend.databinding.ActivityStudyContentBinding;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
@@ -121,32 +123,60 @@ public class StudyContent extends AppCompatActivity {
             menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    db.collection("게시글").document(intent1.getStringExtra("title")).get()
-                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                    if(task.isSuccessful()){
-                                        Log.d("RERE","1번");
-                                        DocumentSnapshot documentSnapshot = task.getResult();
-                                        Map<String,Object> info = documentSnapshot.getData();
-                                        Log.d("RERE",info.get("신청인원").toString());
-                                        int applicants = Integer.parseInt(info.get("신청인원").toString());
-                                        Log.d("RERE","요기");
-                                        Log.d("RERE",info.get("신청자Uid").toString());
-                                        List<String> appliers = (ArrayList<String>)info.get("신청자Uid");
-                                        Log.d("RERE",Integer.toString(applicants));
-                                        appliers.add(applicants,user.getUid());
-                                        Log.d("RERE","2번");
-                                        applicants++;
-                                        Map<String,Object> newInfo = new HashMap<>();
-                                        newInfo.put("신청인원",applicants);
-                                        newInfo.put("신청자Uid",appliers);
-                                        db.collection("게시글").document(intent1.getStringExtra("title"))
-                                                .set(newInfo, SetOptions.merge());
+                    db.collection("users").document(user.getUid()).get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                int point = Integer.parseInt(task.getResult().get("point").toString());
+                                                Log.d("RERE",Integer.toString(point));
+                                                if(point>=100) {
+                                                    db.collection("게시글").document(intent1.getStringExtra("title")).get()
+                                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        Log.d("RERE", "1번");
+                                                                        DocumentSnapshot documentSnapshot = task.getResult();
+                                                                        Map<String, Object> info = documentSnapshot.getData();
+                                                                        Log.d("RERE", info.get("신청인원").toString());
+                                                                        int applicants = Integer.parseInt(info.get("신청인원").toString());
+                                                                        Log.d("RERE", "요기");
+                                                                        Log.d("RERE", info.get("신청자Uid").toString());
+                                                                        List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
+                                                                        Log.d("RERE", Integer.toString(applicants));
+                                                                        appliers.add(applicants, user.getUid());
+                                                                        Log.d("RERE", "2번");
+                                                                        applicants++;
+                                                                        Map<String, Object> newInfo = new HashMap<>();
+                                                                        newInfo.put("신청인원", applicants);
+                                                                        newInfo.put("신청자Uid", appliers);
+                                                                        db.collection("게시글").document(intent1.getStringExtra("title"))
+                                                                                .set(newInfo, SetOptions.merge());
+                                                                        db.collection("users").document(user.getUid())
+                                                                                .get()
+                                                                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                        DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                                                        int point = Integer.parseInt(documentSnapshot1.get("point").toString());
+                                                                                        point = point - 100;
+                                                                                        DocumentReference documentReference = db.collection("users").document(user.getUid());
+                                                                                        documentReference.update("point", point);
 
-                                    }
-                                }
-                            });
+                                                                                    }
+                                                                                });
+
+                                                                    }
+                                                                }
+                                                            });
+                                                }else{
+                                                    Toast.makeText(StudyContent.this, "포인트가 모자랍니다.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+                                    });
+
                 }
             });
             menu.setNegativeButton("Cancel",null);

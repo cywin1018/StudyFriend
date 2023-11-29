@@ -29,8 +29,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 /*
- * 1. 내가 만든 스터디 내가 참여한 스터디 연결
- * 2. 개추 시스템
+ * 1. 내가 만든 스터디 내가 참여한 스터디 연결(완료)
+ * 2. 개추 시스템(완료)
  * 3. 포인트 시스템
  */
 
@@ -85,10 +85,12 @@ public class account_fragment extends Fragment {
                         String semester = (String)users.get("semester");
                         String major =(String)users.get("major");
                         String recommended = users.get("recommended").toString();
+                        String point = users.get("point").toString();
                         binding.profileName.setText(nickname +"님");
                         binding.profileSemester.setText(semester +"학기");
                         binding.profileInfo.setText(univ + " " + major);
                         binding.starNumber.setText(recommended+" 개");
+                        binding.studyPoint.setText(point);
                     }
                 }
             }

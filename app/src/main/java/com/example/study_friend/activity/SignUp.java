@@ -80,15 +80,6 @@ public class SignUp extends AppCompatActivity {
         binding.submitBtn.setOnClickListener(v -> {
             Toast.makeText(SignUp.this,"중복확인을 먼저 해주세요",Toast.LENGTH_SHORT).show();
         });
-//        binding.submitBtn.setOnClickListener(v -> {
-//            final String email = binding.editEmail.getText().toString().trim();
-//            final String password = binding.editPassword.getText().toString().trim();
-//            final String nickname = binding.editNickname.getText().toString().trim();
-//            final String univ = binding.univ.getText().toString().trim();
-//            final String major = binding.major.getText().toString().trim();
-//            final String semester = binding.semester.getText().toString().trim();
-//            createAccount(email, password, nickname, univ, major, semester);
-//        });
     }
     private void createAccount(String email, String password,String nickname,String univ,String major,String semester){
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -99,6 +90,7 @@ public class SignUp extends AppCompatActivity {
                             Log.d(TAG,"CreateUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             int recommendedValue = 0;
+                            int point = 100;
                             Map<String,Object> userMap = new HashMap<>();
                             userMap.put("documentID",user.getUid());
                             userMap.put("email",email);
@@ -107,6 +99,7 @@ public class SignUp extends AppCompatActivity {
                             userMap.put("major",major);
                             userMap.put("semester",semester);
                             userMap.put("recommended",recommendedValue);
+                            userMap.put("point",point);
                             db.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(getLayoutInflater().getContext());

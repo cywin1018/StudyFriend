@@ -79,6 +79,7 @@ public class GoogleUserInfoSet extends AppCompatActivity{
     private void createAccount(String email, String password,String nickname,String univ,String major,String semester){
         Map<String,Object> userMap = new HashMap<>();
         int recommended = 0;
+        int point = 100;
         userMap.put("documentID",user.getUid());
         userMap.put("email",email);
         userMap.put("nickname",nickname);
@@ -86,6 +87,7 @@ public class GoogleUserInfoSet extends AppCompatActivity{
         userMap.put("major",major);
         userMap.put("semester",semester);
         userMap.put("recommended",recommended);
+        userMap.put("point",point);
         db.collection("users").document(user.getUid()).set(userMap, SetOptions.merge());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getLayoutInflater().getContext());

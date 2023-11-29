@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,8 +51,9 @@ public class study_register extends AppCompatActivity {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             String nickname = documentSnapshot.get("nickname").toString();
+                            int point = Integer.parseInt(documentSnapshot.get("point").toString());
                             Log.d(TAG,documentSnapshot.get("nickname").toString());
-                            posting(people,field,place,num,title,content,participants,timestamp,nickname);
+                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point);
                         }
                     });
 
@@ -65,9 +67,10 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point){
         Map<String,Object> post = new HashMap<>();
         int k = 1;
+        point = point + 100;
         post.put("모집대상",people);
         post.put("분야",field);
         post.put("장소",place);
@@ -81,5 +84,7 @@ public class study_register extends AppCompatActivity {
         post.put("nickname",nickname);
 
         db.collection("게시글").document(title).set(post);
+        DocumentReference docRef = db.collection("users").document(currentUser.getUid());
+        docRef.update("point",point);
     }
 }
