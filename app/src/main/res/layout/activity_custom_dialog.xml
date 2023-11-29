@@ -2,15 +2,23 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="330dp"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="1"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,109 +27,164 @@
             android:layout_gravity="center"
             android:text="작성 목록"
             android:textStyle="bold"
-           />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        >
+            />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="2dp"
+            android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="모집대상"
                 android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="컴퓨터학부"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="분야"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오토마타"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="모집인원"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5명"
+                android:layout_weight="1"
+                android:gravity="center"
                 />
         </LinearLayout>
         <LinearLayout
-            android:padding="2dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="과목"
                 android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="오토마타"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="모집인원"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="5명"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="모집학년"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="전체학년"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="지역/장소"
+                android:layout_weight="1"
+                android:gravity="center"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="3층 중간 스터디룸"
+                android:text="2학년"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="지역/장소"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="테라스 이용 예정"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:text="정말 신청하시겠습니까?"
+                android:textStyle="bold"
                 />
 
         </LinearLayout>
-    </LinearLayout>
-
         <LinearLayout
-            android:layout_marginRight="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-            android:layout_gravity="center">
-            <Button
+            >
+            <androidx.appcompat.widget.AppCompatButton
                 android:text="아니요"
                 android:textSize="10dp"
                 android:id="@+id/btnCancle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:scaleType="center"/>
-            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:scaleType="center"
+                android:layout_weight="1"
+                android:background="@drawable/buttonsky"
+                />
+            <androidx.appcompat.widget.AppCompatButton
                 android:text="예"
                 android:textSize="10dp"
                 android:layout_marginLeft="4dp"
                 android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:scaleType="center"/>
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:scaleType="center"
+                android:layout_weight="1"
+                android:background="@drawable/buttonsky"
+                />
 
         </LinearLayout>
+
+    </GridLayout>
+
+
+
+
+
 
     </LinearLayout>
 
