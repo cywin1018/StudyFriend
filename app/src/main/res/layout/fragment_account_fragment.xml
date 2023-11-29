@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.account_fragment">
+    tools:context=".fragment.account_fragment"
+    android:orientation="vertical"
+    android:weightSum="10"
+    >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonsky"
-        android:layout_weight="1"
         android:layout_margin="10dp"
         android:padding="10dp"
         >
         <TextView
             android:id="@+id/icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:background="@drawable/profile_icon"
 
             />
 
         <TextView
-            android:layout_width="330dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_toEndOf="@+id/icon"
             android:text="마이페이지"
             android:textStyle="bold"
             android:layout_gravity="center"
+            android:textSize="15dp"
             />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/mystudy"
         >
 
@@ -110,23 +114,40 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:background="@drawable/study_background_primary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="30dp"
-        android:text="내 스터디"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        />
     <LinearLayout
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonsky"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/education1"
+            />
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_marginStart="25dp"
+            android:text="내 스터디"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:background="@drawable/mystudy"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         >
         <LinearLayout
@@ -145,6 +166,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="스터디 횟수"
+                   android:textStyle="bold"
                    />
                <TextView
                    android:id="@+id/studyNumber"
@@ -163,6 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="함께한 학우"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/studyMemberNumber"
@@ -181,6 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="포인트"
+                    android:textStyle="bold"
                     />
                 <TextView
                     android:id="@+id/studyPoint"
@@ -190,23 +214,23 @@
                     />
             </LinearLayout>
         </LinearLayout>
-        <View
-            android:background="@color/black"
-            android:layout_width="300dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            />
-        <LinearLayout
+<!--        <View-->
+<!--            android:background="@color/black"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            />-->
 
+        <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:padding="20dp"
+            android:background="@drawable/buttonblackline"
             >
-
             <ImageView
-
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/edit_icon"
@@ -216,23 +240,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="내가 모집한 스터디 보기"
+                android:textStyle="bold"
+                android:layout_marginLeft="50dp"
                 android:textSize="12dp"
-                android:paddingLeft="60dp"
                 android:clickable="true"
                 />
         </LinearLayout>
-        <View
-            android:background="@color/black"
-            android:layout_width="300dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center"
-            android:padding="10dp"
-            />
+<!--        <View-->
+<!--            android:background="@color/black"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp"
+            android:background="@drawable/buttonblackline"
             >
             <ImageView
                 android:layout_width="25dp"
@@ -244,6 +272,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="내가 참여한 스터디 보기"
+                android:textStyle="bold"
                 android:layout_marginLeft="50dp"
                 android:textSize="12dp"
                 />
@@ -258,9 +287,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutBtn"
-        android:layout_marginTop="510dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="330dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="로그 아웃"
         android:textColor="@color/white"
@@ -268,4 +298,4 @@
         android:textStyle="bold"
         android:background="@drawable/buttonblue"
         />
-</FrameLayout>
+</LinearLayout>

@@ -39,16 +39,16 @@
         android:layout_height="50dp"
         android:background="@drawable/circle"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         >
 
         <android.widget.Button
             android:id="@+id/writerBtn"
-            android:layout_width="34dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:adjustViewBounds="true"
             android:background="@drawable/register_icon"
             android:gravity="center_vertical"
