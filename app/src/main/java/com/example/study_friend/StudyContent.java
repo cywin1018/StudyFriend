@@ -36,6 +36,7 @@ public class StudyContent extends AppCompatActivity {
     CollectionReference UserRef;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    Intent intent;
     String profilename;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,8 @@ public class StudyContent extends AppCompatActivity {
                                                                     }
                                                                 }
                                                             });
+                                                    intent = new Intent(StudyContent.this, HomeActivity.class);
+                                                    startActivity(intent);
                                                 }else{
                                                     Toast.makeText(StudyContent.this, "포인트가 모자랍니다.", Toast.LENGTH_SHORT).show();
                                                 }

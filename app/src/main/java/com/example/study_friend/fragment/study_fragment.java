@@ -65,6 +65,17 @@ public class study_fragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_study_fragment, container, false);
         Log.d(TAG, "뷰 생성");
 
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        /*스터디 검색 기능 개선할 점
+         * 1. 아무것도 같은게 없으면 안뜨게 해야함
+         * 2. title검색하는데 tttttttt쳐도 검색되니까 이거는 수정 해야함*/
+
+
         recyclerView = v.findViewById(R.id.study_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -110,22 +121,16 @@ public class study_fragment extends Fragment {
 
         Button button = v.findViewById(R.id.writerBtn);
 
-        button.setOnClickListener(view -> {
+        button.setOnClickListener(VView -> {
             Log.d("TAG", "Click y nono?");
             Intent intent = new Intent(getActivity(), study_register.class);
             startActivity(intent);
         });
 
 
-        return v;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        /*스터디 검색 기능 개선할 점
-         * 1. 아무것도 같은게 없으면 안뜨게 해야함
-         * 2. title검색하는데 tttttttt쳐도 검색되니까 이거는 수정 해야함*/
+
+
         SearchView searchView = v.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
