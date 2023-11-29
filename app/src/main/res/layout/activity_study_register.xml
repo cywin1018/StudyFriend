@@ -63,24 +63,78 @@
                 android:layout_height="wrap_content"
                 android:text="모집대상"
                 />
+
             <TextView
-                android:layout_below="@+id/atr1"
-                android:layout_alignStart="@+id/atr1"
+                android:id="@+id/atr1_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/atr1"
+                android:layout_alignStart="@+id/atr1"
                 android:text="모집 추천 학부와 학생을 정할 수 있어요!"
-                android:textColor="#80020202"
-                />
+                android:textColor="#80020202" />
             <EditText
                 android:id="@+id/edit_people"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/atr1"
                 android:layout_alignStart="@+id/atr1"
-                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 />
+            <GridLayout
+                android:layout_below="@+id/atr1_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="1"
+                android:orientation="horizontal">
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="전공"
+                        android:textSize="15dp"
+                        android:id="@+id/text_major"
+                        android:layout_weight="1"
+                        android:gravity="center"
+
+                        />
+                    <Spinner
+                        android:id="@+id/spinner_major"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/major"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="2"
+
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="학년"
+                        android:textSize="15dp"
+                        android:id="@+id/text_grade"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+                    <Spinner
+                        android:id="@+id/spinner_grade"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/grade"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="2"
+                        />
+                </LinearLayout>
+
+
+
+            </GridLayout>
+
+
+
 
         </RelativeLayout>
 
@@ -152,9 +206,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_num"
                 android:layout_alignStart="@+id/text_num"
-                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
                 />
+            <Spinner
+                android:id="@+id/spinner_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/num"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/edit_num"
+                android:layout_alignBaseline="@+id/edit_num"
+                />
+
+
 
         </RelativeLayout>
         <RelativeLayout

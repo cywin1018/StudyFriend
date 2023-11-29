@@ -3,4 +3,29 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="googleLogInBtn">Google 계정으로 로그인</string>
+    <string-array name="major">
+        <item>컴퓨터학부</item>
+        <item>소프트웨어</item>
+        <item>AI융합학부</item>
+        <item>글로벌미디어학부</item>
+        <item>전정공</item>
+        <item>융특</item>
+    </string-array>
+    <string-array name="num">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>제한없음</item>
+    </string-array>
+    <string-array name="grade">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>제한없음</item>
+    </string-array>
 </resources>
