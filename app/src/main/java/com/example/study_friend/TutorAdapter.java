@@ -21,7 +21,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
 
     public ArrayList<Item> items;
     AlertDialog.Builder builder;
-    FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public TutorAdapter (ArrayList<Item> items){
         this.items = items;
@@ -68,14 +68,17 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Item item = items.get(getBindingAdapterPosition());
+                    String curTutee =   item.CurTutee;
                     builder = new AlertDialog.Builder(view.getContext());
                     builder.setTitle("스터디 인원 현황");
-                    /* db에서 스터디 인원 받아와서 현재 신청 인원 보여줘야함  */
+                    builder.setMessage("현재 신청 인원 : " + curTutee + "명");
+
 
                     builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                             dialog.dismiss();
                         }
                     });

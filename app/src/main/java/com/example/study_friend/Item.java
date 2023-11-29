@@ -7,6 +7,7 @@ public class Item {
     String num;
 
     int image;
+    String CurTutee;
 
     public Item(){
 
@@ -16,6 +17,13 @@ public class Item {
         this.title = title;
         this.day = day;
         this.num = num;
+    }
+    public Item(String name, String title, String day, String num,String CurTutee) {
+        this.name = name;
+        this.title = title;
+        this.day = day;
+        this.num = num;
+        this.CurTutee = CurTutee;
     }
 //    public Item(String name, String title, String day, String num, int image) {
 //        this.name = name;

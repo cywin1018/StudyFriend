@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.util.Log;
 
 
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
@@ -75,7 +75,10 @@ public class StudyTutor extends AppCompatActivity {
                                 String date = post.get("장소").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
-                                itemData = new Item("닉네임", title, date, people);
+                                String documentId = posts.getData().toString();
+                                String CurTutee = post.get("신청인원").toString();
+                                Log.d("RERE", "documentId: " + documentId);
+                                itemData = new Item("닉네임", title, date, people,CurTutee);
                                 items.add(itemData);
 
                                 tutorAdapter = new TutorAdapter(items);
