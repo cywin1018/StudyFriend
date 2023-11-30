@@ -194,5 +194,49 @@ public class study_fragment extends Fragment {
 
             }
         });
+        // 아래로 스크롤하면 화면 새로고침
+        // 스크롤을 끝까지 내렸을 때
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState){
+                super.onScrollStateChanged(recyclerView, newState);
+                if(!recyclerView.canScrollVertically(1)){
+                    db = FirebaseFirestore.getInstance();
+                    postRf = db.collection("게시글");
+                    items = new ArrayList<Item>();
+                    db.collection("게시글").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            QuerySnapshot queryDocumentSnapshots = task.getResult();
+                            List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
+                            ArrayList<Item> items1 = new ArrayList<>();
+                            for(DocumentSnapshot document : documents){
+                                Map<String,Object> postDocument = document.getData();
+
+                                if(postDocument != null) {
+                                    String nickname = postDocument.get("nickname").toString();
+                                    Timestamp time1 =(Timestamp)postDocument.get("time");
+                                    String date = time1.toDate().toString();
+                                    String title = postDocument.get("제목").toString();
+                                    String num = postDocument.get("모집인원").toString();
+                                    long timeNow = Timestamp.now().getSeconds();
+                                    Timestamp time = (Timestamp) postDocument.get("time");
+                                    if (time != null) {
+                                        long timeThen = time.getSeconds();
+                                        if (timeNow < timeThen + 60 * 30) {
+                                            items1.add(new Item(nickname, title, date, num));
+                                            int itemposition=items.size() - 1;
+                                        }
+                            }
+                        }
+                    }
+                            studyRecyclerAdapter.setItemsList(items1);
+                            studyRecyclerAdapter.notifyItemInserted(items1.size() - 1);
+                            items = items1;
+                        }
+                    });
+                }
+            }
+        });
     }
 }
