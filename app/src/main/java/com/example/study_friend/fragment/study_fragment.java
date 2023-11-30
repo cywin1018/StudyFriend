@@ -108,8 +108,10 @@ public class study_fragment extends Fragment {
                             long timeThen = time.getSeconds();
                             if (timeNow < timeThen + 60 * 30) {
                                 items.add(new Item(nickname, title, date, num));
+                                int itemposition=items.size() - 1;
                                 studyRecyclerAdapter.setItemsList(items);
                                 studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
+
                             }
                         }
                     }
