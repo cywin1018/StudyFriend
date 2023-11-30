@@ -92,7 +92,7 @@ public class chat_fragment extends Fragment {
          * 그렇다는건 유저 정보에 맞는 친구들을 띄워주면 되는거잖아? */
         String uid = user.getUid();
         db.collection("게시글")
-                .whereArrayContains("신청자Uid",uid)
+                .whereArrayContains("allPeople",uid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -39,12 +39,15 @@ public class study_register extends AppCompatActivity {
             final String people = binding.editPeople.getText().toString().trim();
             final String field = binding.editField.getText().toString().trim();
             final String place = binding.editPlace.getText().toString().trim();
-            final int num = Integer.parseInt(binding.editNum.getText().toString().trim());
+            final int num = Integer.parseInt(binding.spinnerNum.getSelectedItem().toString());
             final String title = binding.editTitle.getText().toString().trim();
             final String content = binding.editContent.getText().toString().trim();
+            final String major = binding.spinnerMajor.getSelectedItem().toString();
+            final String grade = binding.spinnerGrade.getSelectedItem().toString();
             Timestamp timestamp = Timestamp.now();
             List<String> participants = new ArrayList<>();
-            participants.add(currentUser.getUid());
+            List<String> allPeople = new ArrayList<>();
+            allPeople.add(currentUser.getUid());
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
@@ -53,7 +56,7 @@ public class study_register extends AppCompatActivity {
                             String nickname = documentSnapshot.get("nickname").toString();
                             int point = Integer.parseInt(documentSnapshot.get("point").toString());
                             Log.d(TAG,documentSnapshot.get("nickname").toString());
-                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point);
+                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point,allPeople);
                         }
                     });
 
@@ -67,9 +70,9 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point,List<String> allPeople){
         Map<String,Object> post = new HashMap<>();
-        int k = 1;
+        int k = 0;
         point = point + 100;
         post.put("모집대상",people);
         post.put("분야",field);
@@ -82,7 +85,7 @@ public class study_register extends AppCompatActivity {
         post.put("신청자Uid",participants);
         post.put("time",time);
         post.put("nickname",nickname);
-
+        post.put("allPeople",allPeople);
         db.collection("게시글").document(title).set(post);
         DocumentReference docRef = db.collection("users").document(currentUser.getUid());
         docRef.update("point",point);
