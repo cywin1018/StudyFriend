@@ -52,21 +52,9 @@ public class chatting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Log.d("chatting.java`s nickname : ",chatName);
-//        mUser = FirebaseAuth.getInstance().getCurrentUser();
-//        String uid = mUser.getUid();
-//        firestore = FirebaseFirestore.getInstance();
-//        firestore.collection("FirebaseID.user").document(uid).get().addOnSuccessListener(documentSnapshot -> {
-//            G.nicname = documentSnapshot.get("FirebaseID.nickname").toString();
-//            Log.d("chatting.java",G.nicname);
-//        });
         G.nicname = "yongwon";
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        //제목줄에 채팅방 이름 표시
-//        getSupportActionBar().setTitle(chatName);
-//        getSupportActionBar().setSubtitle("상대방 이름");
 
         //아답터 연결
         messageAdapter = new adapter(this,messageItems);

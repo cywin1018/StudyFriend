@@ -30,6 +30,8 @@ import com.example.study_friend.StudyTutor;
 import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -87,37 +89,74 @@ public class study_fragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         postRf = db.collection("게시글");
         items = new ArrayList<Item>();
-        postRf.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("게시글").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                List<DocumentChange> documentChanges = value.getDocumentChanges();
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    QuerySnapshot queryDocumentSnapshots = task.getResult();
+                   List<DocumentSnapshot> documents = queryDocumentSnapshots.getDocuments();
+                   ArrayList<Item> items1 = new ArrayList<>();
+                   for(DocumentSnapshot document : documents){
+                       Map<String,Object> postDocument = document.getData();
 
-                for (DocumentChange documentChange : documentChanges) {
-                    DocumentSnapshot documentSnapshot = documentChange.getDocument();
+                       if(postDocument != null) {
+                           String nickname = postDocument.get("nickname").toString();
+                           Timestamp time1 =(Timestamp)postDocument.get("time");
+                           String date = time1.toDate().toString();
+                           String title = postDocument.get("제목").toString();
+                           String num = postDocument.get("모집인원").toString();
+                           long timeNow = Timestamp.now().getSeconds();
+                           Timestamp time = (Timestamp) postDocument.get("time");
+                           if (time != null) {
+                               long timeThen = time.getSeconds();
+                               if (timeNow < timeThen + 60 * 30) {
+                                   items1.add(new Item(nickname, title, date, num));
+                                   int itemposition=items.size() - 1;
 
-                    Map<String, Object> postDocument = documentSnapshot.getData();
-                    if(postDocument != null) {
-                        String nickname = postDocument.get("nickname").toString();
-                        Timestamp time1 =(Timestamp)postDocument.get("time");
-                        String date = time1.toDate().toString();
-                        String title = postDocument.get("제목").toString();
-                        String num = postDocument.get("모집인원").toString();
-                        long timeNow = Timestamp.now().getSeconds();
-                        Timestamp time = (Timestamp) postDocument.get("time");
-                        if (time != null) {
-                            long timeThen = time.getSeconds();
-                            if (timeNow < timeThen + 60 * 30) {
-                                items.add(new Item(nickname, title, date, num));
-                                int itemposition=items.size() - 1;
-                                studyRecyclerAdapter.setItemsList(items);
-                                studyRecyclerAdapter.notifyItemInserted(items.size() - 1);
 
-                            }
-                        }
-                    }
+                               }
+                           }
+                       }
+                   }
+                    studyRecyclerAdapter.setItemsList(items1);
+                    studyRecyclerAdapter.notifyItemInserted(items1.size() - 1);
+                    items = items1;
                 }
             }
         });
+//        postRf.addSnapshotListener(new EventListener<QuerySnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                List<DocumentChange> documentChanges = value.getDocumentChanges();
+//                ArrayList<Item> items1 = new ArrayList<>();
+//                for (DocumentChange documentChange : documentChanges) {
+//                    DocumentSnapshot documentSnapshot = documentChange.getDocument();
+//
+//                    Map<String, Object> postDocument = documentSnapshot.getData();
+//                    if(postDocument != null) {
+//                        String nickname = postDocument.get("nickname").toString();
+//                        Timestamp time1 =(Timestamp)postDocument.get("time");
+//                        String date = time1.toDate().toString();
+//                        String title = postDocument.get("제목").toString();
+//                        String num = postDocument.get("모집인원").toString();
+//                        long timeNow = Timestamp.now().getSeconds();
+//                        Timestamp time = (Timestamp) postDocument.get("time");
+//                        if (time != null) {
+//                            long timeThen = time.getSeconds();
+//                            if (timeNow < timeThen + 60 * 30) {
+//                                items1.add(new Item(nickname, title, date, num));
+//                                int itemposition=items.size() - 1;
+//
+//
+//                            }
+//                        }
+//                    }
+//                }
+//                studyRecyclerAdapter.setItemsList(items1);
+//                studyRecyclerAdapter.notifyItemInserted(items1.size() - 1);
+//                items = items1;
+//            }
+//        });
 
 
 
