@@ -16,6 +16,7 @@ import com.example.study_friend.databinding.ActivityStudyTutorBinding;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -72,13 +73,14 @@ public class StudyTutor extends AppCompatActivity {
                             for (QueryDocumentSnapshot posts : task.getResult()) {
                                 Map<String, Object> post = posts.getData();
                                 String nickname = post.get("내용").toString();
-                                String date = post.get("장소").toString();
+                                Timestamp time1 =(Timestamp)post.get("time");
+                                String date = time1.toDate().toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
                                 String documentId = posts.getData().toString();
                                 String CurTutee = post.get("신청인원").toString();
                                 Log.d("RERE", "documentId: " + documentId);
-                                itemData = new Item("닉네임", title, date, people,CurTutee);
+                                itemData = new Item(nickname, title, date, people,CurTutee);
                                 items.add(itemData);
 
                                 tutorAdapter = new TutorAdapter(items);

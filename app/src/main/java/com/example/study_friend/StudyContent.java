@@ -3,6 +3,8 @@ package com.example.study_friend;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 public class StudyContent extends AppCompatActivity {
 
+    StudyContent studyContent;
     ActivityStudyContentBinding binding;
     FirebaseFirestore db;
     CollectionReference contentRef;
@@ -162,13 +165,22 @@ public class StudyContent extends AppCompatActivity {
                                                                                         point = point - 100;
                                                                                         DocumentReference documentReference = db.collection("users").document(user.getUid());
                                                                                         documentReference.update("point", point);
-
+//                                                                                        Log.d("RERE", "2번");
+//                                                                                        FragmentManager fragmentManager = getSupportFragmentManager();
+//                                                                                        Log.d("RERE", "3번");
+//                                                                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                                                                        Log.d("RERE", "4번");
+//                                                                                        fragmentTransaction.replace(R.id.study_content, new study_fragment());
+//                                                                                        Log.d("RERE", "5번");
+//                                                                                        fragmentTransaction.commit();
+//                                                                                        Log.d("RERE", "6번");
                                                                                     }
                                                                                 });
 
                                                                     }
                                                                 }
                                                             });
+
                                                     intent = new Intent(StudyContent.this, HomeActivity.class);
                                                     startActivity(intent);
                                                 }else{

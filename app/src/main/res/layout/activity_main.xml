@@ -34,7 +34,8 @@
             android:ems="10"
             android:hint="이메일을 입력하세요."
             android:inputType="textEmailAddress"
-            android:text="leechanho8511@naver.com" />
+            android:paddingLeft="7dp"
+            />
 
         <EditText
             android:id="@+id/editPassword"
@@ -45,7 +46,7 @@
             android:ems="10"
             android:hint="비밀번호를 입력하세요."
             android:inputType="textPassword"
-            android:text="123412341234"
+            android:paddingLeft="7dp"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -124,18 +125,7 @@
             android:textSize="16dp"
             android:textStyle="bold"
             />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/SuperBtn"
-            android:layout_width="240dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:background="@drawable/buttonblue"
-            android:text="슈퍼로그인"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            />
+
     </LinearLayout>
 
 </ScrollView>
