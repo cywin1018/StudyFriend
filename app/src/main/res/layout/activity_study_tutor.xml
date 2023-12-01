@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/tutorContainer"
     tools:context=".StudyTutor">
 
                 <!--맨위쪽 BAR 형태 부분 레이아웃 코드-->
@@ -45,15 +47,11 @@
     </LinearLayout>
 
             <!--  튜터가 만든 스터디 모집 목록 보유주는 리사이클러뷰 작성 구간  -->
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tutor_recyclerview_list"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tutor_recyclerview_list"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
 </LinearLayout>
