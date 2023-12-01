@@ -2,6 +2,7 @@ package com.example.study_friend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 
 import com.example.study_friend.databinding.ActivityStudyTuteeBinding;
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
+import com.example.study_friend.fragment.account_fragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,8 +48,7 @@ public class StudyTutee extends AppCompatActivity {
         docRef = db.collection("게시글");
 
         binding.backBtn.setOnClickListener(v -> {
-            intent = new Intent(StudyTutee.this, HomeActivity.class);
-            startActivity(intent);
+           finish();
         });
         db.collection("게시글")
                 .whereArrayContains("신청자Uid", uid)

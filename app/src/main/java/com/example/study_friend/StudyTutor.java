@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.LinearLayout;
 
 
+import com.example.study_friend.databinding.ActivityHomeBinding;
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
 
 import com.example.study_friend.fragment.account_fragment;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class StudyTutor extends AppCompatActivity {
 
     ActivityStudyTutorBinding binding;
+    ActivityHomeBinding homeBinding;
     Intent intent;
     RecyclerView recyclerView;
     TutorAdapter tutorAdapter;
@@ -57,12 +59,9 @@ public class StudyTutor extends AppCompatActivity {
         docRef = db.collection("게시글");
 
         binding.backBtn.setOnClickListener(v -> {
-            intent = new Intent(StudyTutor.this, HomeActivity.class);
-            startActivity(intent);
-//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.tutorContainer, new account_fragment()).commit();
-//            Log.d("RERE", "button clicked!!! ");
+            finish();
         });
+
         // 현재 사용자의 정보를 가져오는 부분
 
 

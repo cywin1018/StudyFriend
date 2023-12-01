@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ import android.widget.Toast;
 import com.example.study_friend.Item;
 import com.example.study_friend.R;
 import com.example.study_friend.StudyTutor;
-import com.example.study_friend.databinding.FragmentStudyFragmentBinding;
+
 import com.example.study_friend.study_register;
 import com.example.study_friend.studyrecyclerview_adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +56,7 @@ public class study_fragment extends Fragment {
     RecyclerView recyclerView;
     studyrecyclerview_adapter studyRecyclerAdapter;
     ArrayList<Item> items = new ArrayList<>();
-
+    SwipeRefreshLayout swipeRefreshLayout;
     public View v;
 
 
@@ -66,6 +67,15 @@ public class study_fragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_study_fragment, container, false);
         Log.d(TAG, "뷰 생성");
+        swipeRefreshLayout = v.findViewById(R.id.content_srl);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                studyRecyclerAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         return v;
     }
@@ -212,7 +222,6 @@ public class study_fragment extends Fragment {
                             ArrayList<Item> items1 = new ArrayList<>();
                             for(DocumentSnapshot document : documents){
                                 Map<String,Object> postDocument = document.getData();
-
                                 if(postDocument != null) {
                                     String nickname = postDocument.get("nickname").toString();
                                     Timestamp time1 =(Timestamp)postDocument.get("time");
@@ -227,9 +236,9 @@ public class study_fragment extends Fragment {
                                             items1.add(new Item(nickname, title, date, num));
                                             int itemposition=items.size() - 1;
                                         }
+                                    }
+                                }
                             }
-                        }
-                    }
                             studyRecyclerAdapter.setItemsList(items1);
                             studyRecyclerAdapter.notifyItemInserted(items1.size() - 1);
                             items = items1;
@@ -238,5 +247,6 @@ public class study_fragment extends Fragment {
                 }
             }
         });
+
     }
 }

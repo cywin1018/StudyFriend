@@ -222,29 +222,33 @@
 <!--            />-->
 
         <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:padding="20dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/buttonblackline"
+            android:orientation="horizontal"
+
+            android:padding="20dp"
+
             >
+
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/edit_icon"
+
                 />
+
             <TextView
                 android:id="@+id/tutorBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내가 모집한 스터디 보기"
-                android:textStyle="bold"
                 android:layout_marginLeft="50dp"
-                android:textSize="12dp"
                 android:clickable="true"
-                />
+                android:text="내가 모집한 스터디 보기"
+                android:textSize="12dp"
+                android:textStyle="bold" />
         </LinearLayout>
 <!--        <View-->
 <!--            android:background="@color/black"-->
@@ -255,8 +259,9 @@
 <!--            />-->
         <LinearLayout
             android:layout_marginTop="5dp"
-
-            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp"
