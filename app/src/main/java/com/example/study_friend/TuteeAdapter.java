@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -120,6 +121,34 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
                         });
                         builder.show();
                     }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("스터디 신청 취소하기");
+                    builder.setMessage("정말로 신청을 취소하시겠습니까?");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Item item = items.get(getBindingAdapterPosition());
+                            String documentId = item.title;
+                            db.collection("게시글").document(documentId).update("신청인원", FieldValue.increment(-1));
+                            items.remove(getBindingAdapterPosition());
+                            notifyItemRemoved(getBindingAdapterPosition());
+                            notifyItemRangeChanged(getBindingAdapterPosition(), items.size());
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+                    return true;
                 }
             });
         }

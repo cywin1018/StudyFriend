@@ -108,7 +108,6 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
                             notifyItemRemoved(getBindingAdapterPosition());
                             notifyItemRangeChanged(getBindingAdapterPosition(), items.size());
                             dialog.dismiss();
-                            Log.d("RERE", "documentId: " + documentId);
                         }
                     });
                     builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
