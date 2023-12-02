@@ -22,6 +22,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class StudyTutee extends AppCompatActivity {
@@ -66,7 +67,8 @@ public class StudyTutee extends AppCompatActivity {
                                 String date = post.get("장소").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
-                                itemData = new Item(nickname, title, date, people);
+                                List<String> recommendedPeople = (List<String>) post.get("recommendedPeople");
+                                itemData = new Item(nickname, title, date, people, recommendedPeople);
                                 items.add(itemData);
 
                                 tuteeAdapter = new TuteeAdapter(items);

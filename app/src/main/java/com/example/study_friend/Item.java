@@ -1,10 +1,14 @@
 package com.example.study_friend;
 
+import java.util.List;
+
 public class Item {
     String name;
     String title;
     String day;
     String num;
+
+    List<String> recommendedPeople;
 
     int image;
     String CurTutee;
@@ -24,6 +28,13 @@ public class Item {
         this.day = day;
         this.num = num;
         this.CurTutee = CurTutee;
+    }
+    public Item(String name, String title, String day, String num, List<String> recommendedPeople){
+        this.name = name;
+        this.title = title;
+        this.day = day;
+        this.num = num;
+        this.recommendedPeople = recommendedPeople;
     }
 //    public Item(String name, String title, String day, String num, int image) {
 //        this.name = name;

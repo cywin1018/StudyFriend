@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -32,6 +33,7 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
 
     public ArrayList<Item> items;
     AlertDialog.Builder builder;
+    AlertDialog.Builder builder2;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public TuteeAdapter (ArrayList<Item> items){
@@ -85,41 +87,93 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
                     int pos = getBindingAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         Item item = items.get(pos);
+                        // item의 recommendedPeople에 현제 사용자의 uid가 있는지 for문으로 확인
+                        // 있으면 이미 추천한 스터디라는 메시지를 띄워줌
+                        // 없으면 추천하시겠습니까? 라는 메시지를 띄워줌
+                        // 추천하면 해당 게시글의 recommendedPeople에 현재 사용자의 uid를 추가해줌
+                        // 추천수를 1 증가시켜줌
+                        // 추천수를 db에 저장해줌
+                        // 추천이 완료되었습니다 라는 메시지를 띄워줌
+
                         builder = new AlertDialog.Builder(view.getContext());
                         builder.setTitle("스터디 추천하기");
                         builder.setMessage("스터디를 추천하시겠습니까?");
                         Log.d("RERE",item.name);
 
-                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                db.collection("users")
-                                        .whereEqualTo("nickname", item.name)
-                                                .get()
-                                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                                 QuerySnapshot documents = task.getResult();
-                                                                 for(QueryDocumentSnapshot documentSnapshot : documents){
-                                                                     Map<String,Object> document =documentSnapshot.getData();
-                                                                     String uid = document.get("documentID").toString();
-                                                                     int recommended = Integer.parseInt(document.get("recommended").toString());
-                                                                     recommended++;
-                                                                     DocumentReference docRef = db.collection("users").document(uid);
-                                                                     docRef.update("recommended",recommended);
-                                                                 }
+                                Log.d("RERE", "확인버튼 클릭");
+                                db.collection("게시글").document(item.title).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        Log.d("RERE", "게시글 가져오기");
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+                                                Log.d("RERE", "DocumentSnapshot data: " + document.getData());
+                                                Map<String, Object> post = document.getData();
+                                                List<String> recommendedPeople = (List<String>) post.get("recommendedPeople");
+                                                Log.d("RERE", "추천인원 가져오기");
+                                                if(recommendedPeople.contains(item.name)){
+                                                    Log.d("RERE", "이미 추천한 스터디");
+                                                    builder2 = new AlertDialog.Builder(view.getContext());
+                                                    builder2.setTitle("스터디 추천하기");
+                                                    builder2.setMessage("이미 추천한 스터디입니다.");
+                                                    builder2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.dismiss();
+                                                        }
+                                                    });
+                                                    builder2.show();
+                                                }
+                                                else{
+                                                    Log.d("RERE", "추천 가능한 스터디");
+                                                    recommendedPeople.add(item.name);
+                                                    db.collection("게시글").document(item.title).update("recommendedPeople", recommendedPeople);
+                                                    db.collection("게시글").document(item.title).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            DocumentSnapshot document = task.getResult();
+                                                            if (document.exists()) {
+                                                                Map<String, Object> post = document.getData();
+                                                                String tutorUid = post.get("tutorUid").toString();
+                                                                db.collection("users").document(tutorUid).update("recommended", FieldValue.increment(10));
+                                                                builder2 = new AlertDialog.Builder(view.getContext());
+                                                                builder2.setTitle("스터디 추천하기");
+                                                                builder2.setMessage("추천이 완료되었습니다.");
+                                                                builder2.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(DialogInterface dialog, int which) {
+                                                                        dialog.dismiss();
+                                                                    }
+                                                                });
+                                                                builder2.show();
                                                             }
-                                                        });
-                                dialog.dismiss();
+                                                        }
+                                                    });
+
+                                                }
+                                            } else {
+                                                Log.d("RERE", "No such document");
+                                            }
+                                        } else {
+                                            Log.d("RERE", "get failed with ", task.getException());
+                                        }
+                                    }
+                                });
+
                             }
+
                         });
-                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         });
-                        builder.show();
+                    builder.show();
                     }
                 }
             });

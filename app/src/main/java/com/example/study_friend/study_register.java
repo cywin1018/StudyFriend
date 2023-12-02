@@ -47,6 +47,7 @@ public class study_register extends AppCompatActivity {
             Timestamp timestamp = Timestamp.now();
             List<String> participants = new ArrayList<>();
             List<String> allPeople = new ArrayList<>();
+            List<String> recommendedPeople = new ArrayList<>();
             allPeople.add(currentUser.getUid());
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -56,7 +57,7 @@ public class study_register extends AppCompatActivity {
                             String nickname = documentSnapshot.get("nickname").toString();
                             int point = Integer.parseInt(documentSnapshot.get("point").toString());
                             Log.d(TAG,documentSnapshot.get("nickname").toString());
-                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point,allPeople);
+                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point,allPeople,recommendedPeople);
                         }
                     });
 
@@ -70,7 +71,7 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point,List<String> allPeople){
+    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point,List<String> allPeople,List<String> recommendedPeople){
         Map<String,Object> post = new HashMap<>();
         int k = 0;
         point = point + 100;
@@ -86,6 +87,7 @@ public class study_register extends AppCompatActivity {
         post.put("time",time);
         post.put("nickname",nickname);
         post.put("allPeople",allPeople);
+        post.put("recommendedPeople",recommendedPeople);
         db.collection("게시글").document(title).set(post);
         DocumentReference docRef = db.collection("users").document(currentUser.getUid());
         docRef.update("point",point);
