@@ -62,7 +62,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
         Item item = items.get(position);
         viewHolder.day.setText(item.day);
         viewHolder.name.setText(item.name);
-        viewHolder.selectNum.setText(item.num);
+        viewHolder.setnum.setText(item.num);
         viewHolder.title1.setText(item.title);
         Log.d(TAG, "onBindViewHolder: "+viewHolder.getAbsoluteAdapterPosition());
         if(position%2==0){
@@ -86,7 +86,8 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title1, name, day, selectNum;
+
+        TextView title1, name, day, setnum;
         RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -94,7 +95,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
             title1 =  itemView.findViewById(R.id.title1);
             name =(TextView)itemView.findViewById(R.id.name);
             day = (TextView)itemView.findViewById(R.id.day);
-            selectNum = (TextView)itemView.findViewById(R.id.select_num);
+            setnum = (TextView)itemView.findViewById(R.id.setnum);
             relativeLayout = itemView.findViewById(R.id.item_layout);
 
 

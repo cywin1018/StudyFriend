@@ -81,7 +81,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/date"
-        android:layout_toEndOf="@+id/day"
+        android:layout_toLeftOf="@+id/select_num"
         android:layout_marginStart="15dp"
         android:background="@drawable/people"
 
@@ -89,12 +89,12 @@
 
     <TextView
         android:id="@+id/select_num"
-        android:text="6"
+        android:text="1"
         android:textSize="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/date"
-        android:layout_toEndOf="@+id/people"
+        android:layout_toLeftOf="@+id/slash"
         android:layout_marginStart="5dp"
 
         />
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/date"
-        android:layout_toEndOf="@+id/select_num"
+        android:layout_toLeftOf="@+id/setnum"
         android:layout_marginStart="5dp"
         />
     <TextView
@@ -115,8 +115,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/date"
-        android:layout_toEndOf="@+id/slash"
         android:layout_marginStart="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
         />
 
 
