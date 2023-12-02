@@ -1,14 +1,19 @@
 package com.example.study_friend.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.study_friend.R;
 import com.example.study_friend.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,11 +38,94 @@ public class SignUp extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static final String TAG = "RERE";
     Intent intent;
+    String email;
+    String password;
+    String passwordconfirm;
+
+    String emailValidation = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+    String passwordValidation = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.editEmail.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                email = binding.editEmail.getText().toString().trim();
+                if(email.matches(emailValidation)){
+                    binding.emailCheck.setText("유효한 이메일입니다");
+                    binding.emailCheck.setTextColor(R.color.green);
+                }
+                else{
+                    binding.emailCheck.setText("올바르지 않은 이메일 형식입니다.");
+
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        } );
+        binding.editPassword.addTextChangedListener(new TextWatcher(){
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                password = binding.editPassword.getText().toString().trim();
+                if(password.matches(passwordValidation)){
+                    binding.passwordValidation.setText("유효한 비밀번호입니다");
+                    binding.passwordValidation.setTextColor(R.color.green);
+                }
+                else{
+                    binding.passwordValidation.setText("비밀번호는 8자리 이상, 영문자와 숫자를 포함해야 합니다.");
+                    binding.passwordValidation.setTextColor(R.color.red);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        binding.editPasswordConfirm.addTextChangedListener(new TextWatcher(){
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                password = binding.editPassword.getText().toString().trim();
+                passwordconfirm = binding.editPasswordConfirm.getText().toString().trim();
+                if(password.equals(passwordconfirm)){
+                    binding.passwordCheck.setText("비밀번호가 일치합니다");
+                    binding.passwordCheck.setTextColor(R.color.green);
+                }
+                else{
+                    binding.passwordCheck.setText("비밀번호가 일치하지 않습니다");
+                    binding.passwordCheck.setTextColor(R.color.red);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         binding.confirm.setOnClickListener(v->{
             Log.d(TAG,"중복확인 버튼이 눌림");
             String nickname = binding.editNickname.getText().toString().trim();

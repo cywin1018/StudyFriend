@@ -55,6 +55,15 @@
                 android:textStyle="bold"
                 />
             <TextView
+                android:id="@+id/emailCheck"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="12dp"
+                />
+            <TextView
                 android:layout_margin="10dp"
                 android:id="@+id/Password"
                 android:layout_width="60dp"
@@ -77,7 +86,16 @@
                 android:ems="10"
                 android:hint="비밀번호를 입력하세요."
                 android:gravity="center"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
+                />
+            <TextView
+                android:id="@+id/passwordValidation"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="12dp"
                 />
             <EditText
                 android:layout_margin="10dp"
@@ -89,7 +107,16 @@
                 android:ems="10"
                 android:hint="비밀번호를 확인하세요."
                 android:gravity="center"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
+                />
+            <TextView
+                android:id="@+id/passwordCheck"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="12dp"
                 />
             <TextView
                 android:layout_margin="10dp"
