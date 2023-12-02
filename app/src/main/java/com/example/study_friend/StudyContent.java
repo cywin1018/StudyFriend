@@ -147,24 +147,34 @@ public class StudyContent extends AppCompatActivity {
                                                                         List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
                                                                         appliers.add(applicants, user.getUid());
                                                                         applicants++;
-                                                                        List<String> allpeople =(ArrayList<String>)info.get("allPeople");
+                                                                        List<String> allpeople = (ArrayList<String>) info.get("allPeople");
                                                                         allpeople.add(user.getUid());
                                                                         Map<String, Object> newInfo = new HashMap<>();
                                                                         newInfo.put("신청인원", applicants);
                                                                         newInfo.put("신청자Uid", appliers);
-                                                                        newInfo.put("allPeople",allpeople);
-                                                                        db.collection("게시글").document(intent1.getStringExtra("title"))
-                                                                                .set(newInfo, SetOptions.merge());
-                                                                        db.collection("users").document(user.getUid())
-                                                                                .get()
-                                                                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                                                    @Override
-                                                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                                        DocumentSnapshot documentSnapshot1 = task.getResult();
-                                                                                        int point = Integer.parseInt(documentSnapshot1.get("point").toString());
-                                                                                        point = point - 100;
-                                                                                        DocumentReference documentReference = db.collection("users").document(user.getUid());
-                                                                                        documentReference.update("point", point);
+                                                                        newInfo.put("allPeople", allpeople);
+                                                                        //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
+                                                                        boolean isExist = false;
+                                                                        for (int i = 0; i < appliers.size(); i++) {
+                                                                            if (appliers.get(i).equals(user.getUid())) {
+                                                                                isExist = true;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                        if (isExist) {
+                                                                            Toast.makeText(StudyContent.this, "이미 신청한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                                                            db.collection("게시글").document(intent1.getStringExtra("title"))
+                                                                                    .set(newInfo, SetOptions.merge());
+                                                                            db.collection("users").document(user.getUid())
+                                                                                    .get()
+                                                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                                        @Override
+                                                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                            DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                                                            int point = Integer.parseInt(documentSnapshot1.get("point").toString());
+                                                                                            point = point - 100;
+                                                                                            DocumentReference documentReference = db.collection("users").document(user.getUid());
+                                                                                            documentReference.update("point", point);
 //                                                                                        Log.d("RERE", "2번");
 //                                                                                        FragmentManager fragmentManager = getSupportFragmentManager();
 //                                                                                        Log.d("RERE", "3번");
@@ -174,9 +184,10 @@ public class StudyContent extends AppCompatActivity {
 //                                                                                        Log.d("RERE", "5번");
 //                                                                                        fragmentTransaction.commit();
 //                                                                                        Log.d("RERE", "6번");
-                                                                                    }
-                                                                                });
+                                                                                        }
+                                                                                    });
 
+                                                                        }
                                                                     }
                                                                 }
                                                             });
