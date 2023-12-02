@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +15,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.study_friend.Item;
 import com.example.study_friend.R;
 import com.example.study_friend.StudyTutee;
 import com.example.study_friend.StudyTutor;
+import com.example.study_friend.TuteeAdapter;
 import com.example.study_friend.activity.MainActivity;
 import com.example.study_friend.databinding.FragmentAccountFragmentBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 /*
@@ -39,6 +44,7 @@ public class account_fragment extends Fragment {
     Intent intent;
     FirebaseUser user;
     String uid;
+    int mstudyMemberNumber;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,5 +101,28 @@ public class account_fragment extends Fragment {
                 }
             }
         });
+
+        db.collection("게시글")
+                .whereArrayContains("신청자Uid", uid)
+                .get()
+                .addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        DocumentSnapshot posts1 = task1.getResult().getDocuments().get(0);
+                        Map<String, Object> post1 = posts1.getData();
+                        String people1 = post1.get("신청인원").toString();
+                        mstudyMemberNumber += Integer.parseInt(people1);
+
+                        binding.studyMemberNumber.setText( mstudyMemberNumber + " 명");
+                    }
+                });
+        db.collection("게시글")
+                .whereArrayContains("tutorUid", uid)
+                .get()
+                .addOnCompleteListener(task1 -> {
+                    if (task1.isSuccessful()) {
+                        mstudyMemberNumber += 1;
+                        binding.studyNumber.setText( mstudyMemberNumber + " 회");
+                    }
+                });
     }
 }

@@ -72,18 +72,20 @@
                 android:layout_height="wrap_content"
                 android:text="숭실대학교 컴퓨터학부 20학번"
                 />
-            <TextView
-                android:id="@+id/profileSemester"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:layout_gravity="center"
-                android:text="2학년 2학기"
-                />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
+                <TextView
+                    android:id="@+id/profileSemester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" 2학기"
+                    android:layout_marginLeft="10sp"
+                    />
                <ImageView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -96,21 +98,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="60개"
+                    android:layout_gravity="center"
                     />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/group_3"
-                    android:layout_marginLeft="10dp"
-                    android:padding="10dp"
-                    />
-                <TextView
-                    android:id="@+id/groupNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="100+"
-                    />
+
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
