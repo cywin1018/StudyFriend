@@ -3,6 +3,7 @@ package com.example.study_friend;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,35 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
                         }
                     });
                     builder.show();
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    builder = new AlertDialog.Builder(view.getContext());
+                    builder.setTitle("스터디 삭제하기");
+                    builder.setMessage("정말로 삭제하시겠습니까?");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Item item = items.get(getBindingAdapterPosition());
+                            String documentId = item.title;
+                            db.collection("게시글").document(documentId).delete();
+                            items.remove(getBindingAdapterPosition());
+                            notifyItemRemoved(getBindingAdapterPosition());
+                            notifyItemRangeChanged(getBindingAdapterPosition(), items.size());
+                            dialog.dismiss();
+                            Log.d("RERE", "documentId: " + documentId);
+                        }
+                    });
+                    builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+                    return true;
                 }
             });
         }
