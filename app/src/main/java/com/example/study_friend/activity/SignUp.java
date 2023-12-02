@@ -82,6 +82,12 @@ public class SignUp extends AppCompatActivity {
         });
     }
     private void createAccount(String email, String password,String nickname,String univ,String major,String semester){
+
+        //유효한 이메일 주소라면 계정 생성
+        //1.파이어베이스 인증 객체 가져오기
+        //2.이메일 비밀번호로 계정 생성하기
+        //3.계정 생성에 성공하면 UI 갱신
+        //4.계정 생성에 실패하면 실패 이유 보여주기
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
