@@ -111,9 +111,11 @@ public class study_fragment extends Fragment {
 
                        if(postDocument != null) {
                            String nickname = postDocument.get("nickname").toString();
+
                            //생성날짜 : 모집기간
-                           Timestamp time1 =(Timestamp)postDocument.get("time");
-                           String date = time1.toDate().toString();
+//                           Timestamp time1 =(Timestamp)postDocument.get("time");
+//                           String date = time1.toDate().toString();
+                           String date = postDocument.get("모집기간").toString();
                            String title = postDocument.get("제목").toString();
                            String num = postDocument.get("모집인원").toString();
 
@@ -227,8 +229,9 @@ public class study_fragment extends Fragment {
                                 Map<String,Object> postDocument = document.getData();
                                 if(postDocument != null) {
                                     String nickname = postDocument.get("nickname").toString();
-                                    Timestamp time1 =(Timestamp)postDocument.get("time");
-                                    String date = time1.toDate().toString();
+//                                    Timestamp time1 =(Timestamp)postDocument.get("time");
+//                                    String date = time1.toDate().toString();
+                                    String date = postDocument.get("모집기간").toString();
                                     String title = postDocument.get("제목").toString();
                                     String num = postDocument.get("모집인원").toString();
                                     long timeNow = Timestamp.now().getSeconds();

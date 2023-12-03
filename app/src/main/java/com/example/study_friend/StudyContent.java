@@ -67,6 +67,7 @@ public class StudyContent extends AppCompatActivity {
 //                      <파이어베이스 연동> -> 작성시 현재 로그인 회원 정보도 "게시글"에 저장하도록 수정하자.
                         String  content = task.getResult().getDocuments().get(i).get("내용").toString();
                         String  major = task.getResult().getDocuments().get(i).get("모집대상").toString();
+                        String  grade = task.getResult().getDocuments().get(i).get("모집학년").toString();
                         String  num = task.getResult().getDocuments().get(i).get("모집인원").toString();
                         String  textbook = task.getResult().getDocuments().get(i).get("분야").toString();
                         String  place = task.getResult().getDocuments().get(i).get("장소").toString();
@@ -74,6 +75,7 @@ public class StudyContent extends AppCompatActivity {
                         binding.contentTitle.setText(title);
                         binding.studyContent.setText(content);
                         binding.studyMajor.setText(major);
+                        binding.studyGrade.setText(grade);
                         binding.studyPossiblenum.setText(num+"명");
                         binding.studyTextbook.setText(textbook);
                         binding.studyPlace.setText(place);
