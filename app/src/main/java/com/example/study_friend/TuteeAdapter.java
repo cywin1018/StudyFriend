@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -35,6 +37,7 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
     AlertDialog.Builder builder;
     AlertDialog.Builder builder2;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user;
 
     public TuteeAdapter (ArrayList<Item> items){
         this.items = items;
@@ -192,6 +195,9 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
                             items.remove(getBindingAdapterPosition());
                             notifyItemRemoved(getBindingAdapterPosition());
                             notifyItemRangeChanged(getBindingAdapterPosition(), items.size());
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            // 게시글의 allpeople 에서 현재 사용자의 uid를 삭제
+                            db.collection("게시글").document(documentId).update("allPeople", FieldValue.arrayRemove(user.getUid()));
                             dialog.dismiss();
                         }
                     });
