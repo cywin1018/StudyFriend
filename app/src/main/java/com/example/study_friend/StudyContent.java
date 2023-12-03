@@ -40,6 +40,7 @@ public class StudyContent extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     Intent intent;
+    Intent intent1;
     String profilename;
     int isExist = 0;
     @Override
@@ -60,7 +61,7 @@ public class StudyContent extends AppCompatActivity {
             if (task.isSuccessful()) {
                 for (int i = 0; i < task.getResult().size(); i++) {
                     String data = task.getResult().getDocuments().get(i).toString();
-                    Log.d("MYMY", "게시글: database -> data: "+data);
+//                    Log.d("MYMY", "게시글: database -> data: "+data);
                     String title = task.getResult().getDocuments().get(i).get("제목").toString();
                     if (sel_title.equals(title)) {
 //                      <파이어베이스 연동> -> 작성시 현재 로그인 회원 정보도 "게시글"에 저장하도록 수정하자.
@@ -117,26 +118,35 @@ public class StudyContent extends AppCompatActivity {
         binding.studyRegBtn.setOnClickListener(v -> {
             Log.d("yongwon","스터디 신청 버튼 클릭");
             AlertDialog.Builder menu = new AlertDialog.Builder(StudyContent.this);
-            db.collection("게시글").document(user.getUid()).get()
+            String title = intent1.getStringExtra("title");
+            db.collection("게시글").document(title).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if(task.isSuccessful()){
                                 DocumentSnapshot documentSnapshot = task.getResult();
                                 Map<String, Object> info = documentSnapshot.getData();
-                                Log.d("RERE",info.toString());
+                                Log.d("yongwon",info +"입니다.");
+                                try {
+                                    String people = info.get("모집대상").toString();
+                                    String grade = info.get("모집인원").toString();
+                                    String field = info.get("분야").toString();
+                                    String place = info.get("장소").toString();
+                                    String num = info.get("신청인원").toString();
+                                    Log.d("yongwon","isHere?");
+                                    menu.setTitle("작성 목록");
+                                    menu.setMessage("모집대상 " + people + "\n" + "모집인원 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
+                                }catch (Exception e){
+                                    Log.d("yongwon",e+"입니다.");
+                                }
+                            }
+                            else{
+                                Log.d("yongwon","실패");
 
-                                String people = info.get("모집대상").toString();
-                                String grade = info.get("모집인원").toString();
-                                String field = info.get("분야").toString();
-                                String place = info.get("장소").toString();
-                                String num = info.get("신청인원").toString();
-                                menu.setTitle("작성 목록");
-                                menu.setMessage("모집대상 " + people + "\n" + "모집인원 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
                             }
                         }
                     });
-            menu.show();
+
 
             menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
