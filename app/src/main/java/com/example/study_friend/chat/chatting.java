@@ -4,11 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.study_friend.MessageItem;
+import com.example.study_friend.R;
 import com.example.study_friend.databinding.ActivityChattingBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,7 +50,6 @@ public class chatting extends AppCompatActivity {
     public chatting(String chatName){
         this.chatName = chatName;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,8 @@ public class chatting extends AppCompatActivity {
         Log.d("chatting.java",firestore.toString());
         chatRef = firestore.collection(chatName);
         Log.d("chatting.java",chatRef.toString());
+
+
 
         //채팅방이름으로 된 컬렉션에 저장되어 있는 데이터들 읽어오기
         //chatRef의 데이터가 변경될때마다 반응하는 리스너 달기 : get()은 일회용

@@ -9,20 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#F8F7F2"
         >
-
-        <TextView
-            android:id="@+id/loginText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img"
             android:layout_marginBottom="30dp"
-            android:text="로그인"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="45dp"
-            android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:layout_marginTop="20dp"
+            />
+
 
         <EditText
             android:id="@+id/editID"

@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             >
             <TextView
                 android:id="@+id/loginText"
@@ -136,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:columnCount="3"
+                android:layout_gravity="center"
                 >
                 <EditText
                     android:layout_margin="10dp"
@@ -184,7 +186,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:columnCount="1">
+                android:columnCount="1"
+                android:layout_gravity="center"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -196,6 +200,7 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/buttonblackline"
                         android:ems="10"
+                        android:layout_marginLeft="10dp"
                         android:hint="학교"
                         android:inputType="text"
                         android:gravity="center"

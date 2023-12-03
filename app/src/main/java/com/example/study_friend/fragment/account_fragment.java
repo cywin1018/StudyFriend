@@ -97,6 +97,7 @@ public class account_fragment extends Fragment {
                         binding.profileInfo.setText(univ + " " + major);
                         binding.starNumber.setText(recommended+" 개");
                         binding.studyPoint.setText(point);
+                        Log.d("TAG", "account fragement : DocumentSnapshot data: " + document.getData());
                     }
                 }
             }
