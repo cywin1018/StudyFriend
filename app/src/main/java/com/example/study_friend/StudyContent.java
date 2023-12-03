@@ -41,6 +41,7 @@ public class StudyContent extends AppCompatActivity {
 
     Intent intent;
     String profilename;
+    int isExist = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,24 +146,29 @@ public class StudyContent extends AppCompatActivity {
                                                                         Map<String, Object> info = documentSnapshot.getData();
                                                                         int applicants = Integer.parseInt(info.get("신청인원").toString());
                                                                         List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
-                                                                        appliers.add(applicants, user.getUid());
-                                                                        applicants++;
                                                                         List<String> allpeople = (ArrayList<String>) info.get("allPeople");
                                                                         allpeople.add(user.getUid());
                                                                         Map<String, Object> newInfo = new HashMap<>();
-                                                                        newInfo.put("신청인원", applicants);
-                                                                        newInfo.put("신청자Uid", appliers);
-                                                                        newInfo.put("allPeople", allpeople);
+
                                                                         //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
-                                                                        boolean isExist = false;
+
                                                                         for (int i = 0; i < appliers.size(); i++) {
                                                                             if (appliers.get(i).equals(user.getUid())) {
-                                                                                isExist = true;
+                                                                                Log.d("RERE",appliers.get(i));
+                                                                                isExist = 1;
                                                                                 break;
                                                                             }
                                                                         }
-                                                                        if (isExist) {
+
+                                                                        appliers.add(applicants, user.getUid());
+                                                                        applicants++;
+                                                                        newInfo.put("신청인원", applicants);
+                                                                        newInfo.put("신청자Uid", appliers);
+                                                                        newInfo.put("allPeople", allpeople);
+
+                                                                        if (isExist==1) {
                                                                             Toast.makeText(StudyContent.this, "이미 신청한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                                                        }else{
                                                                             db.collection("게시글").document(intent1.getStringExtra("title"))
                                                                                     .set(newInfo, SetOptions.merge());
                                                                             db.collection("users").document(user.getUid())
@@ -175,23 +181,15 @@ public class StudyContent extends AppCompatActivity {
                                                                                             point = point - 100;
                                                                                             DocumentReference documentReference = db.collection("users").document(user.getUid());
                                                                                             documentReference.update("point", point);
-//                                                                                        Log.d("RERE", "2번");
-//                                                                                        FragmentManager fragmentManager = getSupportFragmentManager();
-//                                                                                        Log.d("RERE", "3번");
-//                                                                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                                                                        Log.d("RERE", "4번");
-//                                                                                        fragmentTransaction.replace(R.id.study_content, new study_fragment());
-//                                                                                        Log.d("RERE", "5번");
-//                                                                                        fragmentTransaction.commit();
-//                                                                                        Log.d("RERE", "6번");
+                                                                                            Toast.makeText(StudyContent.this, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                                                                         }
                                                                                     });
+
 
                                                                         }
                                                                     }
                                                                 }
                                                             });
-
                                                     intent = new Intent(StudyContent.this, HomeActivity.class);
                                                     startActivity(intent);
                                                 }else{

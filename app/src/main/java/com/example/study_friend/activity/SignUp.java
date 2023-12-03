@@ -104,6 +104,12 @@ public class SignUp extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 password = binding.editPassword.getText().toString().trim();
                 passwordconfirm = binding.editPasswordConfirm.getText().toString().trim();
                 if(password.equals(passwordconfirm)){
@@ -114,11 +120,6 @@ public class SignUp extends AppCompatActivity {
                     binding.passwordCheck.setText("비밀번호가 일치하지 않습니다");
                     binding.passwordCheck.setTextColor(R.color.red);
                 }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
