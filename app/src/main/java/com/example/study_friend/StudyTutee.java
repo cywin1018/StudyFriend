@@ -64,7 +64,7 @@ public class StudyTutee extends AppCompatActivity {
                             for (QueryDocumentSnapshot posts : task.getResult()) {
                                 Map<String, Object> post = posts.getData();
                                 String nickname = post.get("nickname").toString();
-                                String date = post.get("장소").toString();
+                                String date = post.get("모집기간").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
                                 List<String> recommendedPeople = (List<String>) post.get("recommendedPeople");

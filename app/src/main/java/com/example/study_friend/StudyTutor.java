@@ -78,8 +78,8 @@ public class StudyTutor extends AppCompatActivity {
                             for (QueryDocumentSnapshot posts : task.getResult()) {
                                 Map<String, Object> post = posts.getData();
                                 String nickname = post.get("내용").toString();
-                                Timestamp time1 =(Timestamp)post.get("time");
-                                String date = time1.toDate().toString();
+//                                Timestamp time1 =(Timestamp)post.get("time");
+                                String date = post.get("모집기간").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
                                 String documentId = posts.getData().toString();
