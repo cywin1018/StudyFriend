@@ -111,10 +111,13 @@ public class study_fragment extends Fragment {
 
                        if(postDocument != null) {
                            String nickname = postDocument.get("nickname").toString();
+                           //생성날짜 : 모집기간
                            Timestamp time1 =(Timestamp)postDocument.get("time");
                            String date = time1.toDate().toString();
                            String title = postDocument.get("제목").toString();
                            String num = postDocument.get("모집인원").toString();
+
+                           //제한시간
                            long timeNow = Timestamp.now().getSeconds();
                            Timestamp time = (Timestamp) postDocument.get("time");
                            if (time != null) {
