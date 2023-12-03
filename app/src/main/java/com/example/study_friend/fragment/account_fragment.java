@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.List;
 import java.util.Map;
 /*
  * 1. 내가 만든 스터디 내가 참여한 스터디 연결(완료)
@@ -45,6 +46,7 @@ public class account_fragment extends Fragment {
     FirebaseUser user;
     String uid;
     int mstudyMemberNumber;
+    int studyNumber;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,10 +109,13 @@ public class account_fragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
-                        DocumentSnapshot posts1 = task1.getResult().getDocuments().get(0);
-                        Map<String, Object> post1 = posts1.getData();
-                        String people1 = post1.get("신청인원").toString();
-                        mstudyMemberNumber += Integer.parseInt(people1);
+                        List<DocumentSnapshot> posts1 = task1.getResult().getDocuments();
+                        mstudyMemberNumber = 0;
+                        for (DocumentSnapshot post : posts1) {
+                            Map<String, Object> post1 = post.getData();
+                            String people1 = post1.get("신청인원").toString();
+                            mstudyMemberNumber += Integer.parseInt(people1);
+                        }
 
                         binding.studyMemberNumber.setText( mstudyMemberNumber + " 명");
                     }
@@ -120,8 +125,9 @@ public class account_fragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
-                        mstudyMemberNumber += 1;
-                        binding.studyNumber.setText( mstudyMemberNumber + " 회");
+                        List<DocumentSnapshot> posts1 = task1.getResult().getDocuments();
+                        studyNumber = posts1.size();
+                        binding.studyNumber.setText(studyNumber + " 회");
                     }
                 });
     }
