@@ -42,8 +42,9 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
         Item item = items.get(position);
         viewHolder.day.setText(item.day);
         viewHolder.name.setText(item.name);
-        viewHolder.selectNum.setText(item.num);
         viewHolder.title1.setText(item.title);
+        viewHolder.selectNum.setText(item.CurTutee);
+        viewHolder.setnum.setText(item.num);
     }
     public void setItemsList(ArrayList<Item> list){
         this.items = list;
@@ -57,7 +58,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title1, name, day, selectNum;
+        TextView title1, name, day, selectNum,setnum;;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +66,8 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
             name =(TextView)itemView.findViewById(R.id.name);
             day = (TextView)itemView.findViewById(R.id.day);
             selectNum = (TextView)itemView.findViewById(R.id.select_num);
+            setnum = (TextView)itemView.findViewById(R.id.setnum);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
