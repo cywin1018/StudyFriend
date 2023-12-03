@@ -37,6 +37,8 @@ public class StudyContent extends AppCompatActivity {
     FirebaseFirestore db;
     CollectionReference contentRef;
     CollectionReference UserRef;
+
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     Intent intent;
@@ -67,6 +69,8 @@ public class StudyContent extends AppCompatActivity {
 //                      <파이어베이스 연동> -> 작성시 현재 로그인 회원 정보도 "게시글"에 저장하도록 수정하자.
                         String  content = task.getResult().getDocuments().get(i).get("내용").toString();
                         String  major = task.getResult().getDocuments().get(i).get("모집대상").toString();
+                        String grade = task.getResult().getDocuments().get(i).get("모집학년").toString();
+                        grade = grade+"학년";
                         String  num = task.getResult().getDocuments().get(i).get("모집인원").toString();
                         String  textbook = task.getResult().getDocuments().get(i).get("분야").toString();
                         String  place = task.getResult().getDocuments().get(i).get("장소").toString();
@@ -74,6 +78,7 @@ public class StudyContent extends AppCompatActivity {
                         binding.contentTitle.setText(title);
                         binding.studyContent.setText(content);
                         binding.studyMajor.setText(major);
+                        binding.studyGrade.setText(grade);
                         binding.studyPossiblenum.setText(num+"명");
                         binding.studyTextbook.setText(textbook);
                         binding.studyPlace.setText(place);
@@ -117,7 +122,7 @@ public class StudyContent extends AppCompatActivity {
 
         binding.studyRegBtn.setOnClickListener(v -> {
             Log.d("yongwon","스터디 신청 버튼 클릭");
-            AlertDialog.Builder menu = new AlertDialog.Builder(StudyContent.this);
+
             String title = intent1.getStringExtra("title");
             db.collection("게시글").document(title).get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
@@ -128,6 +133,7 @@ public class StudyContent extends AppCompatActivity {
                                 Map<String, Object> info = documentSnapshot.getData();
                                 Log.d("yongwon",info +"입니다.");
                                 try {
+                                    AlertDialog.Builder menu = new AlertDialog.Builder(StudyContent.this);
                                     String people = info.get("모집대상").toString();
                                     String grade = info.get("모집인원").toString();
                                     String field = info.get("분야").toString();
@@ -136,6 +142,87 @@ public class StudyContent extends AppCompatActivity {
                                     Log.d("yongwon","isHere?");
                                     menu.setTitle("작성 목록");
                                     menu.setMessage("모집대상 " + people + "\n" + "모집인원 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
+
+                                    menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            db.collection("users").document(user.getUid()).get()
+                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            if(task.isSuccessful()){
+                                                                int point = Integer.parseInt(task.getResult().get("point").toString());
+                                                                Log.d("RERE",Integer.toString(point));
+                                                                if(point>=100) {
+                                                                    db.collection("게시글").document(intent1.getStringExtra("title")).get()
+                                                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                    if (task.isSuccessful()) {
+                                                                                        Log.d("RERE", "1번");
+                                                                                        DocumentSnapshot documentSnapshot = task.getResult();
+                                                                                        Map<String, Object> info = documentSnapshot.getData();
+                                                                                        int applicants = Integer.parseInt(info.get("신청인원").toString());
+                                                                                        List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
+                                                                                        List<String> allpeople = (ArrayList<String>) info.get("allPeople");
+                                                                                        allpeople.add(user.getUid());
+                                                                                        Map<String, Object> newInfo = new HashMap<>();
+
+                                                                                        //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
+
+                                                                                        for (int i = 0; i < appliers.size(); i++) {
+                                                                                            if (appliers.get(i).equals(user.getUid())) {
+                                                                                                Log.d("RERE",appliers.get(i));
+                                                                                                isExist = 1;
+                                                                                                break;
+                                                                                            }
+                                                                                        }
+
+                                                                                        appliers.add(applicants, user.getUid());
+                                                                                        applicants++;
+                                                                                        newInfo.put("신청인원", applicants);
+                                                                                        newInfo.put("신청자Uid", appliers);
+                                                                                        newInfo.put("allPeople", allpeople);
+
+                                                                                        if (isExist==1) {
+                                                                                            Toast.makeText(StudyContent.this, "이미 신청한 스터디입니다.", Toast.LENGTH_SHORT).show();
+                                                                                        }else{
+                                                                                            db.collection("게시글").document(intent1.getStringExtra("title"))
+                                                                                                    .set(newInfo, SetOptions.merge());
+                                                                                            db.collection("users").document(user.getUid())
+                                                                                                    .get()
+                                                                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                                                        @Override
+                                                                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                                                            DocumentSnapshot documentSnapshot1 = task.getResult();
+                                                                                                            int point = Integer.parseInt(documentSnapshot1.get("point").toString());
+                                                                                                            point = point - 100;
+                                                                                                            DocumentReference documentReference = db.collection("users").document(user.getUid());
+                                                                                                            documentReference.update("point", point);
+                                                                                                            Toast.makeText(StudyContent.this, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                        }
+                                                                                                    });
+
+
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                    intent = new Intent(StudyContent.this, HomeActivity.class);
+                                                                    startActivity(intent);
+                                                                }else{
+                                                                    Toast.makeText(StudyContent.this, "포인트가 모자랍니다.", Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+
+                                        }
+                                    });
+                                    menu.setNegativeButton("Cancel",null);
+
+                                    menu.show();
+
                                 }catch (Exception e){
                                     Log.d("yongwon",e+"입니다.");
                                 }
@@ -148,85 +235,6 @@ public class StudyContent extends AppCompatActivity {
                     });
 
 
-            menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    db.collection("users").document(user.getUid()).get()
-                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                int point = Integer.parseInt(task.getResult().get("point").toString());
-                                                Log.d("RERE",Integer.toString(point));
-                                                if(point>=100) {
-                                                    db.collection("게시글").document(intent1.getStringExtra("title")).get()
-                                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        Log.d("RERE", "1번");
-                                                                        DocumentSnapshot documentSnapshot = task.getResult();
-                                                                        Map<String, Object> info = documentSnapshot.getData();
-                                                                        int applicants = Integer.parseInt(info.get("신청인원").toString());
-                                                                        List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
-                                                                        List<String> allpeople = (ArrayList<String>) info.get("allPeople");
-                                                                        allpeople.add(user.getUid());
-                                                                        Map<String, Object> newInfo = new HashMap<>();
-
-                                                                        //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
-
-                                                                        for (int i = 0; i < appliers.size(); i++) {
-                                                                            if (appliers.get(i).equals(user.getUid())) {
-                                                                                Log.d("RERE",appliers.get(i));
-                                                                                isExist = 1;
-                                                                                break;
-                                                                            }
-                                                                        }
-
-                                                                        appliers.add(applicants, user.getUid());
-                                                                        applicants++;
-                                                                        newInfo.put("신청인원", applicants);
-                                                                        newInfo.put("신청자Uid", appliers);
-                                                                        newInfo.put("allPeople", allpeople);
-
-                                                                        if (isExist==1) {
-                                                                            Toast.makeText(StudyContent.this, "이미 신청한 스터디입니다.", Toast.LENGTH_SHORT).show();
-                                                                        }else{
-                                                                            db.collection("게시글").document(intent1.getStringExtra("title"))
-                                                                                    .set(newInfo, SetOptions.merge());
-                                                                            db.collection("users").document(user.getUid())
-                                                                                    .get()
-                                                                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                                                        @Override
-                                                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                                                            DocumentSnapshot documentSnapshot1 = task.getResult();
-                                                                                            int point = Integer.parseInt(documentSnapshot1.get("point").toString());
-                                                                                            point = point - 100;
-                                                                                            DocumentReference documentReference = db.collection("users").document(user.getUid());
-                                                                                            documentReference.update("point", point);
-                                                                                            Toast.makeText(StudyContent.this, "신청이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                                                                                        }
-                                                                                    });
-
-
-                                                                        }
-                                                                    }
-                                                                }
-                                                            });
-                                                    intent = new Intent(StudyContent.this, HomeActivity.class);
-                                                    startActivity(intent);
-                                                }else{
-                                                    Toast.makeText(StudyContent.this, "포인트가 모자랍니다.", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }
-                                    });
-
-                }
-            });
-            menu.setNegativeButton("Cancel",null);
-            menu.create();
-            menu.show();
         });
     }
 

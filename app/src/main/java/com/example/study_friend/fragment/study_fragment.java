@@ -124,7 +124,7 @@ public class study_fragment extends Fragment {
                            Timestamp time = (Timestamp) postDocument.get("time");
                            if (time != null) {
                                long timeThen = time.getSeconds();
-                               if (timeNow < timeThen + 60 * 30) {
+                               if (timeNow < timeThen + 60 * 300) {
                                    items1.add(new Item(nickname, title, date, num));
                                    int itemposition=items.size() - 1;
 
@@ -238,7 +238,7 @@ public class study_fragment extends Fragment {
                                     Timestamp time = (Timestamp) postDocument.get("time");
                                     if (time != null) {
                                         long timeThen = time.getSeconds();
-                                        if (timeNow < timeThen + 60 * 30) {
+                                        if (timeNow < timeThen + 60 * 300) {
                                             items1.add(new Item(nickname, title, date, num));
                                             int itemposition=items.size() - 1;
                                         }
