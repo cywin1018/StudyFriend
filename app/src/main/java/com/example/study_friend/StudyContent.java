@@ -117,14 +117,27 @@ public class StudyContent extends AppCompatActivity {
         binding.studyRegBtn.setOnClickListener(v -> {
             Log.d("yongwon","스터디 신청 버튼 클릭");
             AlertDialog.Builder menu = new AlertDialog.Builder(StudyContent.this);
+            db.collection("게시글").document(user.getUid()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>(){
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                Map<String, Object> info = documentSnapshot.getData();
+                                Log.d("RERE",info.toString());
 
-            String people = "컴퓨터학부";
-            String grade = "1학년";
-            String field = "프로그래밍";
-            String place = "정보과학관 3층 중간 스터디룸";
-            String num = "5명";
-            menu.setTitle("작성 목록");
-            menu.setMessage("모집대상 " + people + "\n" + "학년 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
+                                String people = info.get("모집대상").toString();
+                                String grade = info.get("모집인원").toString();
+                                String field = info.get("분야").toString();
+                                String place = info.get("장소").toString();
+                                String num = info.get("신청인원").toString();
+                                menu.setTitle("작성 목록");
+                                menu.setMessage("모집대상 " + people + "\n" + "모집인원 " + grade + "\n" + "분야 " + field + "\n" + "장소 " + place + "\n" + "인원 " + num + "\n");
+                            }
+                        }
+                    });
+            menu.show();
+
             menu.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
