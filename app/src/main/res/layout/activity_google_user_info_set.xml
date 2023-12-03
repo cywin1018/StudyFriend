@@ -16,81 +16,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-            <TextView
-                android:id="@+id/loginText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="회원가입"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="45dp"
-                android:textAlignment="center"
-                android:gravity="center_horizontal"
-                />
-            <TextView
-                android:id="@+id/Email"
-                android:background="@drawable/button_small_circle"
-                android:gravity="center"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="이메일"
-                android:layout_margin="10dp"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                />
-            <EditText
-                android:layout_margin="10dp"
-                android:id="@+id/editEmail"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="5dp"
-                android:hint="이메일을 입력하세요"
-                android:gravity="center"
-                android:background="@drawable/buttonblackline"
-                android:textSize="20dp"
-                android:inputType="textEmailAddress"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:layout_margin="10dp"
-                android:id="@+id/Password"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_small_circle"
-                android:gravity="center"
-                android:layout_marginBottom="5dp"
-                android:text="비밀번호"
-                android:textSize="16dp"
-                android:textStyle="bold"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                />
-            <EditText
-                android:layout_margin="10dp"
-                android:id="@+id/editPassword"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/buttonblackline"
-                android:ems="10"
-                android:hint="비밀번호를 입력하세요."
-                android:gravity="center"
-                android:inputType="numberPassword"
-                />
-            <EditText
-                android:layout_margin="10dp"
-                android:id="@+id/editPasswordConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/buttonblackline"
-                android:ems="10"
-                android:hint="비밀번호를 확인하세요."
-                android:gravity="center"
-                android:inputType="numberPassword"
-                />
+                >
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ggic"
+                    android:layout_marginRight="10dp"
+                    />
+                <TextView
+                    android:id="@+id/loginText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="회원가입"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="45dp"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"
+                    />
+            </LinearLayout>
+
+
+
+
             <TextView
                 android:layout_margin="10dp"
                 android:id="@+id/nickname"
@@ -160,7 +116,9 @@
                 android:columnCount="1">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
                     <EditText
                         android:id="@+id/univ"
                         android:layout_width="0dp"

@@ -75,15 +75,17 @@
                 android:text="모집 추천 학부와 학생을 정할 수 있어요!"
                 android:textSize="12dp"
                 android:textColor="#80020202" />
-            <EditText
-                android:id="@+id/edit_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/atr1"
-                android:layout_alignStart="@+id/atr1"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                />
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/edit_people"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/atr1"-->
+            <!--                android:layout_alignStart="@+id/atr1"-->
+            <!--                android:layout_marginEnd="20dp"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                />-->
+
             <GridLayout
                 android:layout_below="@+id/atr1_hint"
                 android:layout_width="match_parent"
@@ -208,26 +210,24 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 />
-            <EditText
-                android:id="@+id/edit_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_num"
-                android:layout_alignStart="@+id/text_num"
-                android:layout_marginEnd="10dp"
-                />
+            <!--            <EditText-->
+            <!--                android:id="@+id/edit_num"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/text_num"-->
+            <!--                android:layout_alignStart="@+id/text_num"-->
+            <!--                android:layout_marginEnd="10dp"-->
+            <!--                />-->
             <Spinner
                 android:id="@+id/spinner_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/num"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@+id/edit_num"
-                android:layout_alignBaseline="@+id/edit_num"
+                android:layout_below="@+id/text_num"
+                android:layout_alignStart="@+id/text_num"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 />
-
-
-
         </RelativeLayout>
         <RelativeLayout
             android:layout_marginTop="5dp"

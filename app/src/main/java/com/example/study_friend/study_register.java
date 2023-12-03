@@ -18,7 +18,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,7 @@ public class study_register extends AppCompatActivity {
         setContentView(binding.getRoot());
         //2.
         binding.regBttn.setOnClickListener(view -> {
-            final String people = binding.editPeople.getText().toString().trim();
+//            final String people = binding.editPeople.getText().toString().trim();
             final String field = binding.editField.getText().toString().trim();
             final String place = binding.editPlace.getText().toString().trim();
             final int num = Integer.parseInt(binding.spinnerNum.getSelectedItem().toString());
@@ -44,7 +46,17 @@ public class study_register extends AppCompatActivity {
             final String content = binding.editContent.getText().toString().trim();
             final String major = binding.spinnerMajor.getSelectedItem().toString();
             final String grade = binding.spinnerGrade.getSelectedItem().toString();
+
             Timestamp timestamp = Timestamp.now();
+
+            Long nowdate = System.currentTimeMillis();
+            Date currentTimestamp = new java.sql.Timestamp(nowdate);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            String mydate= String.valueOf(simpleDateFormat.format(currentTimestamp));
+            Log.d("MYMY", "time: " + mydate);
+
             List<String> participants = new ArrayList<>();
             List<String> allPeople = new ArrayList<>();
             List<String> recommendedPeople = new ArrayList<>();
@@ -57,7 +69,7 @@ public class study_register extends AppCompatActivity {
                             String nickname = documentSnapshot.get("nickname").toString();
                             int point = Integer.parseInt(documentSnapshot.get("point").toString());
                             Log.d(TAG,documentSnapshot.get("nickname").toString());
-                            posting(people,field,place,num,title,content,participants,timestamp,nickname,point,allPeople,recommendedPeople);
+                            posting(major,grade,field,place,num,title,content,participants,timestamp,mydate,nickname,point,allPeople,recommendedPeople);
                         }
                     });
 
@@ -71,11 +83,12 @@ public class study_register extends AppCompatActivity {
 
     }
 
-    public void posting(String people,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String nickname,int point,List<String> allPeople,List<String> recommendedPeople){
+    public void posting(String major,String grade,String field,String place,int num,String title,String content,List<String> participants,Timestamp time,String date,String nickname,int point,List<String> allPeople,List<String> recommendedPeople){
         Map<String,Object> post = new HashMap<>();
         int k = 0;
         point = point + 100;
-        post.put("모집대상",people);
+        post.put("모집대상",major);
+        post.put("모집학년",grade);
         post.put("분야",field);
         post.put("장소",place);
         post.put("모집인원",num);
@@ -85,6 +98,7 @@ public class study_register extends AppCompatActivity {
         post.put("신청인원",k);
         post.put("신청자Uid",participants);
         post.put("time",time);
+        post.put("모집기간",date);
         post.put("nickname",nickname);
         post.put("allPeople",allPeople);
         post.put("recommendedPeople",recommendedPeople);

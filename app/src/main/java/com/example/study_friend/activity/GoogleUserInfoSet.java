@@ -66,22 +66,19 @@ public class GoogleUserInfoSet extends AppCompatActivity{
             }
         });
         binding.submitBtn.setOnClickListener(v -> {
-            final String email = binding.editEmail.getText().toString().trim();
-            final String password = binding.editPassword.getText().toString().trim();
             final String nickname = binding.editNickname.getText().toString().trim();
             final String univ = binding.univ.getText().toString().trim();
             final String major = binding.major.getText().toString().trim();
             final String semester = binding.semester.getText().toString().trim();
-            createAccount(email,password,nickname,univ,major,semester);
+            createAccount(nickname,univ,major,semester);
         });
     }
 
-    private void createAccount(String email, String password,String nickname,String univ,String major,String semester){
+    private void createAccount(String nickname,String univ,String major,String semester){
         Map<String,Object> userMap = new HashMap<>();
         int recommended = 0;
         int point = 100;
         userMap.put("documentID",user.getUid());
-        userMap.put("email",email);
         userMap.put("nickname",nickname);
         userMap.put("univ",univ);
         userMap.put("major",major);

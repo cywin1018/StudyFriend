@@ -74,6 +74,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                         Log.d("yongwon", "onClick: " + friendItem.title);
                         chatting.chatName = friendItem.title;
                         intent = new Intent(view.getContext(), chatting.class);
+                        intent.putExtra("title", friendItem.title);
                         view.getContext().startActivity(intent);
                         // 이후에 닉네임, 방장에 맞는걸 store에서 받아와서 intent하면 될듯
 //                        nicknameRef = db.collection("TestCollection");

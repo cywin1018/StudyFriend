@@ -95,20 +95,20 @@
                         android:layout_height="wrap_content"
                         android:text="(개수)60개"
                         />
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group_3"
-                        android:layout_marginLeft="10dp"
-                        android:padding="10dp"
-                        />
-                    <TextView
-                        android:id="@+id/groupNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="(명수)100+"
-                        />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:src="@drawable/group_3"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:padding="10dp"-->
+<!--                        />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/groupNumber"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:text="(명수)100+"-->
+<!--                        />-->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -121,6 +121,7 @@
             android:background="@drawable/mystudy"
             >
             <TextView
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,6 +135,7 @@
                 android:layout_gravity="center"
                 >
                 <TextView
+                    android:layout_margin="5dp"
                     android:id="@+id/study_major"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,6 +157,8 @@
                     android:layout_weight="1"
                     />
                 <TextView
+                    android:layout_margin="5dp"
+                    android:id="@+id/study_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(학년) 2학년"
