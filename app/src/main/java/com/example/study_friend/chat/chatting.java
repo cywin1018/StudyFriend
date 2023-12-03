@@ -53,7 +53,13 @@ public class chatting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        G.nicname = "yongwon";
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = mUser.getUid();
+        firestore = FirebaseFirestore.getInstance();
+        firestore.collection("users").document(uid).get().addOnSuccessListener(documentSnapshot -> {
+            G.nicname = documentSnapshot.get("nickname").toString();
+            Log.d("chatting.java",G.nicname);
+        });
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.backChatBtn.setOnClickListener(v->{
