@@ -67,8 +67,9 @@ public class StudyTutee extends AppCompatActivity {
                                 String date = post.get("모집기간").toString();
                                 String title = post.get("제목").toString();
                                 String people = post.get("모집인원").toString();
+                                String curTutee = post.get("신청인원").toString();
                                 List<String> recommendedPeople = (List<String>) post.get("recommendedPeople");
-                                itemData = new Item(nickname, title, date, people, recommendedPeople);
+                                itemData = new Item(nickname, title, date, people, recommendedPeople,curTutee);
                                 items.add(itemData);
 
                                 tuteeAdapter = new TuteeAdapter(items);

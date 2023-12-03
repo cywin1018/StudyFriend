@@ -29,12 +29,13 @@ public class Item {
         this.num = num;
         this.CurTutee = CurTutee;
     }
-    public Item(String name, String title, String day, String num, List<String> recommendedPeople){
+    public Item(String name, String title, String day, String num, List<String> recommendedPeople,String CurTutee) {
         this.name = name;
         this.title = title;
         this.day = day;
         this.num = num;
         this.recommendedPeople = recommendedPeople;
+        this.CurTutee = CurTutee;
     }
 //    public Item(String name, String title, String day, String num, int image) {
 //        this.name = name;
