@@ -198,6 +198,7 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
                             user = FirebaseAuth.getInstance().getCurrentUser();
                             // 게시글의 allpeople 에서 현재 사용자의 uid를 삭제
                             db.collection("게시글").document(documentId).update("allPeople", FieldValue.arrayRemove(user.getUid()));
+                            db.collection("게시글").document(documentId).update("신청자Uid", FieldValue.arrayRemove(user.getUid()));
                             dialog.dismiss();
                         }
                     });
