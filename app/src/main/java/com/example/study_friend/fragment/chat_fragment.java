@@ -102,7 +102,7 @@ public class chat_fragment extends Fragment {
                             for(QueryDocumentSnapshot chatRoom : task.getResult()){
                                 Map<String,Object> chatRoomData = chatRoom.getData();
                                 String nickname = chatRoomData.get("nickname").toString();
-                                String date = chatRoomData.get("time").toString();
+                                String date = chatRoomData.get("모집기간").toString();
                                 String title = chatRoomData.get("제목").toString();
                                 Log.d("RERE",nickname+" "+date + " " + title);
 
