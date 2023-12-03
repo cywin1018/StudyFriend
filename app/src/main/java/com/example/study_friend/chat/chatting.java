@@ -56,6 +56,10 @@ public class chatting extends AppCompatActivity {
         G.nicname = "yongwon";
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.backChatBtn.setOnClickListener(v->{
+            Log.d("chatting.java","뒤로가기 버튼 클릭");
+            finish();
+        });
 
         //아답터 연결
         messageAdapter = new adapter(this,messageItems);
@@ -114,6 +118,7 @@ public class chatting extends AppCompatActivity {
             }
         });
         binding.btn.setOnClickListener(v-> clickSend());
+
 
     }
 
