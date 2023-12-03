@@ -64,6 +64,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
         viewHolder.name.setText(item.name);
         viewHolder.setnum.setText(item.num);
         viewHolder.title1.setText(item.title);
+        viewHolder.curNum.setText(item.CurTutee);
         Log.d(TAG, "onBindViewHolder: "+viewHolder.getAbsoluteAdapterPosition());
         if(position%2==0){
             viewHolder.relativeLayout.setBackgroundResource(R.drawable.buttonblackline_blue);
@@ -87,7 +88,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title1, name, day, setnum;
+        TextView title1, name, day, setnum,curNum;
         RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -97,6 +98,7 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
             day = (TextView)itemView.findViewById(R.id.day);
             setnum = (TextView)itemView.findViewById(R.id.setnum);
             relativeLayout = itemView.findViewById(R.id.item_layout);
+            curNum = (TextView)itemView.findViewById(R.id.select_num);
 
 
             //          chat의 리사이클러뷰 클릭함수 적극 반영
