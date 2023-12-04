@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,9 +43,14 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
         Item item = items.get(position);
         viewHolder.day.setText(item.day);
         viewHolder.name.setText(item.name);
+        viewHolder.selectNum.setText(item.num);
         viewHolder.title1.setText(item.title);
-        viewHolder.selectNum.setText(item.CurTutee);
-        viewHolder.setnum.setText(item.num);
+        if(position%2==0){
+            viewHolder.relativeLayout.setBackgroundResource(R.drawable.buttonblackline_blue);
+        }
+        else{
+            viewHolder.relativeLayout.setBackgroundResource(R.drawable.buttonblackline);
+        }
     }
     public void setItemsList(ArrayList<Item> list){
         this.items = list;
@@ -58,7 +64,8 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title1, name, day, selectNum,setnum;;
+        TextView title1, name, day, selectNum;
+        RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,8 +73,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
             name =(TextView)itemView.findViewById(R.id.name);
             day = (TextView)itemView.findViewById(R.id.day);
             selectNum = (TextView)itemView.findViewById(R.id.select_num);
-            setnum = (TextView)itemView.findViewById(R.id.setnum);
-
+            relativeLayout = itemView.findViewById(R.id.item_layout);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

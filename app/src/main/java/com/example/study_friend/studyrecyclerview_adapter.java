@@ -89,6 +89,8 @@ public class studyrecyclerview_adapter extends RecyclerView.Adapter<studyrecycle
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title1, name, day, setnum,curNum;
+
+        //Viewholder에 item의 relativelayout을 받아서 그것의 백그라운드를 바꿔줄 것임
         RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {

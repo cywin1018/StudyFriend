@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,6 +61,12 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
         viewHolder.title1.setText(item.title);
         viewHolder.selectNum.setText(item.CurTutee);
         viewHolder.setnum.setText(item.num);
+        if(position%2==0){
+            viewHolder.relativeLayout.setBackgroundResource(R.drawable.buttonblackline_blue);
+        }
+        else{
+            viewHolder.relativeLayout.setBackgroundResource(R.drawable.buttonblackline);
+        }
     }
     public void setItemsList(ArrayList<Item> list){
         this.items = list;
@@ -74,7 +81,7 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView title1, name, day, selectNum,setnum;
-
+        RelativeLayout relativeLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title1 =  itemView.findViewById(R.id.title1);
@@ -84,6 +91,7 @@ public class TuteeAdapter extends RecyclerView.Adapter<TuteeAdapter.ViewHolder> 
             Log.d("RERE", selectNum.getText().toString()+"여기여기");
             setnum = (TextView)itemView.findViewById(R.id.setnum);
             Log.d("RERE", setnum.getText().toString()+"여기여기");
+            relativeLayout = itemView.findViewById(R.id.item_layout);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
