@@ -36,6 +36,9 @@ public class study_register extends AppCompatActivity {
 
         binding = ActivityStudyRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.backChatBtn.setOnClickListener(view -> {
+            finish();
+        });
         //2.
         binding.regBttn.setOnClickListener(view -> {
 //            final String people = binding.editPeople.getText().toString().trim();
