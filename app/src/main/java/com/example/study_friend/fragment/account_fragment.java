@@ -127,7 +127,7 @@ public class account_fragment extends Fragment {
                     if (task1.isSuccessful()) {
                         List<DocumentSnapshot> posts1 = task1.getResult().getDocuments();
                         studyNumber = posts1.size();
-                        binding.studyNumber.setText(studyNumber + " 회");
+                        binding.studyNumber.setText(Integer.toString(studyNumber) + " 회");
                     }
                 });
     }
