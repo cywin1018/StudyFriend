@@ -49,6 +49,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Log.d(TAG,"signUp");
         binding.backChatBtn.setOnClickListener(v->{
             finish();
         });

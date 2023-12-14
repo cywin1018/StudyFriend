@@ -19,13 +19,13 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordReset extends AppCompatActivity {
     private ActivityPasswordResetBinding binding;
     Intent intent;
-    private final static String TAG ="PasswordReset";
+    private final static String TAG ="RERE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPasswordResetBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Log.d(TAG,"PasswordReset");
 
         binding.backLogin.setOnClickListener(v -> {
             intent = new Intent(this, MainActivity.class);

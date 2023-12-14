@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Log.d(TAG,"onCreate");
         db = FirebaseFirestore.getInstance();
         textView = (TextView) binding.googleLoginBtn.getChildAt(0);
         textView.setText(getString(R.string.googleLogInBtn));

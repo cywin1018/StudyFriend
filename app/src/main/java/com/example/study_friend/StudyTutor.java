@@ -57,7 +57,7 @@ public class StudyTutor extends AppCompatActivity {
         uid = user.getUid();
         db = FirebaseFirestore.getInstance();
         docRef = db.collection("게시글");
-
+        Log.d("RERE","studyTutor");
         binding.backBtn.setOnClickListener(v -> {
             finish();
         });

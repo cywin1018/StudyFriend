@@ -33,6 +33,7 @@ public class study_register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG,"studyRegister");
 
         binding = ActivityStudyRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.study_friend.databinding.ActivityStudyTuteeBinding;
 import com.example.study_friend.databinding.ActivityStudyTutorBinding;
@@ -43,6 +44,7 @@ public class StudyTutee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityStudyTuteeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Log.d("RERE","studyTutee");
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         db = FirebaseFirestore.getInstance();

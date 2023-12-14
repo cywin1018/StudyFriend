@@ -49,8 +49,8 @@ public class StudyContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStudyContentBinding.inflate(getLayoutInflater());
-
-       intent1 =getIntent();
+        Log.d("RERE","StudyContent");
+        intent1 =getIntent();
 //      <어뎁터로부터 데이터를 받다오는 부분>
 //        String sel_name = intent1.getStringExtra("name");
         String sel_title = intent1.getStringExtra("title");

@@ -33,7 +33,7 @@ public class chatting extends AppCompatActivity {
 
     //채팅방 시작하자마자 아이템 하나 붙잡을 테니 전역변수로
     FirebaseFirestore firestore;
-
+    public static String TAG = "RERE";
     FirebaseUser mUser;
     CollectionReference chatRef;
 
@@ -63,14 +63,14 @@ public class chatting extends AppCompatActivity {
         binding = ActivityChattingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.backChatBtn.setOnClickListener(v->{
-            Log.d("chatting.java","뒤로가기 버튼 클릭");
+            Log.d(TAG,"뒤로가기 버튼 클릭");
             finish();
         });
 
         //아답터 연결
         messageAdapter = new adapter(this,messageItems);
         binding.recycler.setAdapter(messageAdapter);
-        Log.d("chatting.java","adapter연결");
+        Log.d(TAG,"adapter연결");
 
         //파리어베이스 파이어 스토어 관리객체 및 (채팅방 이름)참조 객체 소환
         //채팅기록 남기기 위한 DB 생성
@@ -78,9 +78,9 @@ public class chatting extends AppCompatActivity {
         //도큐먼트 = 시간
         //필드 : 칭팅정보 (사진, 이름, 메세지 ,시간)
         firestore = FirebaseFirestore.getInstance();
-        Log.d("chatting.java",firestore.toString());
+        Log.d(TAG,firestore.toString());
         chatRef = firestore.collection(chatName);
-        Log.d("chatting.java",chatRef.toString());
+        Log.d(TAG,chatRef.toString());
 
 
 

@@ -53,7 +53,7 @@ public class account_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAccountFragmentBinding.inflate(inflater);
-
+        Log.d("RERE","accountFragment");
         TextView tutorBtn = binding.getRoot().findViewById(R.id.tutorBtn);
         TextView tuteeBtn = binding.getRoot().findViewById(R.id.tuteeBtn);
         tutorBtn.setOnClickListener(view -> {
