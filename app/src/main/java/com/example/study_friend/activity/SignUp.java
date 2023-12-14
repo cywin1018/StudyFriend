@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                email = binding.editEmail.getText().toString().trim();
+                email = binding.editEmail.getText().toString();
                 if(email.matches(emailValidation)){
                     binding.emailCheck.setText("유효한 이메일입니다");
                     binding.emailCheck.setTextColor(R.color.green);
@@ -82,6 +82,12 @@ public class SignUp extends AppCompatActivity {
             @SuppressLint("ResourceAsColor")
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 password = binding.editPassword.getText().toString().trim();
                 if(password.matches(passwordValidation)){
                     binding.passwordValidation.setText("유효한 비밀번호입니다");
@@ -89,15 +95,11 @@ public class SignUp extends AppCompatActivity {
                 }
                 else{
                     binding.passwordValidation.setText("비밀번호는 8자리 이상, 영문자와 숫자를 포함해야 합니다.");
-                    binding.passwordValidation.setTextColor(R.color.red);
+//                    binding.passwordValidation.setTextColor(R.color.red);
                 }
             }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+            @SuppressLint("ResourceAsColor")
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -122,7 +124,7 @@ public class SignUp extends AppCompatActivity {
                 }
                 else{
                     binding.passwordCheck.setText("비밀번호가 일치하지 않습니다");
-                    binding.passwordCheck.setTextColor(R.color.red);
+//                    binding.passwordCheck.setTextColor(R.color.red);
                 }
             }
 
