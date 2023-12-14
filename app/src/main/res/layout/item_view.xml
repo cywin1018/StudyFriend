@@ -58,7 +58,7 @@
         android:textSize="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="모집기간"
+        android:text="작성일"
         android:layout_alignStart="@id/title1"
         android:layout_toEndOf="@+id/imageview"
         android:layout_below="@+id/wirter"
