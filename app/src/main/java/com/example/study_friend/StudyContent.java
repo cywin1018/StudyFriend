@@ -165,7 +165,7 @@ public class StudyContent extends AppCompatActivity {
                                                                                         int applicants = Integer.parseInt(info.get("신청인원").toString());
                                                                                         List<String> appliers = (ArrayList<String>) info.get("신청자Uid");
                                                                                         List<String> allpeople = (ArrayList<String>) info.get("allPeople");
-                                                                                        allpeople.add(user.getUid());
+
                                                                                         Map<String, Object> newInfo = new HashMap<>();
 
                                                                                         //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
@@ -177,7 +177,7 @@ public class StudyContent extends AppCompatActivity {
                                                                                                 break;
                                                                                             }
                                                                                         }
-
+                                                                                        allpeople.add(user.getUid());
                                                                                         appliers.add(applicants, user.getUid());
                                                                                         applicants++;
                                                                                         newInfo.put("신청인원", applicants);
