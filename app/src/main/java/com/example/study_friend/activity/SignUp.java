@@ -49,6 +49,9 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.backChatBtn.setOnClickListener(v->{
+            finish();
+        });
         binding.editEmail.addTextChangedListener(new TextWatcher() {
 
             @Override
