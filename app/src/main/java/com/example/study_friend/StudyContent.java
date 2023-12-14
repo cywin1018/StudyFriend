@@ -170,9 +170,9 @@ public class StudyContent extends AppCompatActivity {
 
                                                                                         //중복신청을 막기 위해 신청자Uid에 현재 사용자의 uid가 있는지 확인
 
-                                                                                        for (int i = 0; i < appliers.size(); i++) {
-                                                                                            if (appliers.get(i).equals(user.getUid())) {
-                                                                                                Log.d("RERE",appliers.get(i));
+                                                                                        for (int i = 0; i < allpeople.size(); i++) {
+                                                                                            if (allpeople.get(i).equals(user.getUid())) {
+                                                                                                Log.d("RERE",allpeople.get(i));
                                                                                                 isExist = 1;
                                                                                                 break;
                                                                                             }
