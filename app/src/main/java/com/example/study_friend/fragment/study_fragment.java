@@ -117,8 +117,8 @@ public class study_fragment extends Fragment {
 //                           String date = time1.toDate().toString();
                            String date = postDocument.get("모집기간").toString();
                            String title = postDocument.get("제목").toString();
-                           String members = postDocument.get("모집인원").toString();
-                           String num = postDocument.get("신청인원").toString();
+                           String members = postDocument.get("신청인원").toString();
+                           String num = postDocument.get("모집인원").toString();
 
                            //제한시간
                            long timeNow = Timestamp.now().getSeconds();

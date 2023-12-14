@@ -121,12 +121,13 @@ public class account_fragment extends Fragment {
                     }
                 });
         db.collection("게시글")
-                .whereArrayContains("tutorUid", uid)
+                .whereEqualTo("tutorUid", uid)
                 .get()
                 .addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
                         List<DocumentSnapshot> posts1 = task1.getResult().getDocuments();
                         studyNumber = posts1.size();
+                        Log.d("RERE studyNumber", String.valueOf(studyNumber));
                         binding.studyNumber.setText(Integer.toString(studyNumber) + " 회");
                     }
                 });
